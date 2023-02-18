@@ -1,13 +1,55 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: "Circular Sp Vit Black Web";
+	src: url("/public/fonts/css/fonts/Circular\ Sp\ Vit\ Web\ Black.woff") format("woff"),
+		 url("/public/fonts/css/fonts/Circular\ Sp\ Vit\ Web\ Black.woff2") format("woff2");
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+	font-family: "Circular Sp Vit Bold Web";
+	src: url("/public/fonts/css/fonts/Circular\ Sp\ Vit\ Web\ Bold.woff") format("woff"),
+		 url("/public/fonts/css/fonts/Circular\ Sp\ Vit\ Web\ Bold.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Circular Sp Vit Light Web";
+	src: url("/public/fonts/css/fonts/Circular\ Sp\ Vit\ Web\ Light.woff") format("woff"),
+		 url("/public/fonts/css/fonts/Circular\ Sp\ Vit\ Web\ Light.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Circular Sp Vit Medium Web";
+	src: url("/public/fonts/css/fonts/Circular\ Sp\ Vit\ Web\ Medium.woff") format("woff"),
+		 url("/public/fonts/css/fonts/Circular\ Sp\ Vit\ Web\ Medium.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Circular Sp Vit Book Web";
+	src: url("/public/fonts/css/fonts/Circular\ Sp\ Vit\ Web\ Book.woff") format("woff"),
+		 url("/public/fonts/css/fonts/Circular\ Sp\ Vit\ Web\ Book.woff2") format("woff2");
+}
+
+
+
+
+/*   
+  body {
+    font-family: "Circular Sp Vit Bold Web" , sans-serif;
+  } */
+
+
+
+hr {
+  border: 1px solid rgb(217, 218, 220)
+}
+
+:root {
+    --primary-color: #1ed760;
+}
+
+hr {
+  color: #1877f2
 }
