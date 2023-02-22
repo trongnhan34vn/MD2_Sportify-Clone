@@ -46,10 +46,7 @@ hr {
   border: 1px solid rgb(217, 218, 220)
 }
 
-:root {
-    --primary-color: #1ed760;
-}
-
-hr {
-  color: #1877f2
+.bg-show {
+	background-color: #101010;
+	transition: all ease 0.3s;
 }

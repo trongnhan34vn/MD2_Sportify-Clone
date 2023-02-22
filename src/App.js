@@ -1,13 +1,44 @@
 import logo from './logo.svg';
 import './App.css';
 import HomePage from './components/HomePage/HomePage';
+import { useEffect, useState } from 'react';
+import myMusic from './audio/audio1.mp3'
+import useSound from 'use-sound'
 
 function App() {
+  const [menuToggle, setMenuToggle] = useState(false)
+  const [stickyClass, setStickyClass] = useState('')
+  const [audio] = useState(new Audio(myMusic))
+  // Hiệu ứng navbar
+  const stickNav = () => { 
+    let windowHeight = window.scrollY;
+    (windowHeight > 64) ? setStickyClass('bg-show') : setStickyClass('')
+  }
+  useEffect(() => {
+    window.addEventListener('scroll', stickNav)
+  }, [])
+  // Hiệu ứng navbar
+
+  // Toggle menu navbar thò thụt
+  const handleMenuToggle = () => {
+    setMenuToggle(!menuToggle)
+  }
+  const elementIconToggle = (menuToggle) ? <i className="fa-solid fa-caret-up"></i> : <i className="fa-solid fa-caret-down"></i>
+  const elementMenuToggle = (menuToggle) ? <ul className='right-0 top-10 p-1 direction-account absolute bg-[#282828] font-CircularLight text-sm rounded shadow-[0 16px 24px rgb(0 0 0 / 30%), 0 6px 8px rgb(0 0 0 / 20%)] max-w-[350px] min-w-[160px]'>
+    <li><a className='p-3 h-10 block hover:bg-[hsla(0,0%,100%,.1)]' href="">Profile</a></li>
+    <li><a className='p-3 h-10 block hover:bg-[hsla(0,0%,100%,.1)]' href="">Account</a></li>
+    <li><a className='p-3 h-10 block hover:bg-[hsla(0,0%,100%,.1)]' href="">Log Out</a></li>
+  </ul> : ""
+    // Toggle menu navbar thò thụt
+  const handlePlay = () => {
+    audio.play()
+  }
+
   return (
     <div className="App">
-      <div>
+      <div onClick={menuToggle ? handleMenuToggle : undefined}>
         {/* Home Page - Log in*/}
-        <div className='home-page mb-[66px] flex'>
+        <div className='relative home-page mb-[66px] flex'>
           {/* Direction Menu */}
           <div id='direction-menu' className='h-auto pt-6 w-[241px] bg-[#000] fixed z-10 bottom-0 top-0'>
             {/* Logo */}
@@ -101,40 +132,41 @@ function App() {
             </ul>
           </div>
           {/* Direction Menu */}
+          {/* Nav */}
+          <nav className={`fixed z-[60] right-0 left-[241px] navbar-menu h-16 px-8 flex justify-between duration-[3000] ${stickyClass}`}>
+            <div className='nav-direction-page flex items-center gap-4 z-[60]'>
+              <button className='w-8 h-8 px-2 py-1 opacity-75 hover:opacity-100 transition-all bg-[#101010] rounded-[50%] duration-200'>
+                <i className="ti-angle-left text-[#fff] font-bold" />
+              </button>
+              <button className='w-8 h-8 px-2 py-1 opacity-75 hover:opacity-100 transition-all bg-[#101010] rounded-[50%] duration-200'>
+                <i className="ti-angle-right text-[#fff] font-bold" />
+              </button>
+            </div>
+            <div className='nav-list flex items-center gap-4 z-[70]'>
+              <ul className='text-[#fff] flex gap-4 relative font-CircularBook'>
+                <li className='inline-block'>
+                  <a href='' className='border-[1px] border-[#B3B3B3] rounded-[500px] text-sm inline-block py-[3px] px-[15px] leading-6 hover:scale-105 hover:border-[#fff] transition-all duration-200'>Khám phá Premium</a>
+                </li>
+                <li className='inline-block'>
+                  <button onClick={handleMenuToggle} className='h-8 items-center justify-between gap-2 rounded-[500px] text-sm flex bg-black hover:bg-[#282828] py-[3px] leading-6 hover:opacity-100 transition-all duration-200'>
+                    <span className=''>
+                      <img className='w-7 h-7 rounded-[50%]' src="https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/5/26/913299/Ngan-Ha25.jpg" alt="" />
+                    </span>
+                    <span className='users'>
+                      Nhân Nguyễn
+                    </span>
+                    <span className='pr-3'>
+                      {elementIconToggle}
+                    </span>
+                  </button>
+                  {elementMenuToggle}
+                </li>
+              </ul>
+            </div>
+          </nav>
+          {/* Nav */}
           {/* Content */}
           <div className='content'>
-            {/* Nav */}
-            <div className='fixed z-50 right-0 left-[241px] navbar-menu h-16 px-8 flex justify-between'>
-              <div className='nav-direction-page flex gap-4'>
-                <button className='px-2 py-1 opacity-75 hover:opacity-100 transition-all duration-200'>
-                  <i className="ti-angle-left text-[#fff] font-bold" />
-                </button>
-                <button className='px-2 py-1 opacity-75 hover:opacity-100 transition-all duration-200'>
-                  <i className="ti-angle-right text-[#fff] font-bold" />
-                </button>
-              </div>
-              <div className='nav-list flex items-center gap-4'>
-                <ul className='text-[#fff] flex gap-4 font-CircularBook'>
-                  <li className='inline-block'>
-                    <a href='' className='border-[1px] border-[#B3B3B3] rounded-[500px] text-sm inline-block py-[3px] px-[15px] leading-6 hover:scale-105 hover:border-[#fff] transition-all duration-200'>Khám phá Premium</a>
-                  </li>
-                  <li className='inline-block'>
-                    <a href='' className='h-8 items-center justify-between gap-2 flex rounded-[500px] text-sm inline-block py-[3px] leading-6 hover:opacity-100 transition-all duration-200'>
-                      <span className=''>
-                        <img className='w-7 h-7 rounded-[50%]' src="https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/5/26/913299/Ngan-Ha25.jpg" alt="" />
-                      </span>
-                      <span className='users'>
-                        Nhân Nguyễn
-                      </span>
-                      <span className='pr-3'>
-                        <i className="fa-solid fa-caret-down"></i>
-                      </span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            {/* Nav */}
             {/* List Playlists - Log Out */}
             <div className='list-playlists pt-[64px] ml-[241px] flex flex-col gap-6 py-6 bg-[linear-gradient(#1f1f1f,#121212)]'>
               {/* Playlists - Focus */}
@@ -147,8 +179,31 @@ function App() {
                     <p className="text-[#B3B3B3] font-CircularMedium text-sm hover:underline">Show all</p>
                   </a>
                 </div>
-                <div className='list-playlists-item list-albums grid gap-6 grid-cols-8 min-w-[414px]'>
-                  <div className='relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
+                <div className='list-playlists-item list-albums grid gap-6 grid-cols-6 min-w-[414px]'>
+                  <div className='z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
+                    <a href='#' className='block album-wrap p-4 group'>
+                      <div className='album-img mb-4 relative'>
+                        <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
+                        <button onClick={handlePlay} className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
+                          <svg
+                            role="img"
+                            height="24"
+                            width="24"
+                            aria-hidden="true"
+                            viewBox="0 0 24 24"
+                            data-encore-id="icon"
+                            className="Svg-sc-ytk21e-0 uPxdw">
+                            <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
+                          </svg>
+                        </button>
+                      </div>
+                      <div className='album-content text-[#fff]'>
+                        <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
+                        <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
+                      </div>
+                    </a>
+                  </div>
+                  <div className='z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
                     <a href='#' className='block album-wrap p-4 group'>
                       <div className='album-img mb-4 relative'>
                         <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
@@ -171,7 +226,7 @@ function App() {
                       </div>
                     </a>
                   </div>
-                  <div className='relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
+                  <div className='z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
                     <a href='#' className='block album-wrap p-4 group'>
                       <div className='album-img mb-4 relative'>
                         <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
@@ -194,7 +249,7 @@ function App() {
                       </div>
                     </a>
                   </div>
-                  <div className='relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
+                  <div className='z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
                     <a href='#' className='block album-wrap p-4 group'>
                       <div className='album-img mb-4 relative'>
                         <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
@@ -217,7 +272,7 @@ function App() {
                       </div>
                     </a>
                   </div>
-                  <div className='relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
+                  <div className='z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
                     <a href='#' className='block album-wrap p-4 group'>
                       <div className='album-img mb-4 relative'>
                         <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
@@ -240,76 +295,7 @@ function App() {
                       </div>
                     </a>
                   </div>
-                  <div className='relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
-                    <a href='#' className='block album-wrap p-4 group'>
-                      <div className='album-img mb-4 relative'>
-                        <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
-                        <button className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
-                          <svg
-                            role="img"
-                            height="24"
-                            width="24"
-                            aria-hidden="true"
-                            viewBox="0 0 24 24"
-                            data-encore-id="icon"
-                            className="Svg-sc-ytk21e-0 uPxdw">
-                            <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
-                          </svg>
-                        </button>
-                      </div>
-                      <div className='album-content text-[#fff]'>
-                        <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
-                        <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
-                      </div>
-                    </a>
-                  </div>
-                  <div className='relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
-                    <a href='#' className='block album-wrap p-4 group'>
-                      <div className='album-img mb-4 relative'>
-                        <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
-                        <button className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
-                          <svg
-                            role="img"
-                            height="24"
-                            width="24"
-                            aria-hidden="true"
-                            viewBox="0 0 24 24"
-                            data-encore-id="icon"
-                            className="Svg-sc-ytk21e-0 uPxdw">
-                            <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
-                          </svg>
-                        </button>
-                      </div>
-                      <div className='album-content text-[#fff]'>
-                        <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
-                        <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
-                      </div>
-                    </a>
-                  </div>
-                  <div className='relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
-                    <a href='#' className='block album-wrap p-4 group'>
-                      <div className='album-img mb-4 relative'>
-                        <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
-                        <button className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
-                          <svg
-                            role="img"
-                            height="24"
-                            width="24"
-                            aria-hidden="true"
-                            viewBox="0 0 24 24"
-                            data-encore-id="icon"
-                            className="Svg-sc-ytk21e-0 uPxdw">
-                            <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
-                          </svg>
-                        </button>
-                      </div>
-                      <div className='album-content text-[#fff]'>
-                        <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
-                        <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
-                      </div>
-                    </a>
-                  </div>
-                  <div className='relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
+                  <div className='z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
                     <a href='#' className='block album-wrap p-4 group'>
                       <div className='album-img mb-4 relative'>
                         <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
@@ -345,8 +331,8 @@ function App() {
                     <p className="text-[#B3B3B3] font-CircularMedium text-sm hover:underline">Show all</p>
                   </a>
                 </div>
-                <div className='list-playlists-item list-albums grid gap-6 grid-cols-8 min-w-[414px]'>
-                  <div className='relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
+                <div className='list-playlists-item list-albums grid gap-6 grid-cols-6 min-w-[414px]'>
+                  <div className='album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
                     <a href='#' className='block album-wrap p-4 group'>
                       <div className='album-img mb-4 relative'>
                         <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
@@ -369,7 +355,7 @@ function App() {
                       </div>
                     </a>
                   </div>
-                  <div className='relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
+                  <div className='album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
                     <a href='#' className='block album-wrap p-4 group'>
                       <div className='album-img mb-4 relative'>
                         <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
@@ -392,7 +378,7 @@ function App() {
                       </div>
                     </a>
                   </div>
-                  <div className='relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
+                  <div className='album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
                     <a href='#' className='block album-wrap p-4 group'>
                       <div className='album-img mb-4 relative'>
                         <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
@@ -415,7 +401,7 @@ function App() {
                       </div>
                     </a>
                   </div>
-                  <div className='relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
+                  <div className='album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
                     <a href='#' className='block album-wrap p-4 group'>
                       <div className='album-img mb-4 relative'>
                         <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
@@ -438,7 +424,7 @@ function App() {
                       </div>
                     </a>
                   </div>
-                  <div className='relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
+                  <div className='album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
                     <a href='#' className='block album-wrap p-4 group'>
                       <div className='album-img mb-4 relative'>
                         <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
@@ -461,53 +447,7 @@ function App() {
                       </div>
                     </a>
                   </div>
-                  <div className='relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
-                    <a href='#' className='block album-wrap p-4 group'>
-                      <div className='album-img mb-4 relative'>
-                        <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
-                        <button className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
-                          <svg
-                            role="img"
-                            height="24"
-                            width="24"
-                            aria-hidden="true"
-                            viewBox="0 0 24 24"
-                            data-encore-id="icon"
-                            className="Svg-sc-ytk21e-0 uPxdw">
-                            <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
-                          </svg>
-                        </button>
-                      </div>
-                      <div className='album-content text-[#fff]'>
-                        <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
-                        <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
-                      </div>
-                    </a>
-                  </div>
-                  <div className='relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
-                    <a href='#' className='block album-wrap p-4 group'>
-                      <div className='album-img mb-4 relative'>
-                        <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
-                        <button className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
-                          <svg
-                            role="img"
-                            height="24"
-                            width="24"
-                            aria-hidden="true"
-                            viewBox="0 0 24 24"
-                            data-encore-id="icon"
-                            className="Svg-sc-ytk21e-0 uPxdw">
-                            <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
-                          </svg>
-                        </button>
-                      </div>
-                      <div className='album-content text-[#fff]'>
-                        <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
-                        <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
-                      </div>
-                    </a>
-                  </div>
-                  <div className='relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
+                  <div className='album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
                     <a href='#' className='block album-wrap p-4 group'>
                       <div className='album-img mb-4 relative'>
                         <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
@@ -543,7 +483,7 @@ function App() {
                     <p className="text-[#B3B3B3] font-CircularMedium text-sm hover:underline">Show all</p>
                   </a>
                 </div>
-                <div className='list-playlists-item list-albums grid gap-6 grid-cols-8 min-w-[414px]'>
+                <div className='list-playlists-item list-albums grid gap-6 grid-cols-6 min-w-[414px]'>
                   <div className='relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
                     <a href='#' className='block album-wrap p-4 group'>
                       <div className='album-img mb-4 relative'>
@@ -615,7 +555,7 @@ function App() {
                 <button className='bg-[#fff] py-2 px-8 rounded-[500px] hover:scale-105 transition-all duration-200 text-base leading-8 font-CircularMedium'>Đăng kí miễn phí</button>
               </div>
             </a> */}
-            <div className='flex gap justify-between items-center bg-[#181818] h-[90px] justify-between pt-[11px] pr-[24px] pb-[7px] pl-[15px] '>
+            <div className='grid grid-cols-3 items-center bg-[#181818] h-[90px] pt-[11px] pr-[24px] pb-[7px] pl-[15px] '>
               <div className='footer-content song-info flex items-center'>
                 <div className='song-img w-14 h-14 overflow-hidden'>
                   <img src="https://scontent.fhan5-9.fna.fbcdn.net/v/t1.6435-9/54728173_1977886592321967_7318146998438199296_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=5SRgtbXjGLcAX8WTQoy&_nc_ht=scontent.fhan5-9.fna&oh=00_AfC54L_ELn9nxTIB5SDiS4ZcVpWyLvE7Y6auo5eysNhZUA&oe=64197CBF" alt="" />
@@ -631,7 +571,7 @@ function App() {
                 </div>
               </div>
               <div className='song-control flex flex-col'>
-                <div className='song-control-btn flex gap-4'>
+                <div className='song-control-btn justify-center flex gap-4'>
                   <button className='w-8 h-8 flex justify-center items-center fill-[#fff] opacity-60 hover:opacity-100'>
                     <svg
                       role="img"
