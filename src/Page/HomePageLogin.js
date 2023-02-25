@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useCallback } from 'react'
+
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import myMusic from '../../audio/audio1.mp3'
-import myMusic2 from '../../audio/điều cha chưa nói final.mp3'
-import myMusic3 from '../../audio/Hơn em chỗ nào Final Final 2.mp3'
+import myMusic from '../audio/audio1.mp3'
+import myMusic2 from '../audio/điều cha chưa nói final.mp3'
+import myMusic3 from '../audio/Hơn em chỗ nào Final Final 2.mp3'
+
 
 const songArr = [
     {
@@ -27,7 +29,6 @@ export default function HomePageLogin() {
     const [playLength, setPlayLength] = useState(0)
     const audioRef = useRef()
     const progress = useRef(0)
-
     const [progressBarPercent, setProgressBarPercent] = useState(0)
     const [timeProgress, setTimeProgress] = useState(
         {
@@ -100,7 +101,7 @@ export default function HomePageLogin() {
         if (playLength >= 100) {
             setIsPlay(false)
             setPlayLength(0)
-            setCurrentTime (pre => ({minutes: 0, seconds: 0}))
+            setCurrentTime(pre => ({ minutes: 0, seconds: 0 }))
             setTimeout(() => {
                 if (songIndex === songArr.length - 1) {
                     setSongIndex(0)
@@ -329,7 +330,7 @@ export default function HomePageLogin() {
                     </div>
                     {/* Direction Menu */}
                     {/* Nav */}
-                    <nav className={`fixed z-[60] right-0 left-[241px] navbar-menu h-16 px-8 flex justify-between duration-[3000] ${stickyClass}`}>
+                    <nav className={`fixed z-[60] right-0 left-[241px] navbar-menu h-16 px-8 flex justify-between duration-[0.3s] ${stickyClass}`}>
                         <div className='nav-direction-page flex items-center gap-4 z-[60]'>
                             <button className='w-8 h-8 px-2 py-1 opacity-75 hover:opacity-100 transition-all bg-[#101010] rounded-[50%] duration-200'>
                                 <i className="ti-angle-left text-[#fff] font-bold" />
@@ -365,21 +366,21 @@ export default function HomePageLogin() {
                     <div className='content'>
                         {/* List Playlists - Log Out */}
                         <div className='list-playlists pt-[64px] ml-[241px] flex flex-col gap-6 py-6 bg-[linear-gradient(#1f1f1f,#121212)]'>
-                            {/* Playlists - Focus */}
+                            {/* Playlists - Your Playlist */}
                             <div className='list-playlists-item px-8 mb-4'>
                                 {/* Playlist Title */}
                                 <div className='list-playlists-item-title flex justify-between items-end mb-[22px]'>
                                     <a href="" className=''>
-                                        <h3 className='text-[#fff] font-CircularMedium leading-none tracking-tight hover:underline text-2xl'>Focus</h3>
+                                        <h3 className='text-[#fff] font-CircularMedium leading-none tracking-tight hover:underline text-2xl'>Your Playlist</h3>
                                     </a>
                                     <a href="" className=''>
                                         <p className="text-[#B3B3B3] font-CircularMedium text-sm hover:underline">Show all</p>
                                     </a>
                                 </div>
                                 {/* Playlist Title */}
-                                {/* Playlist Item */}
-                                <div className='list-playlists-item list-albums grid gap-6 grid-cols-6 min-w-[414px]'>
-                                    <div className='z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
+                                <div className='list-playlists-item list-albums grid gap-6 grid-cols-5 min-w-[414px] xl:grid-cols-4  l:grid-cols-3 sm:!grid-cols-2 xl:[&>:last-child]:hidden l:[&>:nth-child(3)]:hidden sm:[&>:nth-child(2)]:hidden'>
+                                    {/* Playlist Item */}
+                                    <div className='group z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
                                         <a className='block album-wrap p-4 group'>
                                             <div className='album-img mb-4 relative'>
                                                 <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
@@ -394,7 +395,7 @@ export default function HomePageLogin() {
                                         </a>
                                     </div>
                                     {/* Playlist Item */}
-                                    <div className='z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
+                                    <div className='group z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
                                         <a href='#' className='block album-wrap p-4 group'>
                                             <div className='album-img mb-4 relative'>
                                                 <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
@@ -417,7 +418,7 @@ export default function HomePageLogin() {
                                             </div>
                                         </a>
                                     </div>
-                                    <div className='z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
+                                    <div className='group z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
                                         <a href='#' className='block album-wrap p-4 group'>
                                             <div className='album-img mb-4 relative'>
                                                 <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
@@ -440,7 +441,7 @@ export default function HomePageLogin() {
                                             </div>
                                         </a>
                                     </div>
-                                    <div className='z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
+                                    <div className='group z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
                                         <a href='#' className='block album-wrap p-4 group'>
                                             <div className='album-img mb-4 relative'>
                                                 <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
@@ -463,30 +464,7 @@ export default function HomePageLogin() {
                                             </div>
                                         </a>
                                     </div>
-                                    <div className='z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
-                                        <a href='#' className='block album-wrap p-4 group'>
-                                            <div className='album-img mb-4 relative'>
-                                                <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
-                                                <button className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
-                                                    <svg
-                                                        role="img"
-                                                        height="24"
-                                                        width="24"
-                                                        aria-hidden="true"
-                                                        viewBox="0 0 24 24"
-                                                        data-encore-id="icon"
-                                                        className="Svg-sc-ytk21e-0 uPxdw">
-                                                        <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div className='album-content text-[#fff]'>
-                                                <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
-                                                <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className='z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
+                                    <div className='group z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
                                         <a href='#' className='block album-wrap p-4 group'>
                                             <div className='album-img mb-4 relative'>
                                                 <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
@@ -511,7 +489,7 @@ export default function HomePageLogin() {
                                     </div>
                                 </div>
                             </div>
-                            {/* Playlists - Focus*/}
+                            {/* Playlists - Your Playlist*/}
                             {/* Playlists - Spotify Playlists*/}
                             <div className='list-playlists-item px-8 mb-4'>
                                 <div className='list-playlists-item-title flex justify-between items-end mb-[22px]'>
@@ -522,30 +500,7 @@ export default function HomePageLogin() {
                                         <p className="text-[#B3B3B3] font-CircularMedium text-sm hover:underline">Show all</p>
                                     </a>
                                 </div>
-                                <div className='list-playlists-item list-albums grid gap-6 grid-cols-6 min-w-[414px]'>
-                                    <div className='album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
-                                        <a href='#' className='block album-wrap p-4 group'>
-                                            <div className='album-img mb-4 relative'>
-                                                <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
-                                                <button className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
-                                                    <svg
-                                                        role="img"
-                                                        height="24"
-                                                        width="24"
-                                                        aria-hidden="true"
-                                                        viewBox="0 0 24 24"
-                                                        data-encore-id="icon"
-                                                        className="Svg-sc-ytk21e-0 uPxdw">
-                                                        <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div className='album-content text-[#fff]'>
-                                                <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
-                                                <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
-                                            </div>
-                                        </a>
-                                    </div>
+                                <div className='list-playlists-item list-albums grid gap-6 grid-cols-5 min-w-[414px] xl:grid-cols-4 l:grid-cols-3 sm:!grid-cols-2 xl:[&>:last-child]:hidden l:[&>:nth-child(3)]:hidden sm:[&>:nth-child(2)]:hidden'>
                                     <div className='album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
                                         <a href='#' className='block album-wrap p-4 group'>
                                             <div className='album-img mb-4 relative'>
@@ -674,7 +629,7 @@ export default function HomePageLogin() {
                                         <p className="text-[#B3B3B3] font-CircularMedium text-sm hover:underline">Show all</p>
                                     </a>
                                 </div>
-                                <div className='list-playlists-item list-albums grid gap-6 grid-cols-6 min-w-[414px]'>
+                                <div className='list-playlists-item list-albums grid gap-6 grid-cols-5 min-w-[414px] xl:grid-cols-4 l:grid-cols-3 sm:!grid-cols-2 xl:[&>:last-child]:hidden l:[&>:nth-child(3)]:hidden sm:[&>:nth-child(2)]:hidden'>
                                     <div className='relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
                                         <a href='#' className='block album-wrap p-4 group'>
                                             <div className='album-img mb-4 relative'>

@@ -8,11 +8,20 @@ module.exports = {
         'CircularLight': ["Circular Sp Vit Light Web", 'sans-serif'],
         'CircularMedium': ["Circular Sp Vit Medium Web, 'sans-serif'"],
         'CircularBook': ["Circular Sp Vit Book Web", 'sans-serif'],
-        'CircularBlack' : ["Circular Sp Vit Bold Web", 'sans-serif'],
+        'CircularBlack': ["Circular Sp Vit Bold Web", 'sans-serif'],
       },
       colors: {
-        'primaryColor': '#1ed760',
+        'primaryColor': '#1ed760'
       },
+      screens: {
+        xl: { max: "1300px" },
+        l: {max: "973px"},
+        sm: {max: "767px" },
+      },
+      important: true,
+      // backgroundColor: {
+      //   linearColor: 'from-cyan-500 to-blue-500'
+      // }
     },
   },
   plugins: [

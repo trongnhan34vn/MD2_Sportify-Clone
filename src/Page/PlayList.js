@@ -1,6 +1,235 @@
 import React from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import myMusic from '../audio/audio1.mp3'
+import myMusic2 from '../audio/điều cha chưa nói final.mp3'
+import myMusic3 from '../audio/Hơn em chỗ nào Final Final 2.mp3'
+
+
+const songArr = [
+    {
+        name: 'Khoa Pug',
+        link: myMusic
+    },
+    {
+        name: 'Anh Nhân đẹp zai',
+        link: myMusic2
+    },
+    {
+        name: 'Anh Tấn đz',
+        link: myMusic3
+    }
+]
 
 export default function PlayList() {
+    const [songIndex, setSongIndex] = useState(0)
+    const [menuToggle, setMenuToggle] = useState(false)
+    const [stickyClass, setStickyClass] = useState('')
+    const [isPlay, setIsPlay] = useState(false)
+    const [playLength, setPlayLength] = useState(0)
+    const audioRef = useRef()
+    const progress = useRef(0)
+    const [progressBarPercent, setProgressBarPercent] = useState(0)
+    const [timeProgress, setTimeProgress] = useState(
+        {
+            minutes: 0,
+            seconds: 0,
+        }
+    )
+    const [currentTime, setCurrentTime] = useState(
+        {
+            minutes: 0,
+            seconds: 0
+        }
+    )
+    // Lấy time progress 
+    const onLoadedMetadata = () => {
+        if (audioRef.current) {
+            let minutes = Math.floor(audioRef.current.duration / 60)
+            let seconds = Math.floor(audioRef.current.duration % 60)
+            setTimeProgress({ minutes: minutes, seconds: seconds })
+        }
+    }
+    // Lấy time progress
+
+    // Hiệu ứng navbar
+    const stickNav = () => {
+        let windowHeight = window.scrollY;
+        (windowHeight > 64) ? setStickyClass('bg-show') : setStickyClass('')
+    }
+    useEffect(() => {
+        window.addEventListener('scroll', stickNav)
+    }, [])
+    // Hiệu ứng navbar
+
+    // Toggle menu navbar thò thụt
+    const handleMenuToggle = () => {
+        setMenuToggle(!menuToggle)
+    }
+    const elementIconToggle = (menuToggle) ? <i className="fa-solid fa-caret-up"></i> : <i className="fa-solid fa-caret-down"></i>
+    const elementMenuToggle = (menuToggle) ? <ul className='right-0 top-10 p-1 direction-account absolute bg-[#282828] font-CircularLight text-sm rounded shadow-[0 16px 24px rgb(0 0 0 / 30%), 0 6px 8px rgb(0 0 0 / 20%)] max-w-[350px] min-w-[160px]'>
+        <li><a className='p-3 h-10 block hover:bg-[hsla(0,0%,100%,.1)]' href="">Profile</a></li>
+        <li><a className='p-3 h-10 block hover:bg-[hsla(0,0%,100%,.1)]' href="">Account</a></li>
+        <li><a className='p-3 h-10 block hover:bg-[hsla(0,0%,100%,.1)]' href="">Log Out</a></li>
+    </ul> : ""
+    // Toggle menu navbar thò thụt
+
+    // Handle Play Audio
+    const handlePlay = () => {
+        setIsPlay(!isPlay)
+    }
+
+    useEffect(() => {
+        if (isPlay) {
+            audioRef.current.play()
+            progress.current = setInterval(() => {
+                setPlayLength(pre => pre + 100 / audioRef.current.duration)
+                if (currentTime.seconds === 59) {
+                    setCurrentTime(pre => ({ minutes: pre.minutes + 1, seconds: 0 }))
+                } else {
+                    setCurrentTime(pre => ({ ...pre, seconds: pre.seconds + 1 }))
+                }
+            }, 1000)
+        } else {
+            audioRef.current.pause()
+            clearInterval(progress.current)
+        }
+        return () => clearInterval(progress.current)
+    }, [isPlay, currentTime])
+
+    useEffect(() => {
+        if (playLength >= 100) {
+            setIsPlay(false)
+            setPlayLength(0)
+            setCurrentTime(pre => ({ minutes: 0, seconds: 0 }))
+            setTimeout(() => {
+                if (songIndex === songArr.length - 1) {
+                    setSongIndex(0)
+                } else {
+                    setSongIndex(prev => prev + 1)
+                }
+                setIsPlay(true)
+            }, 3000)
+        }
+    }, [playLength])
+
+    const styles = {
+        transform: `translate(${playLength - 100}%)`
+    }
+
+    const dotStyles = {
+        transform: `translateX(${playLength}%)`
+    }
+
+    const elementIconPlayingFooter = (isPlay) ? <svg
+        role="img"
+        height="16"
+        width="16"
+        aria-hidden="true"
+        viewBox="0 0 16 16"
+        data-encore-id="icon"
+        className="Svg-sc-ytk21e-0 uPxdw">
+        <path d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z"></path>
+    </svg> : <svg
+        role="img"
+        height="16"
+        width="16"
+        aria-hidden="true"
+        viewBox="0 0 16 16"
+        data-encore-id="icon"
+        className="Svg-sc-ytk21e-0 uPxdw">
+        <path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"></path>
+    </svg>
+
+    const elementIconPlayingItem = (isPlay) ? <svg
+        role="img"
+        height="24"
+        width="24"
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        data-encore-id="icon"
+        className="Svg-sc-ytk21e-0 uPxdw">
+        <path d="M5.7 3a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7H5.7zm10 0a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7h-2.6z"></path>
+    </svg> : <svg
+        role="img"
+        height="24"
+        width="24"
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        data-encore-id="icon"
+        className="Svg-sc-ytk21e-0 uPxdw">
+        <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
+    </svg>
+    // Handle Play Audio
+
+    // Handle Prev Track
+    const handlePrevTrack = () => {
+        clearInterval(progress.current)
+        setIsPlay(false)
+        setCurrentTime(
+            {
+                minutes: 0,
+                seconds: 0,
+            }
+        )
+        setPlayLength(0)
+        if (songIndex === 0) {
+            setSongIndex(songArr.length - 1)
+        } else {
+            setSongIndex(prev => prev - 1)
+        }
+        if (isPlay) {
+            setTimeout(() => {
+                setIsPlay(true)
+            }, 3000)
+        }
+    }
+    // Handle Prev Track
+
+    // Handle Next Track
+    const handleNextTrack = () => {
+        clearInterval(progress.current)
+        setIsPlay(false)
+        setCurrentTime(
+            {
+                minutes: 0,
+                seconds: 0,
+            }
+        )
+        setPlayLength(0)
+        if (songIndex === songArr.length - 1) {
+            setSongIndex(0)
+        } else {
+            setSongIndex(prev => prev + 1)
+        }
+        if (isPlay) {
+            setTimeout(() => {
+                setIsPlay(true)
+            }, 3000)
+        }
+    }
+    // Handle Next Track
+
+    // Handle Progress Bar
+    const progressBar = useRef()
+    const slideBar = useRef()
+
+    const handleProgressBar = (event) => {
+        let bounds = event.target.getBoundingClientRect().left
+        let clickPosProgBar = event.clientX - bounds
+        let widthProgBar = progressBar.current.offsetWidth;
+        let percent = clickPosProgBar / widthProgBar
+        setProgressBarPercent(percent)
+        setPlayLength(clickPosProgBar / widthProgBar * 100)
+        let currentSeconds = percent * audioRef.current.duration
+        let currentTime = {
+            minutes: Math.floor(currentSeconds / 60),
+            seconds: Math.floor(currentSeconds % 60)
+        }
+        setCurrentTime(pre => pre = currentTime)
+        audioRef.current.currentTime = currentSeconds
+    }
+
+    // Handle Progress Bar
     return (
         <div>
             {/* Direction Menu */}
@@ -97,7 +326,7 @@ export default function PlayList() {
             </div>
             {/* Direction Menu */}
             {/* Nav */}
-            <nav className={`fixed z-[60] right-0 left-[241px] navbar-menu h-16 px-8 flex justify-between duration-[3000] ${stickyClass}`}>
+            <nav className={`fixed z-[60] right-0 left-[241px] navbar-menu h-16 px-8 flex justify-between duration-[0.3s] ${stickyClass}`}>
                 <div className='nav-direction-page flex items-center gap-4 z-[60]'>
                     <button className='w-8 h-8 px-2 py-1 opacity-75 hover:opacity-100 transition-all bg-[#101010] rounded-[50%] duration-200'>
                         <i className="ti-angle-left text-[#fff] font-bold" />
@@ -128,6 +357,124 @@ export default function PlayList() {
                     </ul>
                 </div>
             </nav>
+            {/* Content */}
+            <section className='section-playlist pb-[90px] pl-[241px]'>
+                <div className='section-playlist-banner flex items-end gap-6 linearColor max-h-[500px] h-[30vh] min-h-[340px] p-8'>
+                    <div className='banner-img w-48 h-48'>
+                        <img className='w-full h-full shadow-[0 4px 60px rgb(0 0 0 / 50%)]' src="https://seed-mix-image.spotifycdn.com/v6/img/artist/1Gm45JaOS9vp7DsB51yDWq/en/default" alt="" />
+                    </div>
+                    <div className='banner-song-info text-[#fff]'>
+                        <p className='text-xs font-CircularBook'>Playlist</p>
+                        <h3 className='font-CircularBold text-[72px]'>Tùng Acoustic Mix</h3>
+                    </div>
+                </div>
+                <div className='section-playlist-list-song bg-[#121212]'>
+                    <div className='section-play-list-control flex gap-8 px-8 py-6 items-center'>
+                        <button className='rounded-[50%] bg-primaryColor p-3.5'>
+                            <svg role="img" height="28" width="28" aria-hidden="true" viewBox="0 0 24 24" data-encore-id="icon" className="Svg-sc-ytk21e-0 uPxdw"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+                        </button>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="hsla(0,0%,100%,.7)" className="bi bi-heart cursor-pointer" viewBox="0 0 16 16">
+                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                        </svg>
+                    </div>
+                    <div className='section-playlist-list px-8'>
+                        <table className='table-fixed w-full text-[#B3B3B3] font-CircularLight text-sm'>
+                            <thead className='text-left'>
+                                <tr className='border-b border-[hsla(0,0%,100%,.1)]'>
+                                    <th width="5%" className='text-center'>#</th>
+                                    <th width="35%" className='py-2'>Title</th>
+                                    <th wdth="20%" className='py-2'>Album</th>
+                                    <th className='py-2'>Date Added</th>
+                                    <th width="5%" className='py-2'><i className="fa-regular fa-clock"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
+                                    <td className='text-center'>1</td>
+                                    <td className='flex gap-2 items-center py-2'>
+                                        <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
+                                        <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
+                                    </td>
+                                    <td>Tuyển tập của Tùng Acoustic</td>
+                                    <td></td>
+                                    <td>4:42</td>
+                                </tr>
+                                <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
+                                    <td className='text-center'>1</td>
+                                    <td className='flex gap-2 items-center py-2'>
+                                        <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
+                                        <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
+                                    </td>
+                                    <td>Tuyển tập của Tùng Acoustic</td>
+                                    <td></td>
+                                    <td>4:42</td>
+                                </tr>
+                                <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
+                                    <td className='text-center'>1</td>
+                                    <td className='flex gap-2 items-center py-2'>
+                                        <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
+                                        <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
+                                    </td>
+                                    <td>Tuyển tập của Tùng Acoustic</td>
+                                    <td></td>
+                                    <td>4:42</td>
+                                </tr>
+                                <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
+                                    <td className='text-center'>1</td>
+                                    <td className='flex gap-2 items-center py-2'>
+                                        <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
+                                        <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
+                                    </td>
+                                    <td>Tuyển tập của Tùng Acoustic</td>
+                                    <td></td>
+                                    <td>4:42</td>
+                                </tr>
+                                <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
+                                    <td className='text-center'>1</td>
+                                    <td className='flex gap-2 items-center py-2'>
+                                        <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
+                                        <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
+                                    </td>
+                                    <td>Tuyển tập của Tùng Acoustic</td>
+                                    <td></td>
+                                    <td>4:42</td>
+                                </tr>
+                                <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
+                                    <td className='text-center'>1</td>
+                                    <td className='flex gap-2 items-center py-2'>
+                                        <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
+                                        <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
+                                    </td>
+                                    <td>Tuyển tập của Tùng Acoustic</td>
+                                    <td></td>
+                                    <td>4:42</td>
+                                </tr>
+                                <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
+                                    <td className='text-center'>1</td>
+                                    <td className='flex gap-2 items-center py-2'>
+                                        <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
+                                        <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
+                                    </td>
+                                    <td>Tuyển tập của Tùng Acoustic</td>
+                                    <td></td>
+                                    <td>4:42</td>
+                                </tr>
+                                <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
+                                    <td className='text-center'>1</td>
+                                    <td className='flex gap-2 items-center py-2'>
+                                        <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
+                                        <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
+                                    </td>
+                                    <td>Tuyển tập của Tùng Acoustic</td>
+                                    <td></td>
+                                    <td>4:42</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            {/* Content */}
             {/* Footer */}
             <footer className='fixed z-10 bottom-0 right-0 left-0'>
                 <div className='grid grid-cols-3 items-center bg-[#181818] h-[90px] pt-[11px] pr-[24px] pb-[7px] pl-[15px] '>
@@ -146,7 +493,8 @@ export default function PlayList() {
                         </div>
                     </div>
                     <div className='song-control flex flex-col'>
-                        <div className='song-control-btn justify-center flex gap-4'>
+                        <audio ref={audioRef} webkit-playsinline="true" playsInline={true} autoPlay={true} onLoadedMetadata={onLoadedMetadata} src={songArr[songIndex].link}></audio>
+                        <div className='song-control-btn justify-center mb-1 flex gap-4'>
                             <button className='w-8 h-8 flex justify-center items-center fill-[#fff] opacity-60 hover:opacity-100'>
                                 <svg
                                     role="img"
@@ -201,12 +549,15 @@ export default function PlayList() {
                             <p className='font-CircularLight text-[11px] w-7 text-[#B3B3B3]'>
                                 {currentTime.minutes}:{currentTime.seconds < 10 && "0"}{currentTime.seconds}
                             </p>
-                            <div ref={ref} className='w-full h-3 relative group'>
-                                <div className='cursor-pointer group absolute top-[50%] translate-y-[-50%] w-full h-1 rounded bg-[hsla(0,0%,100%,.3)] overflow-hidden'>
-                                    <div style={styles} className={`absolute group-hover:bg-primaryColor top-[50%] left-[-100%] translate-y-[-50%] w-full h-1 rounded bg-[#fff]`}>
+                            <div className='w-full h-3 relative group'>
+                                <div onClick={handleProgressBar} ref={progressBar} className='bg-transparent cursor-pointer w-full absolute z-50 h-1 rounded top-[50%] translate-y-[-50%]'></div>
+                                <div className='cursor-pointer flex group absolute top-[50%] translate-y-[-50%] w-full h-1 rounded bg-[hsla(0,0%,100%,.3)] overflow-hidden'>
+                                    <div className='overflow-hidden w-full h-full rounded'>
+                                        <div style={styles} className={`transition-all duration-200 group-hover:bg-primaryColor group-focus:bg-primaryColor w-full h-full rounded bg-[#fff]`}>
+                                        </div>
                                     </div>
                                 </div>
-                                <div style={dotStyles} className="group-hover:opacity-100 opacity-0 cursor-pointer transition-all duration-75">
+                                <div style={dotStyles} className="group-hover:opacity-100 opacity-0 cursor-pointer transition-all duration-200">
                                     <div className='absolute left-[-6px] bg-[#fff] w-3 h-3 rounded-[50%]'></div>
                                 </div>
                             </div>

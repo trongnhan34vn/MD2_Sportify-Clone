@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+.linearColor {
+  @apply
+  bg-gradient-to-br from-[#525252] to-[#2b2b2b]
+}
