@@ -27,6 +27,8 @@ export default function HomePageLogin() {
     const [playLength, setPlayLength] = useState(0)
     const audioRef = useRef()
     const progress = useRef(0)
+
+    const [progressBarPercent, setProgressBarPercent] = useState(0)
     const [timeProgress, setTimeProgress] = useState(
         {
             minutes: 0,
@@ -95,17 +97,23 @@ export default function HomePageLogin() {
     }, [isPlay, currentTime])
 
     useEffect(() => {
-        playLength >= 100 && setIsPlay(false)
         if (playLength >= 100) {
+            setIsPlay(false)
+            setPlayLength(0)
+            setCurrentTime (pre => ({minutes: 0, seconds: 0}))
             setTimeout(() => {
-                setSongIndex(pre => pre + 1)
+                if (songIndex === songArr.length - 1) {
+                    setSongIndex(0)
+                } else {
+                    setSongIndex(prev => prev + 1)
+                }
                 setIsPlay(true)
             }, 3000)
         }
     }, [playLength])
 
     const styles = {
-        transform: `translate(${playLength}%)`
+        transform: `translate(${playLength - 100}%)`
     }
 
     const dotStyles = {
@@ -202,16 +210,16 @@ export default function HomePageLogin() {
     // Handle Next Track
 
     // Handle Progress Bar
-    const ref = useRef()
-    const [progressBarPercent, setProgressBarPercent] = useState(0)
+    const progressBar = useRef()
+    const slideBar = useRef()
+
     const handleProgressBar = (event) => {
         let bounds = event.target.getBoundingClientRect().left
         let clickPosProgBar = event.clientX - bounds
-        let widthProgBar = ref.current.offsetWidth;
+        let widthProgBar = progressBar.current.offsetWidth;
         let percent = clickPosProgBar / widthProgBar
-        console.log(percent);
         setProgressBarPercent(percent)
-        setPlayLength(prev => prev = clickPosProgBar / widthProgBar * 100)
+        setPlayLength(clickPosProgBar / widthProgBar * 100)
         let currentSeconds = percent * audioRef.current.duration
         let currentTime = {
             minutes: Math.floor(currentSeconds / 60),
@@ -380,7 +388,6 @@ export default function HomePageLogin() {
                                                 </button>
                                             </div>
                                             <div className='album-content text-[#fff]'>
-                                                <audio ref={audioRef} onLoadedMetadata={onLoadedMetadata} src={songArr[songIndex].link}></audio>
                                                 <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
                                                 <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
                                             </div>
@@ -746,6 +753,7 @@ export default function HomePageLogin() {
                                 </div>
                             </div>
                             <div className='song-control flex flex-col'>
+                                <audio ref={audioRef} webkit-playsinline="true" playsInline={true} autoPlay={true} onLoadedMetadata={onLoadedMetadata} src={songArr[songIndex].link}></audio>
                                 <div className='song-control-btn justify-center mb-1 flex gap-4'>
                                     <button className='w-8 h-8 flex justify-center items-center fill-[#fff] opacity-60 hover:opacity-100'>
                                         <svg
@@ -801,9 +809,12 @@ export default function HomePageLogin() {
                                     <p className='font-CircularLight text-[11px] w-7 text-[#B3B3B3]'>
                                         {currentTime.minutes}:{currentTime.seconds < 10 && "0"}{currentTime.seconds}
                                     </p>
-                                    <div ref={ref} className='w-full h-3 relative group'>
-                                        <div onClick={handleProgressBar} className='cursor-pointer group absolute top-[50%] translate-y-[-50%] w-full h-1 rounded bg-[hsla(0,0%,100%,.3)] overflow-hidden'>
-                                            <div className={`absolute top-0 left-0 group-hover:bg-primaryColor w-full h-full rounded bg-[#fff]`}>
+                                    <div className='w-full h-3 relative group'>
+                                        <div onClick={handleProgressBar} ref={progressBar} className='bg-transparent cursor-pointer w-full absolute z-50 h-1 rounded top-[50%] translate-y-[-50%]'></div>
+                                        <div className='cursor-pointer flex group absolute top-[50%] translate-y-[-50%] w-full h-1 rounded bg-[hsla(0,0%,100%,.3)] overflow-hidden'>
+                                            <div className='overflow-hidden w-full h-full rounded'>
+                                                <div style={styles} className={`transition-all duration-200 group-hover:bg-primaryColor group-focus:bg-primaryColor w-full h-full rounded bg-[#fff]`}>
+                                                </div>
                                             </div>
                                         </div>
                                         <div style={dotStyles} className="group-hover:opacity-100 opacity-0 cursor-pointer transition-all duration-200">
