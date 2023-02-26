@@ -3,7 +3,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import myMusic from '../audio/audio1.mp3'
 import myMusic2 from '../audio/điều cha chưa nói final.mp3'
 import myMusic3 from '../audio/Hơn em chỗ nào Final Final 2.mp3'
-import { storage } from "./firebase";
+import { storage } from '../firebase/config'
 import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
 
 
@@ -48,16 +48,17 @@ export default function Admin() {
     const [imageUpload, setImageUpload] = useState(null);
     const [imageUrls, setImageUrls] = useState([]);
     const imagesListRef = ref(storage, "images/");
-
     // Viết hàm upload
     const uploadFile = () => {
         if (imageUpload == null) return;
         const imageRef = ref(storage, `images/${imageUpload.name}`);
+
         uploadBytes(imageRef, imageUpload).then((snapshot) => {
             getDownloadURL(snapshot.ref).then((url) => {
                 setImageUrls((prev) => [...prev, url]);
             });
         });
+
     };
     // Lấy dữ liệu trả về từ firebase
     useEffect(() => {
@@ -68,7 +69,7 @@ export default function Admin() {
                 });
             });
         });
-    }, []);
+    }, [imageUpload]);
     // Upload Firebase
 
     // Lấy time progress 
@@ -258,10 +259,66 @@ export default function Admin() {
         setCurrentTime(pre => pre = currentTime)
         audioRef.current.currentTime = currentSeconds
     }
-
     // Handle Progress Bar
+
+    // Handle Volumn
+    const [audioVol, setAudioVol] = useState(100)
+    const [isMuted, setIsMuted] = useState(false)
+    const handleChangeVolume = (event) => {
+        let volume = event.target.value
+        setAudioVol(volume)
+        audioRef.current.volume = volume / 100;
+        if (audioRef.current.volume === 0) {
+            setIsMuted(true)
+        } else {
+            setIsMuted(false)
+        }
+    }
+
+    const handleMuted = () => {
+        setIsMuted(!isMuted)
+    }
+
+    const elementIconMute = (isMuted) ? <svg
+        role="presentation"
+        height="16"
+        width="16"
+        fill='#fff'
+        aria-hidden="true"
+        aria-label="Volume off"
+        id="volume-icon"
+        viewBox="0 0 16 16"
+        data-encore-id="icon">
+        <path d="M13.86 5.47a.75.75 0 0 0-1.061 0l-1.47 1.47-1.47-1.47A.75.75 0 0 0 8.8 6.53L10.269 8l-1.47 1.47a.75.75 0 1 0 1.06 1.06l1.47-1.47 1.47 1.47a.75.75 0 0 0 1.06-1.06L12.39 8l1.47-1.47a.75.75 0 0 0 0-1.06z"></path>
+        <path d="M10.116 1.5A.75.75 0 0 0 8.991.85l-6.925 4a3.642 3.642 0 0 0-1.33 4.967 3.639 3.639 0 0 0 1.33 1.332l6.925 4a.75.75 0 0 0 1.125-.649v-1.906a4.73 4.73 0 0 1-1.5-.694v1.3L2.817 9.852a2.141 2.141 0 0 1-.781-2.92c.187-.324.456-.594.78-.782l5.8-3.35v1.3c.45-.313.956-.55 1.5-.694V1.5z"></path>
+    </svg> : <svg
+        role="presentation"
+        className=''
+        fill='#fff'
+        height="16"
+        width="16"
+        aria-hidden="true"
+        aria-label="Volume medium"
+        id="volume-icon"
+        viewBox="0 0 16 16"
+        data-encore-id="icon">
+        <path d="M9.741.85a.75.75 0 0 1 .375.65v13a.75.75 0 0 1-1.125.65l-6.925-4a3.642 3.642 0 0 1-1.33-4.967 3.639 3.639 0 0 1 1.33-1.332l6.925-4a.75.75 0 0 1 .75 0zm-6.924 5.3a2.139 2.139 0 0 0 0 3.7l5.8 3.35V2.8l-5.8 3.35zm8.683 6.087a4.502 4.502 0 0 0 0-8.474v1.65a2.999 2.999 0 0 1 0 5.175v1.649z"></path>
+    </svg>
+
+    useEffect(() => {
+        if (isMuted) {
+            audioRef.current.volume = 0
+            setAudioVol(pre => pre = 0)
+        } else {
+            audioRef.current.volume = 1
+            setAudioVol(pre => pre = 100)
+        }
+    }, [isMuted])
+
+    // Handle Volumn
+
     return (
-        <div>
+        <div onClick={menuToggle ? handleMenuToggle : undefined}>
             {/* Direction Menu */}
             <div id='direction-menu' className='h-auto pt-6 w-[241px] bg-[#000] fixed z-10 bottom-0 top-0'>
                 {/* Logo */}
@@ -389,23 +446,75 @@ export default function Admin() {
             </nav>
             {/* Content */}
             <section className='section-playlist pb-[90px] pl-[241px]'>
-                <div className='section-playlist-banner flex items-end gap-6 linearColor max-h-[500px] h-[30vh] min-h-[340px] p-8'>
-                    <div className='banner-img w-48 h-48'>
-                        <img className='w-full h-full shadow-[0 4px 60px rgb(0 0 0 / 50%)]' src="https://seed-mix-image.spotifycdn.com/v6/img/artist/1Gm45JaOS9vp7DsB51yDWq/en/default" alt="" />
-                    </div>
-                    <div className='banner-song-info text-[#fff]'>
-                        <p className='text-xs font-CircularBook'>Playlist</p>
-                        <h3 className='font-CircularBold text-[72px]'>Tùng Acoustic Mix</h3>
+                <div className={`section-playlist-banner items-center bg-cover bg-left-bottom bg-no-repeat flex gap-6 bg-[url("https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Admin%20Page%2Fbackground-adminpage.jpeg?alt=media&token=2e67d13a-90f6-4f8d-9939-16a6001063e7")] max-h-[500px] h-[30vh] min-h-[400px] pb-8 pt-16 px-8`}>
+                    <div className='w-3/4 flex gap-16 m-auto'>
+                        <div className='banner-img w-48 flex flex-col text-center'>
+                            <div className='w-48 h-48 border'>
+                                {imageUrls.map((url, index) => <img key={index} className='w-48 h-full shadow-[0 4px 60px rgb(0 0 0 / 50%)]' src={url} alt="" />)}
+                            </div>
+                            <div className='mt-2'>
+                                <label className='text-[#fff] font-CircularLight text-sm hover:underline cursor-pointer' htmlFor='upload-photo'>Choose File</label>
+                                <input className='hidden' id='upload-photo' type="file" onChange={(e) => {
+                                    setImageUpload(e.target.files[0])
+                                }} />
+                                <button className='mt-2 font-CircularLight px-8 hover:scale-105 hover:opacity-90 transition-all duration-200 bg-primaryColor rounded-[500px]' onClick={uploadFile}>Upload Image</button>
+                            </div>
+                        </div>
+                        <div className='form-upload w-full text-[#fff]'>
+                            <div className='text-sm'>
+                                <div className='w-full flex justify-between gap-10 mb-4'>
+                                    <div className='flex-1'>
+                                        <label className='pl-1 font-CircularBook block mb-2'>Tên bài hát :</label>
+                                        <input className='font-CircularLight w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' type="text" />
+                                    </div>
+                                    <div className='flex-1'>
+                                        <label className='pl-1 font-CircularBook block mb-2'>Nghệ sĩ :</label>
+                                        <input className='font-CircularLight w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' type="text" />
+                                    </div>
+                                </div>
+                                <div className='w-full flex justify-between gap-10 mb-4'>
+                                    <div className='flex-1'>
+                                        <label className='pl-1 font-CircularBook block mb-2'>Album :</label>
+                                        <input className='font-CircularLight w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' type="text" />
+                                    </div>
+                                    <div className='flex-1'>
+                                        <label className='pl-1 font-CircularBook block mb-2'>Ngày đăng :</label>
+                                        <input className='font-CircularLight w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' type="text" />
+                                    </div>
+                                </div>
+                                <div className='flex justify-between gap-10'>
+                                    <div className='flex-1 relative'>
+                                        <label className='pl-1 font-CircularBook block mb-2'>Audio :</label>
+                                        <input disabled className='font-CircularLight w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' type="text" />
+                                        <div className='mt-2 absolute right-3 flex items-center top-1/2 -translate-y-1/2'>
+                                            <label className='text-[#fff] font-CircularLight text-sm hover:underline cursor-pointer mr-2 translate-y-1' htmlFor='upload-photo'>Choose File</label>
+                                            <input className='hidden' id='upload-photo' type="file" onChange={(e) => {
+                                                setImageUpload(e.target.files[0])
+                                            }} />
+                                            <button className='text-[#121212] translate-y-[1px] mt-2 font-CircularLight px-4 hover:scale-105 hover:opacity-90 transition-all duration-200 bg-primaryColor rounded-[500px]' onClick={uploadFile}>Upload Audio</button>
+                                        </div>
+                                    </div>
+                                    <div className='bg-transparent flex-1'></div>
+                                </div>
+                                <button className='text-[#121212] tracking-widest float-right mt-2 font-CircularMedium text-base px-8 py-3 hover:scale-105 hover:opacity-90 transition-all duration-200 bg-primaryColor rounded-[500px]'>Đăng bài</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className='section-playlist-list-song bg-[#121212]'>
-                    <div className='section-play-list-control flex gap-8 px-8 py-6 items-center'>
-                        <button className='rounded-[50%] bg-primaryColor p-3.5'>
-                            <svg role="img" height="28" width="28" aria-hidden="true" viewBox="0 0 24 24" data-encore-id="icon" className="Svg-sc-ytk21e-0 uPxdw"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
-                        </button>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="hsla(0,0%,100%,.7)" className="bi bi-heart cursor-pointer" viewBox="0 0 16 16">
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                        </svg>
+                    <div className='section-play-list-control flex justify-between gap-8 px-8 py-6 items-center'>
+                        <div className='flex items-center gap-8'>
+                            <button className='rounded-[50%] hover:scale-110 transition-all duration-200 bg-primaryColor p-3.5'>
+                                <svg role="img" height="28" width="28" aria-hidden="true" viewBox="0 0 24 24" data-encore-id="icon" className="Svg-sc-ytk21e-0 uPxdw"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+                            </button>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="hsla(0,0%,100%,.7)" className="bi bi-heart cursor-pointer" viewBox="0 0 16 16">
+                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                            </svg>
+                        </div>
+                        <div className='flex items-center'>
+                            <input className='text-[#fff] font-CircularLight bg-transparent border rounded-tl-[500px] rounded-bl-[500px] px-5 outline-none py-2' type="text" />
+                            <div className='bg-primaryColor px-5 py-2 border border-primaryColor rounded-tr-[500px] rounded-br-[500px]'><i className="-ml-1 fa-solid fa-magnifying-glass text-[#fff]"></i></div>
+                        </div>
                     </div>
                     <div className='section-playlist-list px-8'>
                         <table className='table-fixed w-full text-[#B3B3B3] font-CircularLight text-sm'>
@@ -523,7 +632,7 @@ export default function Admin() {
                         </div>
                     </div>
                     <div className='song-control flex flex-col'>
-                        <audio ref={audioRef} webkit-playsinline="true" playsInline={true} autoPlay={true} onLoadedMetadata={onLoadedMetadata} src={songArr[songIndex].link}></audio>
+                        <audio ref={audioRef} webkit-playsinline="true" playsInline={true} onLoadedMetadata={onLoadedMetadata} src={songArr[songIndex].link}></audio>
                         <div className='song-control-btn justify-center mb-1 flex gap-4'>
                             <button className='w-8 h-8 flex justify-center items-center fill-[#fff] opacity-60 hover:opacity-100'>
                                 <svg
@@ -594,8 +703,25 @@ export default function Admin() {
                             <p className='font-CircularLight text-[11px] w-7 text-[#B3B3B3]'>{timeProgress.minutes}:{timeProgress.seconds}{timeProgress.seconds < 10 && "0"}</p>
                         </div>
                     </div>
-                    <div className=''>
-
+                    <div className='song-volumn'>
+                        <div className='flex justify-end gap-2 items-center'>
+                            <button onClick={handleMuted} className='opacity-75 hover:opacity-100'>
+                                {elementIconMute}
+                            </button>
+                            <div className='h-3 flex items-center relative group'>
+                                {/* <div className='bg-transparent cursor-pointer w-full absolute z-50 h-1 rounded top-[50%] translate-y-[-50%]'></div>
+                                <div className='cursor-pointer w-full flex group absolute top-[50%] translate-y-[-50%] h-1 rounded bg-[hsla(0,0%,100%,.3)] overflow-hidden'>
+                                    <div className='overflow-hidden w-full h-full rounded'>
+                                        <div className={`transition-all duration-200 group-hover:bg-primaryColor group-focus:bg-primaryColor w-full h-full rounded bg-[#fff]`}>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="group-hover:opacity-100 opacity-0 cursor-pointer transition-all duration-200">
+                                    <div className='absolute left-[-6px] bg-[#fff] w-3 h-3 rounded-[50%]'></div>
+                                </div> */}
+                                <input onChange={handleChangeVolume} value={audioVol} className='block h-1 bg-primaryColor rounded' max={100} min={0} type="range" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </footer>

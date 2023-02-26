@@ -19,9 +19,6 @@ module.exports = {
         sm: {max: "767px" },
       },
       important: true,
-      // backgroundColor: {
-      //   linearColor: 'from-cyan-500 to-blue-500'
-      // }
     },
   },
   plugins: [
