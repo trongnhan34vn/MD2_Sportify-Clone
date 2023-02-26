@@ -4,7 +4,8 @@ import myMusic from '../audio/audio1.mp3'
 import myMusic2 from '../audio/điều cha chưa nói final.mp3'
 import myMusic3 from '../audio/Hơn em chỗ nào Final Final 2.mp3'
 import { storage } from '../firebase/config'
-import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
+import { ref, uploadBytesResumable, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
+import { iconPauseTrackBtnFooter, iconPlayTrackBtnFooter, iconPauseTrackItem, iconPlayTrackItem, iconUnMute, iconMute, iconPauseBtnPlaylist, iconPlayBtnPlaylist } from '../icon';
 
 
 const songArr = [
@@ -45,15 +46,22 @@ export default function Admin() {
         }
     )
     // Upload Firebase
+    const [precentFb, setPercentFb] = useState(0)
     const [imageUpload, setImageUpload] = useState(null);
     const [imageUrls, setImageUrls] = useState([]);
     const imagesListRef = ref(storage, "images/");
     // Viết hàm upload
     const uploadFile = () => {
         if (imageUpload == null) return;
-        const imageRef = ref(storage, `images/${imageUpload.name}`);
+        const imageRef = ref(storage, `images/${imageUpload.upload.name}`);
 
         uploadBytes(imageRef, imageUpload).then((snapshot) => {
+            // const percent = Math.round(
+            //     (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            // );
+            //     console.log(snapshot.bytesTransferred);
+            // // update progress
+            // setPercentFb(percent);
             getDownloadURL(snapshot.ref).then((url) => {
                 setImageUrls((prev) => [...prev, url]);
             });
@@ -62,13 +70,7 @@ export default function Admin() {
     };
     // Lấy dữ liệu trả về từ firebase
     useEffect(() => {
-        listAll(imagesListRef).then((res) => {
-            res.items.forEach((item) => {
-                getDownloadURL(item).then((url) => {
-                    setImageUrls((prev) => [...prev, url]);
-                });
-            });
-        });
+        return () => imageUpload && URL.revokeObjectURL(imageUpload.url); 
     }, [imageUpload]);
     // Upload Firebase
 
@@ -151,45 +153,8 @@ export default function Admin() {
         transform: `translateX(${playLength}%)`
     }
 
-    const elementIconPlayingFooter = (isPlay) ? <svg
-        role="img"
-        height="16"
-        width="16"
-        aria-hidden="true"
-        viewBox="0 0 16 16"
-        data-encore-id="icon"
-        className="Svg-sc-ytk21e-0 uPxdw">
-        <path d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z"></path>
-    </svg> : <svg
-        role="img"
-        height="16"
-        width="16"
-        aria-hidden="true"
-        viewBox="0 0 16 16"
-        data-encore-id="icon"
-        className="Svg-sc-ytk21e-0 uPxdw">
-        <path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"></path>
-    </svg>
-
-    const elementIconPlayingItem = (isPlay) ? <svg
-        role="img"
-        height="24"
-        width="24"
-        aria-hidden="true"
-        viewBox="0 0 24 24"
-        data-encore-id="icon"
-        className="Svg-sc-ytk21e-0 uPxdw">
-        <path d="M5.7 3a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7H5.7zm10 0a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7h-2.6z"></path>
-    </svg> : <svg
-        role="img"
-        height="24"
-        width="24"
-        aria-hidden="true"
-        viewBox="0 0 24 24"
-        data-encore-id="icon"
-        className="Svg-sc-ytk21e-0 uPxdw">
-        <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
-    </svg>
+    const elementIconPlayingFooter = (isPlay) ? iconPlayTrackBtnFooter : iconPauseTrackBtnFooter
+    const elementIconPlaylist = (isPlay) ? iconPlayBtnPlaylist : iconPauseBtnPlaylist
     // Handle Play Audio
 
     // Handle Prev Track
@@ -279,31 +244,7 @@ export default function Admin() {
         setIsMuted(!isMuted)
     }
 
-    const elementIconMute = (isMuted) ? <svg
-        role="presentation"
-        height="16"
-        width="16"
-        fill='#fff'
-        aria-hidden="true"
-        aria-label="Volume off"
-        id="volume-icon"
-        viewBox="0 0 16 16"
-        data-encore-id="icon">
-        <path d="M13.86 5.47a.75.75 0 0 0-1.061 0l-1.47 1.47-1.47-1.47A.75.75 0 0 0 8.8 6.53L10.269 8l-1.47 1.47a.75.75 0 1 0 1.06 1.06l1.47-1.47 1.47 1.47a.75.75 0 0 0 1.06-1.06L12.39 8l1.47-1.47a.75.75 0 0 0 0-1.06z"></path>
-        <path d="M10.116 1.5A.75.75 0 0 0 8.991.85l-6.925 4a3.642 3.642 0 0 0-1.33 4.967 3.639 3.639 0 0 0 1.33 1.332l6.925 4a.75.75 0 0 0 1.125-.649v-1.906a4.73 4.73 0 0 1-1.5-.694v1.3L2.817 9.852a2.141 2.141 0 0 1-.781-2.92c.187-.324.456-.594.78-.782l5.8-3.35v1.3c.45-.313.956-.55 1.5-.694V1.5z"></path>
-    </svg> : <svg
-        role="presentation"
-        className=''
-        fill='#fff'
-        height="16"
-        width="16"
-        aria-hidden="true"
-        aria-label="Volume medium"
-        id="volume-icon"
-        viewBox="0 0 16 16"
-        data-encore-id="icon">
-        <path d="M9.741.85a.75.75 0 0 1 .375.65v13a.75.75 0 0 1-1.125.65l-6.925-4a3.642 3.642 0 0 1-1.33-4.967 3.639 3.639 0 0 1 1.33-1.332l6.925-4a.75.75 0 0 1 .75 0zm-6.924 5.3a2.139 2.139 0 0 0 0 3.7l5.8 3.35V2.8l-5.8 3.35zm8.683 6.087a4.502 4.502 0 0 0 0-8.474v1.65a2.999 2.999 0 0 1 0 5.175v1.649z"></path>
-    </svg>
+    const elementIconMute = (isMuted) ? iconMute : iconUnMute
 
     useEffect(() => {
         if (isMuted) {
@@ -450,12 +391,14 @@ export default function Admin() {
                     <div className='w-3/4 flex gap-16 m-auto'>
                         <div className='banner-img w-48 flex flex-col text-center'>
                             <div className='w-48 h-48 border'>
-                                {imageUrls.map((url, index) => <img key={index} className='w-48 h-full shadow-[0 4px 60px rgb(0 0 0 / 50%)]' src={url} alt="" />)}
+                                <img className='w-48 h-full shadow-[0 4px 60px rgb(0 0 0 / 50%)]' src={imageUpload?.url} alt="" />
                             </div>
                             <div className='mt-2'>
                                 <label className='text-[#fff] font-CircularLight text-sm hover:underline cursor-pointer' htmlFor='upload-photo'>Choose File</label>
                                 <input className='hidden' id='upload-photo' type="file" onChange={(e) => {
-                                    setImageUpload(e.target.files[0])
+                                    const file = e.target.files[0];
+                                    file.preview = URL.createObjectURL(file);
+                                    setImageUpload({upload: e.target.files[0], url:file.preview})
                                 }} />
                                 <button className='mt-2 font-CircularLight px-8 hover:scale-105 hover:opacity-90 transition-all duration-200 bg-primaryColor rounded-[500px]' onClick={uploadFile}>Upload Image</button>
                             </div>
@@ -504,8 +447,8 @@ export default function Admin() {
                 <div className='section-playlist-list-song bg-[#121212]'>
                     <div className='section-play-list-control flex justify-between gap-8 px-8 py-6 items-center'>
                         <div className='flex items-center gap-8'>
-                            <button className='rounded-[50%] hover:scale-110 transition-all duration-200 bg-primaryColor p-3.5'>
-                                <svg role="img" height="28" width="28" aria-hidden="true" viewBox="0 0 24 24" data-encore-id="icon" className="Svg-sc-ytk21e-0 uPxdw"><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+                            <button onClick={handlePlay} className='rounded-[50%] hover:scale-110 transition-all duration-200 bg-primaryColor p-3.5'>
+                                {elementIconPlaylist}
                             </button>
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="hsla(0,0%,100%,.7)" className="bi bi-heart cursor-pointer" viewBox="0 0 16 16">
                                 <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
@@ -631,6 +574,7 @@ export default function Admin() {
                             </svg>
                         </div>
                     </div>
+                    {/* Song Control */}
                     <div className='song-control flex flex-col'>
                         <audio ref={audioRef} webkit-playsinline="true" playsInline={true} onLoadedMetadata={onLoadedMetadata} src={songArr[songIndex].link}></audio>
                         <div className='song-control-btn justify-center mb-1 flex gap-4'>
@@ -703,6 +647,8 @@ export default function Admin() {
                             <p className='font-CircularLight text-[11px] w-7 text-[#B3B3B3]'>{timeProgress.minutes}:{timeProgress.seconds}{timeProgress.seconds < 10 && "0"}</p>
                         </div>
                     </div>
+                    {/* Song Control */}
+                    {/* Song Volume */}
                     <div className='song-volumn'>
                         <div className='flex justify-end gap-2 items-center'>
                             <button onClick={handleMuted} className='opacity-75 hover:opacity-100'>
@@ -723,6 +669,7 @@ export default function Admin() {
                             </div>
                         </div>
                     </div>
+                    {/* Song Volume */}
                 </div>
             </footer>
             {/* Footer */}

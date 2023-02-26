@@ -1,0 +1,220 @@
+{
+  "playList": [
+    {
+      "audioId": 1,
+      "audioName": "Ánh sao và bầu trời",
+      "albums": "Tuyển tập những ca khúc cover bởi Nhân Tic",
+      "artist": "Nhân Tic",
+      "date": "26/2/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Fimg%2Fimg%202.jpeg?alt=media&token=f7f48571-e319-4ec0-b207-7eda49d7255b",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2FA%CC%81nh%20Tra%CC%86ng%20Hoa%CC%80ng%20Anh%20Final%203.wav?alt=media&token=d40df454-4691-4a05-836f-e8a05f94fe78"
+    },
+    {
+      "audioId": 2,
+      "audioName": "Hơn em chỗ nào",
+      "albums": "Tuyển tập những ca khúc cover bởi Nhân Tic",
+      "artist": "Nhân Tic",
+      "date": "26/2/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Fimg%2Fimg%203.jpeg?alt=media&token=e1b0fd08-4c74-4fa1-bafa-2dd605a95684",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2FHo%CC%9Bn%20em%20cho%CC%82%CC%83%20na%CC%80o%20Final%20Final%202.mp3?alt=media&token=74863189-c544-4e19-9527-4f518948ebbf"
+    },
+    {
+      "audioId": 3,
+      "audioName": "Bước qua nhau",
+      "albums": "Tuyển tập những ca khúc cover bởi Nhân Tic",
+      "artist": "Nhân Tic",
+      "date": "26/2/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2Fbu%CC%9Bo%CC%9B%CC%81c%20qua%20nhau%20nghi%CC%A3ch.wav?alt=media&token=f48bcf4d-1482-418d-bf9c-afeae9df8d8a",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Fimg%2Fimg%205.jpeg?alt=media&token=a8c1dbce-fc28-4bff-b515-ba68af7617eb"
+    },
+    {
+      "audioId": 4,
+      "audioName": "Tình đầu",
+      "albums": "Tuyển tập những ca khúc cover bởi Nhân Tic",
+      "artist": "Nhân Tic",
+      "date": "26/2/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Fimg%2Fimg%205.jpeg?alt=media&token=a8c1dbce-fc28-4bff-b515-ba68af7617eb",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2Fti%CC%80nh%20%C4%91a%CC%82%CC%80u%20demo%209.mp3?alt=media&token=b186fb6a-7e1c-4b46-82eb-e4b3a366a709"
+    },
+    {
+      "audioId": 5,
+      "audioName": "Điều cha chưa nói",
+      "albums": "Tuyển tập những ca khúc cover bởi Nhân Tic",
+      "artist": "Nhân Tic",
+      "date": "26/2/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Fimg%2Fimg%201.jpeg?alt=media&token=57fd46b4-f913-4df4-92c9-c05c19b56914",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2F%C4%91ie%CC%82%CC%80u%20cha%20chu%CC%9Ba%20no%CC%81i%20demo%203.mp3?alt=media&token=8daa13ad-4631-473f-b815-a3ac5287d5b5"
+    },
+    {
+      "audioId": 6,
+      "audioName": "Mưa trên cuộc tình",
+      "albums": "Danh sách phát của Tùng Acoustic",
+      "artist": "Tùng Acoustic",
+      "date": "26/2/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FT%C3%B9ng%20Acoustic%2Fimg%2Fimages.jpeg?alt=media&token=ba132361-83a5-458c-85ec-b1c64140afb5",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FT%C3%B9ng%20Acoustic%2Faudio%2FMu%CC%9Ba%20Tre%CC%82n%20Cuo%CC%A3%CC%82c%20Ti%CC%80nh.mp3?alt=media&token=f1eb9b6e-5b23-4f9a-a620-f920b90511d3"
+    },
+    {
+      "audioId": 7,
+      "audioName": "Tình Đơn Phương",
+      "albums": "Danh sách phát của Tùng Acoustic",
+      "artist": "Tùng Acoustic",
+      "date": "26/2/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FT%C3%B9ng%20Acoustic%2Fimg%2Fimages.jpeg?alt=media&token=ba132361-83a5-458c-85ec-b1c64140afb5",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FT%C3%B9ng%20Acoustic%2Faudio%2FTi%CC%80nh%20%C4%90o%CC%9Bn%20Phu%CC%9Bo%CC%9Bng%20with%20Intro.wav?alt=media&token=58f26433-cf1f-4763-9ebf-bf6223dcdb97"
+    },
+    {
+      "audioId": 8,
+      "audioName": "Trái Đất Tròn",
+      "albums": "Danh sách phát của Tùng Acoustic",
+      "artist": "Tùng Acoustic",
+      "date": "26/2/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FT%C3%B9ng%20Acoustic%2Fimg%2Fimages.jpeg?alt=media&token=ba132361-83a5-458c-85ec-b1c64140afb5",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FT%C3%B9ng%20Acoustic%2Faudio%2Fy2mate.com%20-%20TRA%CC%81I%20%C4%90A%CC%82%CC%81T%20TRO%CC%80N%20Cover%20%20T%20N%20K%20V%20L_320kbps.mp3?alt=media&token=97f8e6aa-f19b-4d5d-9e1f-11f0bc4653b8"
+    },
+    {
+      "audioId": 9,
+      "audioName": "Thiên Đường Vắng Em",
+      "albums": "Danh sách phát của Tùng Acoustic",
+      "artist": "Tùng Acoustic",
+      "date": "26/2/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FT%C3%B9ng%20Acoustic%2Fimg%2Fimages.jpeg?alt=media&token=ba132361-83a5-458c-85ec-b1c64140afb5",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FT%C3%B9ng%20Acoustic%2Faudio%2Fy2mate.com%20-%20Thie%CC%82n%20%C4%90u%CC%9Bo%CC%9B%CC%80ng%20Va%CC%86%CC%81ng%20Em%20%20%C4%90a%CC%86ng%20Kho%CC%82i%20%20%20Xua%CC%82n%20So%CC%9Bn%20ft%20Tu%CC%80ng%20Acoustic%20%20Acoustic%20Cover%20_320kbps.mp3?alt=media&token=079b4c46-db4b-4843-b414-8ffc84868c32"
+    },
+    {
+      "audioId": 10,
+      "audioName": "Xin Anh Đừng",
+      "albums": "Danh sách phát của Tùng Acoustic",
+      "artist": "Tùng Acoustic",
+      "date": "26/2/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FT%C3%B9ng%20Acoustic%2Fimg%2Fimages.jpeg?alt=media&token=ba132361-83a5-458c-85ec-b1c64140afb5",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FT%C3%B9ng%20Acoustic%2Faudio%2Fy2mate.com%20-%20Xin%20Anh%20%C4%90u%CC%9B%CC%80ng%20%20%C4%90o%CC%82ng%20Nhi%20%20Tu%CC%80ng%20Ti%CC%81c%20ft%20Du%CC%9Bo%CC%9Bng%20Thu%CC%80y%20Nga%CC%82n%20%20Acoustic%20Cover%20_320kbps.mp3?alt=media&token=a41c96dc-a0b1-41f3-91c5-fe92229a6c80"
+    },
+    {
+      "audioId": 11,
+      "audioName": "Anh nhớ ra",
+      "albums": "Danh sách phát của Vũ.",
+      "artist": "Vũ.",
+      "date": "26/2/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FV%C5%A9.%2Fimg%2F254291766_4331321781.jpeg?alt=media&token=7c479527-bbe9-4062-8116-753bbf8c800d",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FV%C5%A9.%2Faudio%2Fy2mate.com%20-%20ANH%20NHO%CC%9B%CC%81%20RA%20%20Vu%CC%83%20Feat%20Trang%20%20Official%20Audio_320kbps.mp3?alt=media&token=06d992d7-7c7b-4323-a8fa-ca213ee51317"
+    },
+    {
+      "audioId": 12,
+      "audioName": "Bước qua mùa cô đơn",
+      "albums": "Danh sách phát của Vũ.",
+      "artist": "Vũ.",
+      "date": "26/2/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FV%C5%A9.%2Fimg%2F254291766_4331321781.jpeg?alt=media&token=7c479527-bbe9-4062-8116-753bbf8c800d",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FV%C5%A9.%2Faudio%2Fy2mate.com%20-%20BU%CC%9BO%CC%9B%CC%81C%20QUA%20MU%CC%80A%20CO%CC%82%20%C4%90O%CC%9BN%20%20Vu%CC%83%20Official%20MV_320kbps.mp3?alt=media&token=d89c813e-56b1-4dd7-a98b-d1a4df257953"
+    },
+    {
+      "audioId": 13,
+      "audioName": "Lạ lùng",
+      "albums": "Danh sách phát của Vũ.",
+      "artist": "Vũ.",
+      "date": "26/2/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FV%C5%A9.%2Fimg%2F254291766_4331321781.jpeg?alt=media&token=7c479527-bbe9-4062-8116-753bbf8c800d",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FV%C5%A9.%2Faudio%2Fy2mate.com%20-%20LA%CC%A3%20LU%CC%80NG%20%20Vu%CC%83%20Original_320kbps.mp3?alt=media&token=9d41f290-6cda-4099-b370-1fe985f70560"
+    },
+    {
+      "audioId": 14,
+      "audioName": "Đông kiếm em",
+      "albums": "Danh sách phát của Vũ.",
+      "artist": "Vũ.",
+      "date": "26/2/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FV%C5%A9.%2Fimg%2F254291766_4331321781.jpeg?alt=media&token=7c479527-bbe9-4062-8116-753bbf8c800d",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FV%C5%A9.%2Faudio%2Fy2mate.com%20-%20%C4%90O%CC%82NG%20KIE%CC%82%CC%81M%20EM%20%20Vu%CC%83%20Original_320kbps.mp3?alt=media&token=ba46f4f3-e756-4cca-aa1f-c2593f929377"
+    },
+    {
+      "audioId": 15,
+      "audioName": "Đợi",
+      "albums": "Danh sách phát của Vũ.",
+      "artist": "Vũ.",
+      "date": "26/2/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FV%C5%A9.%2Fimg%2F254291766_4331321781.jpeg?alt=media&token=7c479527-bbe9-4062-8116-753bbf8c800d",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FV%C5%A9.%2Faudio%2Fy2mate.com%20-%20%C4%90O%CC%9B%CC%A3I%20%20VU%CC%83%20ORIGINAL_320kbps.mp3?alt=media&token=9fe5c160-54cf-4921-8a7f-3bbb9b975f10"
+    },
+    {
+      "audioId": 16,
+      "audioName": "Lời xin lỗi vụng về",
+      "albums": "Danh sách phát của Quân AP",
+      "artist": "Quân AP",
+      "date": "26/2/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FQu%C3%A2n%20AP%2Fimg%2Fimg%201.jpeg?alt=media&token=b35b35c0-476a-4464-96dd-abc2d8fde829",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FQu%C3%A2n%20AP%2Faudio%2Fy2mate.com%20-%20LO%CC%9B%CC%80I%20XIN%20LO%CC%82%CC%83I%20VU%CC%A3NG%20VE%CC%82%CC%80%20%20QUA%CC%82N%20AP%20%20OFFICIAL%20MV.mp3?alt=media&token=ec019c34-6586-4664-97f0-c4fd64ee9689"
+    },
+    {
+      "audioId": 17,
+      "audioName": "Bông hoa đẹp nhất",
+      "albums": "Danh sách phát của Quân AP",
+      "artist": "Quân AP",
+      "date": "26/2/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FQu%C3%A2n%20AP%2Fimg%2Fimg%201.jpeg?alt=media&token=b35b35c0-476a-4464-96dd-abc2d8fde829",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FQu%C3%A2n%20AP%2Faudio%2Fy2mate.com%20-%20QUA%CC%82N%20AP%20%20BO%CC%82NG%20HOA%20%C4%90E%CC%A3P%20NHA%CC%82%CC%81T%20%20OFFICIAL%20MUSIC%20VIDEO.mp3?alt=media&token=e02b7bf9-3b1f-4958-a103-20f583bb7e46"
+    },
+    {
+      "audioId": 18,
+      "audioName": "Còn gì đau hơn chữ đã từng",
+      "albums": "Danh sách phát của Quân AP",
+      "artist": "Quân AP",
+      "date": "26/2/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FQu%C3%A2n%20AP%2Fimg%2Fimg%201.jpeg?alt=media&token=b35b35c0-476a-4464-96dd-abc2d8fde829",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FQu%C3%A2n%20AP%2Faudio%2Fy2mate.com%20-%20QUA%CC%82N%20AP%20%20Co%CC%80n%20Gi%CC%80%20%C4%90au%20Ho%CC%9Bn%20Chu%CC%9B%CC%83%20%C4%90a%CC%83%20Tu%CC%9B%CC%80ng%20%20Lyrics%20Audio.mp3?alt=media&token=d3fce928-68dc-4e05-bea4-a7d22aab6594"
+    },
+    {
+      "audioId": 19,
+      "audioName": "Ai là người thương em",
+      "albums": "Danh sách phát của Quân AP",
+      "artist": "Quân AP",
+      "date": "26/2/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FQu%C3%A2n%20AP%2Fimg%2Fimg%201.jpeg?alt=media&token=b35b35c0-476a-4464-96dd-abc2d8fde829",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FQu%C3%A2n%20AP%2Faudio%2Fy2mate.com%20-%20Qua%CC%82n%20AP%20%20Ai%20La%CC%80%20Ngu%CC%9Bo%CC%9B%CC%80i%20Thu%CC%9Bo%CC%9Bng%20Em%20%20Official%20Music%20Video.mp3?alt=media&token=d8e6fa50-bc80-4c52-936d-e8d5adc0a7fb"
+    },
+    {
+      "id": 20,
+      "name": "Một ngàn nỗi đau",
+      "albums": "Danh sách có thể bạn sẽ thích",
+      "artist": "Trung Quân Idol",
+      "date": "26/2/2023",
+      "img": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Fimg%2Ftrung-quan-idol-img.jpeg?alt=media&token=21a1c6aa-ee46-4320-b7cd-20b2692fb7bd",
+      "url": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20Mo%CC%A3%CC%82t%20Nga%CC%80n%20No%CC%82%CC%83i%20%C4%90au%20%20TRUNG%20QUA%CC%82N%20live%20at%20souloftheforest%20%20St%20Hu%CC%9B%CC%81a%20Kim%20Tuye%CC%82%CC%80n.mp3?alt=media&token=391e9181-c311-4f56-b86e-ff17d330713c"
+    },
+    {
+      "id": 21,
+      "name": "Mashup Đáp Án Cuối Cùng - Anh Chưa Thương Em Đến Vậy Đâu - Thu Cuối",
+      "albums": "Danh sách có thể bạn sẽ thích",
+      "artist": "Quân AP ft. Myra Trần",
+      "date": "26/2/2023",
+      "img": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Fimg%2Fqua%CC%82n%20ap%20ft%20myra%20.jpeg?alt=media&token=94fca532-4bc3-4c37-bd46-0b8b45460fc2",
+      "url": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20Qua%CC%82n%20AP%20Myra%20Tra%CC%82%CC%80n%20live%20Mashup%20%C4%90a%CC%81p%20A%CC%81n%20Cuo%CC%82%CC%81i%20Cu%CC%80ng%20Anh%20Chu%CC%9Ba%20Thu%CC%9Bo%CC%9Bng%20Em%20%C4%90e%CC%82%CC%81n%20Va%CC%A3%CC%82y%20%C4%90a%CC%82uThu%20Cuo%CC%82%CC%81i%20So%CC%81ng%2023.mp3?alt=media&token=b211f13f-e1a2-40fd-a3a9-bb925eaf262c"
+    },
+    {
+      "id": 22,
+      "name": "Cafe thuốc lá và những ngày vui",
+      "albums": "Danh sách có thể bạn sẽ thích",
+      "artist": "Thế Bảo",
+      "date": "26/2/2023",
+      "img": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Fimg%2Fcafe%20thuo%CC%82%CC%81c%20la%CC%81.jpeg?alt=media&token=b6bb2796-823c-41ba-b73a-99dd7ff47be4",
+      "url": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20The%CC%82%CC%81%20Ba%CC%89o%20%20Cafe%20Thuo%CC%82%CC%81c%20La%CC%81%20%20Nhu%CC%9B%CC%83ng%20Nga%CC%80y%20Vui%20Official%20Lyric%20Video.mp3?alt=media&token=1fef3d97-f2dd-45e3-a2d3-f4bc2f10152b"
+    },
+    {
+      "id": 23,
+      "name": "Vẫn nhớ",
+      "albums": "Danh sách có thể bạn sẽ thích",
+      "artist": "Soobin Hoàng Sơn",
+      "date": "26/2/2023",
+      "img": "ab67616d00001e0208d4e5d5e3077e955394b955.jpeg",
+      "url": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20Va%CC%82%CC%83n%20Nho%CC%9B%CC%81%20%20Soobin%20Hoa%CC%80ng%20So%CC%9Bn%20%20Cover.mp3?alt=media&token=61d43c28-e21d-419f-b986-16feae60a2b7"
+    },
+    {
+      "id": 24,
+      "name": "3107",
+      "albums": "Danh sách có thể bạn sẽ thích",
+      "artist": "Soobin Hoàng Sơn",
+      "date": "26/2/2023",
+      "img": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Fimg%2F3107.jpeg?alt=media&token=493bab05-818d-4aec-9ccb-18da6f0fb1a0",
+      "url": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20Wn%20%203107%20full%20album%20ft%20%20titie%20Na%CC%82u%20Du%CC%9Bo%CC%9Bngg%20.mp3?alt=media&token=744d0155-921d-4990-99d1-1e1f83efbb20"
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import myMusic from '../audio/audio1.mp3'
 import myMusic2 from '../audio/điều cha chưa nói final.mp3'
 import myMusic3 from '../audio/Hơn em chỗ nào Final Final 2.mp3'
+import { iconPauseTrackBtnFooter, iconPlayTrackBtnFooter, iconPauseTrackItem, iconPlayTrackItem, iconUnMute, iconMute, iconPauseBtnPlaylist, iconPlayBtnPlaylist } from '../icon';
 
 
 const songArr = [
@@ -121,45 +122,9 @@ export default function HomePageLogin() {
         transform: `translateX(${playLength}%)`
     }
 
-    const elementIconPlayingFooter = (isPlay) ? <svg
-        role="img"
-        height="16"
-        width="16"
-        aria-hidden="true"
-        viewBox="0 0 16 16"
-        data-encore-id="icon"
-        className="Svg-sc-ytk21e-0 uPxdw">
-        <path d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z"></path>
-    </svg> : <svg
-        role="img"
-        height="16"
-        width="16"
-        aria-hidden="true"
-        viewBox="0 0 16 16"
-        data-encore-id="icon"
-        className="Svg-sc-ytk21e-0 uPxdw">
-        <path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"></path>
-    </svg>
+    const elementIconPlayingFooter = (isPlay) ? iconPlayTrackBtnFooter : iconPauseTrackBtnFooter
 
-    const elementIconPlayingItem = (isPlay) ? <svg
-        role="img"
-        height="24"
-        width="24"
-        aria-hidden="true"
-        viewBox="0 0 24 24"
-        data-encore-id="icon"
-        className="Svg-sc-ytk21e-0 uPxdw">
-        <path d="M5.7 3a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7H5.7zm10 0a.7.7 0 0 0-.7.7v16.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V3.7a.7.7 0 0 0-.7-.7h-2.6z"></path>
-    </svg> : <svg
-        role="img"
-        height="24"
-        width="24"
-        aria-hidden="true"
-        viewBox="0 0 24 24"
-        data-encore-id="icon"
-        className="Svg-sc-ytk21e-0 uPxdw">
-        <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
-    </svg>
+    const elementIconPlayingItem = (isPlay) ? iconPlayTrackItem : iconPauseTrackItem
     // Handle Play Audio
 
     // Handle Prev Track
@@ -231,6 +196,38 @@ export default function HomePageLogin() {
     }
 
     // Handle Progress Bar
+
+    // Handle Volumn
+    const [audioVol, setAudioVol] = useState(100)
+    const [isMuted, setIsMuted] = useState(false)
+    const handleChangeVolume = (event) => {
+        let volume = event.target.value
+        setAudioVol(volume)
+        audioRef.current.volume = volume / 100;
+        if (audioRef.current.volume === 0) {
+            setIsMuted(true)
+        } else {
+            setIsMuted(false)
+        }
+    }
+
+    const handleMuted = () => {
+        setIsMuted(!isMuted)
+    }
+
+    const elementIconMute = (isMuted) ? iconMute : iconUnMute
+
+    useEffect(() => {
+        if (isMuted) {
+            audioRef.current.volume = 0
+            setAudioVol(pre => pre = 0)
+        } else {
+            audioRef.current.volume = 1
+            setAudioVol(pre => pre = 100)
+        }
+    }, [isMuted])
+
+    // Handle Volumn
     return (
         <div>
             <div onClick={menuToggle ? handleMenuToggle : undefined}>
@@ -779,9 +776,18 @@ export default function HomePageLogin() {
                                     <p className='font-CircularLight text-[11px] w-7 text-[#B3B3B3]'>{timeProgress.minutes}:{timeProgress.seconds}{timeProgress.seconds < 10 && "0"}</p>
                                 </div>
                             </div>
-                            <div className=''>
-
+                            {/* Song Volume */}
+                            <div className='song-volumn'>
+                                <div className='flex justify-end gap-2 items-center'>
+                                    <button onClick={handleMuted} className='opacity-75 hover:opacity-100'>
+                                        {elementIconMute}
+                                    </button>
+                                    <div className='h-3 flex items-center relative group'>        
+                                        <input onChange={handleChangeVolume} value={audioVol} className='block h-1 bg-primaryColor rounded' max={100} min={0} type="range" />
+                                    </div>
+                                </div>
                             </div>
+                            {/* Song Volume */}
                         </div>
                     </footer>
                     {/* Footer */}
