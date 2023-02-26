@@ -216,5 +216,15 @@
       "img": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Fimg%2F3107.jpeg?alt=media&token=493bab05-818d-4aec-9ccb-18da6f0fb1a0",
       "url": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20Wn%20%203107%20full%20album%20ft%20%20titie%20Na%CC%82u%20Du%CC%9Bo%CC%9Bngg%20.mp3?alt=media&token=744d0155-921d-4990-99d1-1e1f83efbb20"
     }
+  ],
+  "users" : [
+    {
+      "id": 0,
+      "email": "admin@xtic.com",
+      "password": "1234567",
+      "name": "admin",
+      "birthday": "09/03/1998",
+      "gender": "male"
+    }
   ]
 }

@@ -46,31 +46,42 @@ export default function Admin() {
         }
     )
     // Upload Firebase
-    const [precentFb, setPercentFb] = useState(0)
     const [imageUpload, setImageUpload] = useState(null);
     const [imageUrls, setImageUrls] = useState([]);
     const imagesListRef = ref(storage, "images/");
+    const [audioUpload, setAudioUpload] = useState(null);
+    const [audioUrls, setAudioUrls] = useState([])
+    const audioListRef = ref(storage, "audios/");
     // Viết hàm upload
     const uploadFile = () => {
-        if (imageUpload == null) return;
-        const imageRef = ref(storage, `images/${imageUpload.upload.name}`);
-
-        uploadBytes(imageRef, imageUpload).then((snapshot) => {
-            // const percent = Math.round(
-            //     (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            // );
-            //     console.log(snapshot.bytesTransferred);
-            // // update progress
-            // setPercentFb(percent);
-            getDownloadURL(snapshot.ref).then((url) => {
-                setImageUrls((prev) => [...prev, url]);
+        if (imageUpload !== null) {
+            const imageRef = ref(storage, `images/${imageUpload.upload.name}`);
+            uploadBytes(imageRef, imageUpload).then((snapshot) => {
+                getDownloadURL(snapshot.ref).then((url) => {
+                    setImageUrls((prev) => [...prev, url]);
+                });
             });
-        });
+        } else {
+            return
+        }
+        if (audioUpload !== null) {
+            const audioFbRef = ref(storage, `audios/${audioUpload.name}`);
 
+            console.log(audioUpload);
+
+            uploadBytes(audioFbRef, audioUpload).then((snapshot) => {
+                getDownloadURL(snapshot.ref).then((url) => {
+                    setAudioUrls((prev) => [...prev, url]);
+                });
+            });
+        } else {
+            return;
+        }
     };
+
     // Lấy dữ liệu trả về từ firebase
     useEffect(() => {
-        return () => imageUpload && URL.revokeObjectURL(imageUpload.url); 
+        return () => imageUpload && URL.revokeObjectURL(imageUpload.url);
     }, [imageUpload]);
     // Upload Firebase
 
@@ -134,6 +145,7 @@ export default function Admin() {
             setIsPlay(false)
             setPlayLength(0)
             setCurrentTime(pre => ({ minutes: 0, seconds: 0 }))
+            audioRef.current.currentTime = 0
             setTimeout(() => {
                 if (songIndex === songArr.length - 1) {
                     setSongIndex(0)
@@ -255,6 +267,13 @@ export default function Admin() {
             setAudioVol(pre => pre = 100)
         }
     }, [isMuted])
+
+    // Đổi màu input vol
+    const getBackgroundSize = () => {
+        return {
+            backgroundSize: `${(audioVol * 100) / 100}% 100%` 
+        }
+    }
 
     // Handle Volumn
 
@@ -398,9 +417,8 @@ export default function Admin() {
                                 <input className='hidden' id='upload-photo' type="file" onChange={(e) => {
                                     const file = e.target.files[0];
                                     file.preview = URL.createObjectURL(file);
-                                    setImageUpload({upload: e.target.files[0], url:file.preview})
+                                    setImageUpload({ upload: e.target.files[0], url: file.preview })
                                 }} />
-                                <button className='mt-2 font-CircularLight px-8 hover:scale-105 hover:opacity-90 transition-all duration-200 bg-primaryColor rounded-[500px]' onClick={uploadFile}>Upload Image</button>
                             </div>
                         </div>
                         <div className='form-upload w-full text-[#fff]'>
@@ -408,21 +426,21 @@ export default function Admin() {
                                 <div className='w-full flex justify-between gap-10 mb-4'>
                                     <div className='flex-1'>
                                         <label className='pl-1 font-CircularBook block mb-2'>Tên bài hát :</label>
-                                        <input className='font-CircularLight w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' type="text" />
+                                        <input className='font-CircularLight w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' placeholder='Nhập tên bài hát...' type="text" />
                                     </div>
                                     <div className='flex-1'>
                                         <label className='pl-1 font-CircularBook block mb-2'>Nghệ sĩ :</label>
-                                        <input className='font-CircularLight w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' type="text" />
+                                        <input className='font-CircularLight w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' placeholder='Nhập tên nghệ sĩ...' type="text" />
                                     </div>
                                 </div>
                                 <div className='w-full flex justify-between gap-10 mb-4'>
                                     <div className='flex-1'>
                                         <label className='pl-1 font-CircularBook block mb-2'>Album :</label>
-                                        <input className='font-CircularLight w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' type="text" />
+                                        <input className='font-CircularLight w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' placeholder='Nhập tên album...' type="text" />
                                     </div>
                                     <div className='flex-1'>
                                         <label className='pl-1 font-CircularBook block mb-2'>Ngày đăng :</label>
-                                        <input className='font-CircularLight w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' type="text" />
+                                        <input className='font-CircularLight w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' placeholder='Nhập ngày đăng...' type="text" />
                                     </div>
                                 </div>
                                 <div className='flex justify-between gap-10'>
@@ -432,14 +450,13 @@ export default function Admin() {
                                         <div className='mt-2 absolute right-3 flex items-center top-1/2 -translate-y-1/2'>
                                             <label className='text-[#fff] font-CircularLight text-sm hover:underline cursor-pointer mr-2 translate-y-1' htmlFor='upload-photo'>Choose File</label>
                                             <input className='hidden' id='upload-photo' type="file" onChange={(e) => {
-                                                setImageUpload(e.target.files[0])
+                                                setAudioUpload(e.target.files[0])
                                             }} />
-                                            <button className='text-[#121212] translate-y-[1px] mt-2 font-CircularLight px-4 hover:scale-105 hover:opacity-90 transition-all duration-200 bg-primaryColor rounded-[500px]' onClick={uploadFile}>Upload Audio</button>
                                         </div>
                                     </div>
                                     <div className='bg-transparent flex-1'></div>
                                 </div>
-                                <button className='text-[#121212] tracking-widest float-right mt-2 font-CircularMedium text-base px-8 py-3 hover:scale-105 hover:opacity-90 transition-all duration-200 bg-primaryColor rounded-[500px]'>Đăng bài</button>
+                                <button onClick={uploadFile} className='text-[#121212] tracking-widest float-right mt-2 font-CircularMedium text-base px-8 py-3 hover:scale-105 hover:opacity-90 transition-all duration-200 bg-primaryColor rounded-[500px]'>Upload Audio</button>
                             </div>
                         </div>
                     </div>
@@ -576,7 +593,7 @@ export default function Admin() {
                     </div>
                     {/* Song Control */}
                     <div className='song-control flex flex-col'>
-                        <audio ref={audioRef} webkit-playsinline="true" playsInline={true} onLoadedMetadata={onLoadedMetadata} src={songArr[songIndex].link}></audio>
+                        <audio ref={audioRef} onLoadedMetadata={onLoadedMetadata} src={songArr[songIndex].link}></audio>
                         <div className='song-control-btn justify-center mb-1 flex gap-4'>
                             <button className='w-8 h-8 flex justify-center items-center fill-[#fff] opacity-60 hover:opacity-100'>
                                 <svg
@@ -665,7 +682,7 @@ export default function Admin() {
                                 <div className="group-hover:opacity-100 opacity-0 cursor-pointer transition-all duration-200">
                                     <div className='absolute left-[-6px] bg-[#fff] w-3 h-3 rounded-[50%]'></div>
                                 </div> */}
-                                <input onChange={handleChangeVolume} value={audioVol} className='block h-1 bg-primaryColor rounded' max={100} min={0} type="range" />
+                                <input style={getBackgroundSize()} onChange={handleChangeVolume} value={audioVol} className='block h-1 bg-primaryColor appearance-none inputCSS rounded' max={100} min={0} type="range" />
                             </div>
                         </div>
                     </div>
