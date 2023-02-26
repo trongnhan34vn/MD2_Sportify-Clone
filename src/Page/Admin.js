@@ -661,7 +661,7 @@ export default function Admin() {
                                     <div className='absolute left-[-6px] bg-[#fff] w-3 h-3 rounded-[50%]'></div>
                                 </div>
                             </div>
-                            <p className='font-CircularLight text-[11px] w-7 text-[#B3B3B3]'>{timeProgress.minutes}:{timeProgress.seconds}{timeProgress.seconds < 10 && "0"}</p>
+                            <p className='font-CircularLight text-[11px] w-7 text-[#B3B3B3]'>{timeProgress.minutes}:{timeProgress.seconds < 10 && "0"}{timeProgress.seconds}</p>
                         </div>
                     </div>
                     {/* Song Control */}
