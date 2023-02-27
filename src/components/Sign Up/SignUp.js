@@ -1,6 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function SignUp() {
+    const [birthday, setBirthday] = useState({
+        day: "",
+        month: "",
+        year: ""
+    })
+    const [inputVal, setInputVal] = useState(
+        {
+            email: "",
+            password: "",
+            rePassword: "",
+            name: "",
+            birthday: "",
+            gender: true
+        }
+    )
+
+    const handleChange = (event) => {
+        let key = event.target.name
+        let value = event.target.value
+        setInputVal({ ...inputVal, [key]: value })
+    }
+
+    const getBirthDay = (event) => {
+        let key = event.target.name
+        let value = event.target.value
+        setBirthday(() => ({ ...birthday, [key]: value }))
+    }
+    useEffect(()=>{
+        setInputVal(() => ({ ...inputVal, birthday: `${birthday.day}/${birthday.month}/${birthday.year}` }))
+    },[birthday])
+    console.log(inputVal);
     return (
         <div>
             {/* Sign Up */}
@@ -37,50 +68,50 @@ export default function SignUp() {
                 <form className="sign-up-form text-left text-sm">
                     <div className='sign-up-form-input mb-4'>
                         <label className='block mb-2'>Email address or username</label>
-                        <input className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook' type="text" placeholder='Email address or username' />
+                        <input name='email' onChange={handleChange} className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook' type="text" placeholder='Email address or username' />
                     </div>
                     <div className='sign-up-form-input mb-4'>
                         <label className='block mb-2'>Password</label>
-                        <input className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook' type="password" placeholder='Password' />
+                        <input name='password' onChange={handleChange} className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook' type="password" placeholder='Password' />
                     </div>
                     <div className='sign-up-form-input mb-4'>
                         <label className='block mb-2'>Nhập lại Password</label>
-                        <input className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook' type="password" placeholder='Nhập lại password' />
+                        <input name='rePassword' onChange={handleChange} className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook' type="password" placeholder='Nhập lại password' />
                     </div>
                     <div className='sign-up-form-input mb-4'>
                         <label className='block mb-2'>Bạn tên gì?</label>
-                        <input className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook' type="text" placeholder='Nhập tên hồ sơ' />
+                        <input name='name' onChange={handleChange} className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook' type="text" placeholder='Nhập tên hồ sơ' />
                     </div>
                     <div className='sign-up-form-input mb-4'>
                         <label className='block mb-2'>Bạn sinh ngày nào?</label>
                         <div className='flex gap-5'>
                             <div className='flex-1'>
                                 <label className='block mb-2'>Ngày</label>
-                                <input className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook' type="text" placeholder='DD' />
+                                <input name='day' onChange={getBirthDay} className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook' type="text" placeholder='DD' />
                             </div>
                             <div className='flex-auto'>
 
                                 <label className='block mb-2'>Tháng</label>
-                                <select className="focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded bg-transparent">
+                                <select name='month' onChange={getBirthDay} className="focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded bg-transparent">
                                     <option value="">Tháng</option>
-                                    <option value="">Tháng 1</option>
-                                    <option value="">Tháng 2</option>
-                                    <option value="">Tháng 3</option>
-                                    <option value="">Tháng 4</option>
-                                    <option value="">Tháng 5</option>
-                                    <option value="">Tháng 6</option>
-                                    <option value="">Tháng 7</option>
-                                    <option value="">Tháng 8</option>
-                                    <option value="">Tháng 9</option>
-                                    <option value="">Tháng 10</option>
-                                    <option value="">Tháng 11</option>
-                                    <option value="">Tháng 12</option>
+                                    <option value="01">Tháng 1</option>
+                                    <option value="02">Tháng 2</option>
+                                    <option value="03">Tháng 3</option>
+                                    <option value="04">Tháng 4</option>
+                                    <option value="05">Tháng 5</option>
+                                    <option value="06">Tháng 6</option>
+                                    <option value="07">Tháng 7</option>
+                                    <option value="08">Tháng 8</option>
+                                    <option value="09">Tháng 9</option>
+                                    <option value="10">Tháng 10</option>
+                                    <option value="11">Tháng 11</option>
+                                    <option value="12">Tháng 12</option>
                                 </select>
 
                             </div>
                             <div className='flex-1'>
                                 <label className='block mb-2'>Năm</label>
-                                <input className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded' type="text" placeholder='YY' />
+                                <input name='year' onChange={getBirthDay} className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded' type="text" placeholder='YY' />
                             </div>
                         </div>
                     </div>
@@ -88,11 +119,11 @@ export default function SignUp() {
                         <p className='mr-2 mb-2'>Giới tính của bạn là?</p>
                         <div className='flex'>
                             <div className='mr-5 flex justify-center'>
-                                <input className='mr-2' type="radio" name='gender' />
+                                <input onChange={handleChange} value={true} className='mr-2' type="radio" name='gender' />
                                 <label className='font-CircularBook'>Nam</label>
                             </div>
                             <div className='mr-5 flex justify-center'>
-                                <input className='mr-2' type="radio" name='gender' />
+                                <input onChange={handleChange} value={false} className='mr-2' type="radio" name='gender' />
                                 <label className='font-CircularBook'>Nữ</label>
                             </div>
                         </div>

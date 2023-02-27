@@ -172,59 +172,96 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FQu%C3%A2n%20AP%2Faudio%2Fy2mate.com%20-%20Qua%CC%82n%20AP%20%20Ai%20La%CC%80%20Ngu%CC%9Bo%CC%9B%CC%80i%20Thu%CC%9Bo%CC%9Bng%20Em%20%20Official%20Music%20Video.mp3?alt=media&token=d8e6fa50-bc80-4c52-936d-e8d5adc0a7fb"
     },
     {
-      "id": 20,
-      "name": "Một ngàn nỗi đau",
+      "audioId": 20,
+      "audioName": "Ở Trọ",
+      "albums": "Danh sách phát của Hà Lê",
+      "artist": "Hà Lê",
+      "date": "27/02/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FH%C3%A0%20L%C3%AA%2Fimg%2FHa-Le-jpeg-4643-1617699562.jpeg?alt=media&token=c7e8d25f-378e-4127-a8ab-d7c8cf46218e",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FH%C3%A0%20L%C3%AA%2Faudio%2Fy2mate.com%20-%20O%CC%9B%CC%89%20Tro%CC%A3%20Remake%20%20Ha%CC%80%20Le%CC%82%20%20Official%20Audio.mp3?alt=media&token=d94960fb-ca08-40ac-ad52-e3a66637c65d"
+    },
+    {
+      "audioId": 21,
+      "audioName": "Diễm Xưa",
+      "albums": "Danh sách phát của Hà Lê",
+      "artist": "Hà Lê",
+      "date": "27/02/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FH%C3%A0%20L%C3%AA%2Fimg%2FHa-Le-jpeg-4643-1617699562.jpeg?alt=media&token=c7e8d25f-378e-4127-a8ab-d7c8cf46218e",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FH%C3%A0%20L%C3%AA%2Faudio%2Fy2mate.com%20-%20DIE%CC%82%CC%83M%20XU%CC%9BA%20%20HA%CC%80%20LE%CC%82%20%20OFFICIAL%20MUSIC%20VIDEO.mp3?alt=media&token=73f967d2-bf4e-4ff8-9ef7-54a6906c8be3"
+    },
+    {
+      "audioId": 22,
+      "audioName": "Biển nhớ",
+      "albums": "Danh sách phát của Hà Lê",
+      "artist": "Hà Lê",
+      "date": "27/02/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FH%C3%A0%20L%C3%AA%2Fimg%2FHa-Le-jpeg-4643-1617699562.jpeg?alt=media&token=c7e8d25f-378e-4127-a8ab-d7c8cf46218e",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FH%C3%A0%20L%C3%AA%2Faudio%2Fy2mate.com%20-%20HA%CC%80%20LE%CC%82%20%20BIE%CC%82%CC%89N%20NHO%CC%9B%CC%81%20%20OFFICIAL%20MV.mp3?alt=media&token=fdc09cd5-3f30-4dd2-99cb-8b498a96ea40"
+    },
+    {
+      "audioId": 23,
+      "audioName": "Mưa Hồng",
+      "albums": "Danh sách phát của Hà Lê",
+      "artist": "Hà Lê",
+      "date": "27/02/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FH%C3%A0%20L%C3%AA%2Fimg%2FHa-Le-jpeg-4643-1617699562.jpeg?alt=media&token=c7e8d25f-378e-4127-a8ab-d7c8cf46218e",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FH%C3%A0%20L%C3%AA%2Faudio%2Fy2mate.com%20-%20HA%CC%80%20LE%CC%82%20%20MU%CC%9BA%20HO%CC%82%CC%80NG%20Official%20MV%20ft%20BU%CC%80I%20LAN%20HU%CC%9BO%CC%9BNG.mp3?alt=media&token=a0f00d28-df36-434a-bfd9-1ef5e7f47998"
+    },
+    {
+      "audioId": 24,
+      "audioName": "Một ngàn nỗi đau",
       "albums": "Danh sách có thể bạn sẽ thích",
       "artist": "Trung Quân Idol",
-      "date": "26/2/2023",
-      "img": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Fimg%2Ftrung-quan-idol-img.jpeg?alt=media&token=21a1c6aa-ee46-4320-b7cd-20b2692fb7bd",
-      "url": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20Mo%CC%A3%CC%82t%20Nga%CC%80n%20No%CC%82%CC%83i%20%C4%90au%20%20TRUNG%20QUA%CC%82N%20live%20at%20souloftheforest%20%20St%20Hu%CC%9B%CC%81a%20Kim%20Tuye%CC%82%CC%80n.mp3?alt=media&token=391e9181-c311-4f56-b86e-ff17d330713c"
+      "date": "27/02/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Fimg%2Ftrung-quan-idol-img.jpeg?alt=media&token=21a1c6aa-ee46-4320-b7cd-20b2692fb7bd",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20Mo%CC%A3%CC%82t%20Nga%CC%80n%20No%CC%82%CC%83i%20%C4%90au%20%20TRUNG%20QUA%CC%82N%20live%20at%20souloftheforest%20%20St%20Hu%CC%9B%CC%81a%20Kim%20Tuye%CC%82%CC%80n.mp3?alt=media&token=391e9181-c311-4f56-b86e-ff17d330713c"
     },
     {
-      "id": 21,
-      "name": "Mashup Đáp Án Cuối Cùng - Anh Chưa Thương Em Đến Vậy Đâu - Thu Cuối",
+      "audioId": 25,
+      "audioName": "Mashup Đáp Án Cuối Cùng - Anh Chưa Thương Em Đến Vậy Đâu - Thu Cuối",
       "albums": "Danh sách có thể bạn sẽ thích",
       "artist": "Quân AP ft. Myra Trần",
-      "date": "26/2/2023",
-      "img": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Fimg%2Fqua%CC%82n%20ap%20ft%20myra%20.jpeg?alt=media&token=94fca532-4bc3-4c37-bd46-0b8b45460fc2",
-      "url": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20Qua%CC%82n%20AP%20Myra%20Tra%CC%82%CC%80n%20live%20Mashup%20%C4%90a%CC%81p%20A%CC%81n%20Cuo%CC%82%CC%81i%20Cu%CC%80ng%20Anh%20Chu%CC%9Ba%20Thu%CC%9Bo%CC%9Bng%20Em%20%C4%90e%CC%82%CC%81n%20Va%CC%A3%CC%82y%20%C4%90a%CC%82uThu%20Cuo%CC%82%CC%81i%20So%CC%81ng%2023.mp3?alt=media&token=b211f13f-e1a2-40fd-a3a9-bb925eaf262c"
+      "date": "27/02/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Fimg%2Fqua%CC%82n%20ap%20ft%20myra%20.jpeg?alt=media&token=94fca532-4bc3-4c37-bd46-0b8b45460fc2",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20Qua%CC%82n%20AP%20Myra%20Tra%CC%82%CC%80n%20live%20Mashup%20%C4%90a%CC%81p%20A%CC%81n%20Cuo%CC%82%CC%81i%20Cu%CC%80ng%20Anh%20Chu%CC%9Ba%20Thu%CC%9Bo%CC%9Bng%20Em%20%C4%90e%CC%82%CC%81n%20Va%CC%A3%CC%82y%20%C4%90a%CC%82uThu%20Cuo%CC%82%CC%81i%20So%CC%81ng%2023.mp3?alt=media&token=b211f13f-e1a2-40fd-a3a9-bb925eaf262c"
     },
     {
-      "id": 22,
-      "name": "Cafe thuốc lá và những ngày vui",
+      "audioId": 26,
+      "audioName": "Cafe Thuốc Lá Những Ngày Vui",
       "albums": "Danh sách có thể bạn sẽ thích",
       "artist": "Thế Bảo",
-      "date": "26/2/2023",
-      "img": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Fimg%2Fcafe%20thuo%CC%82%CC%81c%20la%CC%81.jpeg?alt=media&token=b6bb2796-823c-41ba-b73a-99dd7ff47be4",
-      "url": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20The%CC%82%CC%81%20Ba%CC%89o%20%20Cafe%20Thuo%CC%82%CC%81c%20La%CC%81%20%20Nhu%CC%9B%CC%83ng%20Nga%CC%80y%20Vui%20Official%20Lyric%20Video.mp3?alt=media&token=1fef3d97-f2dd-45e3-a2d3-f4bc2f10152b"
+      "date": "27/02/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Fimg%2Fcafe%20thuo%CC%82%CC%81c%20la%CC%81.jpeg?alt=media&token=b6bb2796-823c-41ba-b73a-99dd7ff47be4",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20The%CC%82%CC%81%20Ba%CC%89o%20%20Cafe%20Thuo%CC%82%CC%81c%20La%CC%81%20%20Nhu%CC%9B%CC%83ng%20Nga%CC%80y%20Vui%20Official%20Lyric%20Video.mp3?alt=media&token=1fef3d97-f2dd-45e3-a2d3-f4bc2f10152b"
     },
     {
-      "id": 23,
-      "name": "Vẫn nhớ",
+      "audioId": 27,
+      "audioName": "Vẫn Nhớ",
       "albums": "Danh sách có thể bạn sẽ thích",
       "artist": "Soobin Hoàng Sơn",
-      "date": "26/2/2023",
-      "img": "ab67616d00001e0208d4e5d5e3077e955394b955.jpeg",
-      "url": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20Va%CC%82%CC%83n%20Nho%CC%9B%CC%81%20%20Soobin%20Hoa%CC%80ng%20So%CC%9Bn%20%20Cover.mp3?alt=media&token=61d43c28-e21d-419f-b986-16feae60a2b7"
+      "date": "27/02/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Fimg%2Fab67616d00001e0208d4e5d5e3077e955394b955.jpeg?alt=media&token=00cf5a97-8eda-48ef-88e5-e2e150a7304c",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20Va%CC%82%CC%83n%20Nho%CC%9B%CC%81%20%20Soobin%20Hoa%CC%80ng%20So%CC%9Bn%20%20Cover.mp3?alt=media&token=61d43c28-e21d-419f-b986-16feae60a2b7"
     },
     {
-      "id": 24,
-      "name": "3107",
+      "audioId": 28,
+      "audioName": "3107",
       "albums": "Danh sách có thể bạn sẽ thích",
-      "artist": "Soobin Hoàng Sơn",
-      "date": "26/2/2023",
-      "img": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Fimg%2F3107.jpeg?alt=media&token=493bab05-818d-4aec-9ccb-18da6f0fb1a0",
-      "url": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20Wn%20%203107%20full%20album%20ft%20%20titie%20Na%CC%82u%20Du%CC%9Bo%CC%9Bngg%20.mp3?alt=media&token=744d0155-921d-4990-99d1-1e1f83efbb20"
+      "artist": "Wn 3107 ft. Nâu Dươngg",
+      "date": "27/02/2023",
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Fimg%2F3107.jpeg?alt=media&token=493bab05-818d-4aec-9ccb-18da6f0fb1a0",
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20Wn%20%203107%20full%20album%20ft%20%20titie%20Na%CC%82u%20Du%CC%9Bo%CC%9Bngg%20.mp3?alt=media&token=744d0155-921d-4990-99d1-1e1f83efbb20"
     }
   ],
-  "users" : [
+  "users": [
     {
       "id": 0,
       "email": "admin@xtic.com",
       "password": "1234567",
       "name": "admin",
       "birthday": "09/03/1998",
-      "gender": "male"
+      "gender": "male",
+      "permission": "admin"
     }
   ]
 }
