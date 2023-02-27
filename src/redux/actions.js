@@ -11,3 +11,10 @@ export const actToggleNav = () => {
         type: actionType.NAV_TOGGLE
     }
 }
+
+export const actPostUser = (newUser) => {
+    return {
+        type: actionType.POST_USER,
+        payload: newUser
+    }
+}

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { actPostUser } from '../../redux/actions'
 
 export default function SignUp() {
+    const dispatch = useDispatch()
     const [birthday, setBirthday] = useState({
         day: "",
         month: "",
@@ -8,30 +11,64 @@ export default function SignUp() {
     })
     const [inputVal, setInputVal] = useState(
         {
-            email: "",
-            password: "",
-            rePassword: "",
-            name: "",
-            birthday: "",
-            gender: true
+            email: { value: "", status: null },
+            password: { value: "", status: null },
+            rePassword: { value: "", status: null },
+            name: { value: "", status: null },
+            birthday: { value: "", status: null },
+            gender: { value: true, status: null }
         }
     )
+
+    const validateEmail = (email) => {
+        return email.match(
+            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+    };
+    const elementAlert = (inputVal.email.status === true || inputVal.email.status === null) ? "" : <span className='text-[red] font-CircularLight text-xs'>Đéo phải email</span>
+    const validate = () => {
+        let checkValidate = false;
+        if (inputVal.email.value.trim() === '') {
+            checkValidate = false;
+            setInputVal({ ...inputVal, email: { ...inputVal.email, status: false } })
+
+            return false
+        } else {
+            checkValidate = true;
+            setInputVal({ ...inputVal, email: { ...inputVal.email, status: true } })
+        }
+
+        if (checkValidate) {
+            return true
+        } else {
+            return false
+        }
+    }
 
     const handleChange = (event) => {
         let key = event.target.name
         let value = event.target.value
-        setInputVal({ ...inputVal, [key]: value })
+        setInputVal({ ...inputVal, [key]: { value: value, status: null } })
     }
-
+    console.log(inputVal);
     const getBirthDay = (event) => {
         let key = event.target.name
         let value = event.target.value
         setBirthday(() => ({ ...birthday, [key]: value }))
     }
-    useEffect(()=>{
-        setInputVal(() => ({ ...inputVal, birthday: `${birthday.day}/${birthday.month}/${birthday.year}` }))
-    },[birthday])
-    console.log(inputVal);
+
+    useEffect(() => {
+        console.log("abc");
+    }, [inputVal])
+
+    useEffect(() => {
+        setInputVal(() => ({ ...inputVal, birthday: { value: `${birthday.day}/${birthday.month}/${birthday.year}`, status: null } }))
+    }, [birthday])
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        dispatch(actPostUser(inputVal))
+    }
     return (
         <div>
             {/* Sign Up */}
@@ -68,15 +105,18 @@ export default function SignUp() {
                 <form className="sign-up-form text-left text-sm">
                     <div className='sign-up-form-input mb-4'>
                         <label className='block mb-2'>Email address or username</label>
-                        <input name='email' onChange={handleChange} className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook' type="text" placeholder='Email address or username' />
+                        <input name='email' onChange={handleChange} className={`focus:outline-2 focus:shadow-inner focus:outline-black border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook'`} type="text" placeholder='Email address or username' />
+                        {elementAlert}
                     </div>
                     <div className='sign-up-form-input mb-4'>
                         <label className='block mb-2'>Password</label>
                         <input name='password' onChange={handleChange} className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook' type="password" placeholder='Password' />
+                        <span className='text-[red] font-CircularLight text-xs'></span>
                     </div>
                     <div className='sign-up-form-input mb-4'>
                         <label className='block mb-2'>Nhập lại Password</label>
                         <input name='rePassword' onChange={handleChange} className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook' type="password" placeholder='Nhập lại password' />
+                        <span className='text-[red] font-CircularLight text-xs'></span>
                     </div>
                     <div className='sign-up-form-input mb-4'>
                         <label className='block mb-2'>Bạn tên gì?</label>
@@ -130,7 +170,7 @@ export default function SignUp() {
                     </div>
                     <p className='text-xs text-center mb-3 font-CircularBook'>Bằng việc nhấp vào nút Đăng ký, bạn đồng ý với <a className='text-xs text-primaryColor underline' href="">Điều khoản và điều kiện sử dụng</a> của Spotify.</p>
                     <div className='text-center'>
-                        <button className='bg-[#1ed768] py-3 px-12 rounded-[500px] text-[18px] mb-5'>Đăng kí</button>
+                        <button onClick={handleSubmit} className='bg-[#1ed768] py-3 px-12 rounded-[500px] text-[18px] mb-5'>Đăng kí</button>
                     </div>
                     <p className='text-base text-center mb-3 font-CircularBook'>Bạn có tài khoản? <a className='text-primaryColor underline mb-6' href="">Đăng nhập</a> </p>
                 </form>

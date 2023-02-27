@@ -261,7 +261,17 @@
       "name": "admin",
       "birthday": "09/03/1998",
       "gender": "male",
-      "permission": "admin"
+      "permission": "admin",
+      "status": ""
+    },
+    {
+      "email": "trongnhan34vn@gmail.com",
+      "password": "$2a$10$PxynzMAOfaIshFTAKEBN8eYNcrwcF6Kz7zIhsIXnw8hvnSf.CZNdG",
+      "rePassword": "pikachu123",
+      "name": "nhân",
+      "birthday": "09/03/1998",
+      "gender": "true",
+      "id": 1
     }
   ]
 }
