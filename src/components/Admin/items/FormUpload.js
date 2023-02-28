@@ -18,7 +18,7 @@ export default function FormUpload(props) {
             const imageRef = ref(storage, `images/${imageUpload.upload.name}`);
             uploadBytes(imageRef, imageUpload).then((snapshot) => {
                 getDownloadURL(snapshot.ref).then((url) => {
-                    setImageUrls((prev) => [...prev, url]);
+                    setImageUrls(url);
                 });
             });
         } else {
@@ -32,7 +32,7 @@ export default function FormUpload(props) {
 
             uploadBytes(audioFbRef, audioUpload).then((snapshot) => {
                 getDownloadURL(snapshot.ref).then((url) => {
-                    setAudioUrls((prev) => [...prev, url]);
+                    setAudioUrls(url);
                 });
             });
         } else {

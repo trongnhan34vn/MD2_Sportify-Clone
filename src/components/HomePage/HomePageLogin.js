@@ -7,6 +7,7 @@ import { iconPauseTrackBtnFooter, iconPlayTrackBtnFooter, iconPauseTrackItem, ic
 import Navbar from '../Navbar/Navbar';
 import { actPlayAudio, actToggleNav } from '../../redux/actions';
 import { controlSelector } from '../../redux/selector';
+import { Link } from 'react-router-dom';
 
 export default function HomePageLogin() {
     const dispatch = useDispatch()
@@ -86,7 +87,7 @@ export default function HomePageLogin() {
                                 <div className='list-playlists-item list-albums grid gap-6 grid-cols-5 min-w-[414px] xl:grid-cols-4  l:grid-cols-3 sm:!grid-cols-2 xl:[&>:last-child]:hidden l:[&>:nth-child(3)]:hidden sm:[&>:nth-child(2)]:hidden'>
                                     {/* Playlist Item */}
                                     <div className='group z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
-                                        <a className='block album-wrap p-4 group'>
+                                        <Link to={"/playlist"} className='block album-wrap p-4 group'>
                                             <div className='album-img mb-4 relative'>
                                                 <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
                                                 <button onClick={handlePlay} className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
@@ -97,7 +98,7 @@ export default function HomePageLogin() {
                                                 <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
                                                 <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
                                             </div>
-                                        </a>
+                                        </Link>
                                     </div>
                                     {/* Playlist Item */}
                                     <div className='group z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>

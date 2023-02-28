@@ -1,6 +1,99 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { actLogin } from '../../redux/actions'
+import { recieveData } from '../../redux/selector'
+import { useNavigate } from 'react-router-dom'
+import AlertModal from '../../Modal/AlertModal'
 
 export default function Login() {
+    const [toggleModal, setToggleModal] = useState(false)
+    const resultLogin = useSelector(recieveData)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const [inputValue, setInputValue] = useState(
+        {
+            email: { value: "", status: false, error: "" },
+            password: { value: "", status: false, error: "" }
+        }
+    )
+
+    function validateEmail(mail) {
+        let result = "";
+        if (mail.length == 0) {
+            return result = "Please enter a valid email address!"
+        } else if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))) {
+            return result = "Please enter a valid email!"
+        } else if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail) && mail.length !== 0) {
+            return result = "matchValidate"
+        }
+        return result
+    }
+
+    const validatePassword = (value) => {
+        if (value === "") {
+            return false
+        } else return true
+    }
+
+    const handleChange = (event) => {
+        let key = event.target.name
+        let value = event.target.value
+        if (key === "email") {
+            let result = validateEmail(value)
+            if (result === "matchValidate") {
+                setInputValue({ ...inputValue, email: { ...inputValue.email, value: value, status: true, error: "" } })
+            } else {
+                setInputValue({ ...inputValue, email: { ...inputValue.email, status: false, error: result } })
+            }
+        }
+        if (key === "password") {
+            let result = validatePassword(value)
+            if (result) {
+                setInputValue({ ...inputValue, password: { value: value, status: true, error: "" } })
+            } else {
+                setInputValue({ ...inputValue, password: { value: value, status: false, error: "Please input the password!" } })
+            }
+        }
+    }
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        let checkStat = false
+        for (const key in inputValue) {
+            if (inputValue[key].status) {
+                checkStat = true
+            }
+        }
+
+
+        if (checkStat) {
+            let checkUser = {
+                email: inputValue.email.value,
+                password: inputValue.password.value
+            }
+            dispatch(actLogin(checkUser))
+        } else {
+            setToggleModal(true)
+            setInterval(() => {
+                setToggleModal(false)
+            }, 4000)
+        }
+        if (resultLogin.result === "Failed") {
+            setToggleModal(true)
+            setInterval(() => {
+                setToggleModal(false)
+            }, 4000)
+        }
+    }
+
+    useEffect(() => {
+        if (resultLogin.result === "Success") {
+            navigate("/")
+        }
+    }, [resultLogin.result])
+    console.log(toggleModal);
     return (
         <div>
             {/* Login */}
@@ -48,11 +141,13 @@ export default function Login() {
                     <form className="text-left">
                         <div className='mb-4'>
                             <label className='block mb-2'>Email address or username</label>
-                            <input className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded' type="text" placeholder='Email address or username' />
+                            <input name='email' onChange={handleChange} className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded' type="text" placeholder='Email address or username' />
+                            <span className='text-red-600 font-CircularLight text-xs'>{inputValue.email.error}</span>
                         </div>
                         <div className='mb-4'>
                             <label className='block mb-2'>Password</label>
-                            <input className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded' type="password" placeholder='Password' />
+                            <input name='password' onChange={handleChange} className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded' type="password" placeholder='Password' />
+                            <span className='text-red-600 font-CircularLight text-xs'>{inputValue.password.error}</span>
                         </div>
                         <a className='block mb-5 underline' href="">Forgot you password?</a>
                         <div className='mb-5 flex justify-between '>
@@ -60,20 +155,23 @@ export default function Login() {
                                 <input className='mr-3' type="checkbox" />
                                 <label>Remember me</label>
                             </div>
-                            <button className='btn-submit text-sm px-8 py-3 bg-[#1ed760] uppercase rounded-[500px] tracking-widest'>Log in</button>
+                            <button onClick={handleSubmit} className='btn-submit text-sm px-8 py-3 bg-[#1ed760] uppercase rounded-[500px] tracking-widest'>Log in</button>
                         </div>
                         <hr className='mb-5 mt-3' />
                     </form>
                     {/* Login Form */}
                     {/* Login Footer */}
                     <p className='mb-5'>Don't have an account?</p>
-                    <button className='font-CircularBold border border-[#878787] leading-7 rounded-[500px] uppercase tracking-widest text-sm py-[13px] w-full flex justify-center items-center'>
-                        <span className='text-[#6a6a6a]'>Sign up for Spotify</span>
-                    </button>
+                    <Link to={"/sign-up"}>
+                        <button className='font-CircularBold border border-[#878787] leading-7 rounded-[500px] uppercase tracking-widest text-sm py-[13px] w-full flex justify-center items-center'>
+                            <span className='text-[#6a6a6a]'>Sign up for Spotify</span>
+                        </button>
+                    </Link>
                     {/* Login Footer */}
                 </section>
                 {/* Login */}
             </div>
+            <AlertModal page={(resultLogin.result === "" ? "login" : "login-failed")} toggleModal={toggleModal} />
             {/* Login */}
         </div>
     )

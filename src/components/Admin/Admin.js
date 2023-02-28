@@ -8,8 +8,8 @@ import Navbar from '../Navbar/Navbar';
 import { actPlayAudio, actToggleNav } from '../../redux/actions';
 import { controlSelector } from '../../redux/selector';
 import FormUpload from './items/FormUpload';
-import ListTracks from './items/ListTracks';
-import Modal from './items/Modal';
+import ListTracks from './items/ListTracks'
+import AlertModal from '../../Modal/AlertModal';
 
 export default function Admin() {
     const [toggleModal, setToggleModal] = useState(false)
@@ -48,7 +48,7 @@ export default function Admin() {
             </section>
             {/* Content */}
             {/* Footer */}
-            <Modal toggleModal={toggleModal} />
+            <AlertModal page="admin" toggleModal={toggleModal} />
             <Footer />
             {/* Footer */}
         </div>

@@ -262,16 +262,37 @@
       "birthday": "09/03/1998",
       "gender": "male",
       "permission": "admin",
-      "status": ""
+      "status": "active"
     },
     {
       "email": "trongnhan34vn@gmail.com",
-      "password": "$2a$10$PxynzMAOfaIshFTAKEBN8eYNcrwcF6Kz7zIhsIXnw8hvnSf.CZNdG",
-      "rePassword": "pikachu123",
-      "name": "nhân",
-      "birthday": "09/03/1998",
+      "password": "$2a$10$L/Q3JoFB2GU8UbduWZVUKulnvJGaXAvNwGSVPaY5Z2VP39g/Jis8C",
+      "name": "nhân học dốt",
       "gender": "true",
+      "birthday": "09/03/2007",
+      "permission": "user",
+      "status": "active",
       "id": 1
+    },
+    {
+      "email": "trongnhan23vn@gmail.com",
+      "password": "$2a$10$O5xyTYxjPkyoV8jts1z7ku7RQaiaFmAN7kmnDn.8cGAdwajVD.oSG",
+      "name": "nhân học dốt vl",
+      "gender": "true",
+      "birthday": "09/02/1998",
+      "permission": "user",
+      "status": "active",
+      "id": 2
+    },
+    {
+      "email": "trongnhan15@gmail.com",
+      "password": "$2a$10$QEuqkmx0DUKCGLiJb/t1iexeZv8HZyPwnYyyazwyWwecSFKEFYgEK",
+      "name": "nhan123",
+      "gender": "true",
+      "birthday": "01/02/2000",
+      "permission": "user",
+      "status": "active",
+      "id": 3
     }
   ]
 }

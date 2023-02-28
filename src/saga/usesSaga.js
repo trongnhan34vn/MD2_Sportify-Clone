@@ -1,10 +1,10 @@
 import * as usersServices from "../API/usersServices";
 import { call, put } from "redux-saga/effects";
-import * as action from "../redux/actions";
+import * as actions from "../redux/actions";
 
 export const getUsers = function* () {
     try {
-        let listUsers = call(usersServices.GET_USER)
+        let listUsers = yield call(usersServices.GET_USER)
         yield put()
     } catch {
 
@@ -14,7 +14,17 @@ export const getUsers = function* () {
 export const postUsers = function* (action) {
     try {
         yield call(usersServices.POST_USER, action.payload)
-    } catch {
+        yield put(actions.actRecieveData("Success"))
+    } catch (error) {
+        yield put(actions.actRecieveData("Failed"))
+    }
+}
 
+export const login = function* (action) {
+    try {
+        yield call(usersServices.GET_LOGIN, action.payload)
+        yield put(actions.actRecieveData("Success"))
+    } catch (error) {
+        yield put(actions.actRecieveData("Failed"))
     }
 }

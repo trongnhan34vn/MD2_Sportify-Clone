@@ -1,9 +1,18 @@
+
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { actPostUser } from '../../redux/actions'
+import { Link } from 'react-router-dom'
+import AlertModal from '../../Modal/AlertModal'
+import { actPostUser, actRefUser } from '../../redux/actions'
+import { recieveData } from '../../redux/selector'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 export default function SignUp() {
+    const [toggleModal, setToggleModal] = useState(false)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const [birthday, setBirthday] = useState({
         day: "",
         month: "",
@@ -11,64 +20,115 @@ export default function SignUp() {
     })
     const [inputVal, setInputVal] = useState(
         {
-            email: { value: "", status: null },
-            password: { value: "", status: null },
-            rePassword: { value: "", status: null },
-            name: { value: "", status: null },
-            birthday: { value: "", status: null },
-            gender: { value: true, status: null }
+            email: { value: "", status: false, error: "" },
+            password: { value: "", status: false },
+            rePassword: { value: "", status: false },
+            name: { value: "", status: false },
+            birthday: { value: "", status: false },
+            gender: { value: "true", status: false }
         }
     )
 
-    const validateEmail = (email) => {
-        return email.match(
-            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        );
-    };
-    const elementAlert = (inputVal.email.status === true || inputVal.email.status === null) ? "" : <span className='text-[red] font-CircularLight text-xs'>Đéo phải email</span>
-    const validate = () => {
-        let checkValidate = false;
-        if (inputVal.email.value.trim() === '') {
-            checkValidate = false;
-            setInputVal({ ...inputVal, email: { ...inputVal.email, status: false } })
-
-            return false
-        } else {
-            checkValidate = true;
-            setInputVal({ ...inputVal, email: { ...inputVal.email, status: true } })
+    const checkValidateCommon = (val, key) => {
+        let error = false
+        if (val.length >= 6 && key != "rePassword" && key != "name") {
+            return error = true
+        } else if (val.length >= 6 && key == "rePassword" && val == inputVal.password.value) {
+            return error = true
         }
-
-        if (checkValidate) {
-            return true
-        } else {
-            return false
-        }
+        return error;
     }
 
+    function validateEmail(mail) {
+        let result = "";
+        if (mail.length == 0) {
+            return result = "Please enter a valid email address!"
+        } else if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))) {
+            return result = "Please enter a valid email!"
+        } else if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail) && mail.length !== 0) {
+            return result = "matchValidate"
+        }
+        return result
+    }
     const handleChange = (event) => {
         let key = event.target.name
         let value = event.target.value
-        setInputVal({ ...inputVal, [key]: { value: value, status: null } })
+        if (key === "email") {
+            let result = validateEmail(value)
+            if (result === "matchValidate") {
+                setInputVal({ ...inputVal, email: { ...inputVal.email, value: value, status: true, error: "" } })
+            } else {
+                setInputVal({ ...inputVal, email: { ...inputVal.email, status: false, error: result } })
+            }
+        } else {
+            let result = checkValidateCommon(value, key)
+            let error;
+            if (key !== "rePassword") {
+                error = "Please enter at least 6 charaters!"
+            } else {
+                error = "Please check your confirm password!"
+            }
+            setInputVal({ ...inputVal, [key]: { value, status: result, error } })
+        }
     }
-    console.log(inputVal);
+
     const getBirthDay = (event) => {
         let key = event.target.name
         let value = event.target.value
         setBirthday(() => ({ ...birthday, [key]: value }))
     }
-
-    useEffect(() => {
-        console.log("abc");
-    }, [inputVal])
-
     useEffect(() => {
         setInputVal(() => ({ ...inputVal, birthday: { value: `${birthday.day}/${birthday.month}/${birthday.year}`, status: null } }))
     }, [birthday])
 
+    const signInResult = useSelector(recieveData)
+
     const handleSubmit = (event) => {
         event.preventDefault()
-        dispatch(actPostUser(inputVal))
+        let checkStat = false
+        setToggleModal(true)
+        setInterval(() => {
+            setToggleModal(false)
+        }, 4000)
+
+        for (const key in inputVal) {
+            if (inputVal[key].status) {
+                checkStat = true
+            };
+        }
+        if (checkStat === false) {
+            setToggleModal(true)
+            setInterval(() => {
+                setToggleModal(false)
+            }, 4000)
+        } else {
+            let newStudent = {
+                email: inputVal.email.value,
+                password: inputVal.password.value,
+                name: inputVal.name.value,
+                gender: inputVal.gender.value,
+                birthday: inputVal.birthday.value,
+                permission: "user",
+                status: "active"
+            }
+            dispatch(actPostUser(newStudent))
+        }
     }
+
+    useEffect(() => {
+        if (signInResult.result === "Success") {
+            // chuyển trang login
+            navigate("/login")
+        }
+        if (signInResult.result === "Failed") {
+            //  hiện alert
+            setToggleModal(true)
+            setInterval(() => {
+                setToggleModal(false)
+            }, 4000)
+        }
+    }, [signInResult.result])
+
     return (
         <div>
             {/* Sign Up */}
@@ -105,22 +165,23 @@ export default function SignUp() {
                 <form className="sign-up-form text-left text-sm">
                     <div className='sign-up-form-input mb-4'>
                         <label className='block mb-2'>Email address or username</label>
-                        <input name='email' onChange={handleChange} className={`focus:outline-2 focus:shadow-inner focus:outline-black border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook'`} type="text" placeholder='Email address or username' />
-                        {elementAlert}
+                        <input name='email' onChange={handleChange} className={`focus:outline-2 focus:shadow-inner border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook'`} type="text" placeholder='Email address or username' />
+                        <span className='text-[red] font-CircularLight text-xs'>{inputVal.email.status ? "" : inputVal.email.error}</span>
                     </div>
                     <div className='sign-up-form-input mb-4'>
                         <label className='block mb-2'>Password</label>
-                        <input name='password' onChange={handleChange} className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook' type="password" placeholder='Password' />
-                        <span className='text-[red] font-CircularLight text-xs'></span>
+                        <input name='password' onChange={handleChange} className={`focus:outline-2 focus:shadow-inner border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook`} type="password" placeholder='Password' />
+                        <span className='text-[red] font-CircularLight text-xs'>{inputVal.password.status ? "" : inputVal?.password?.error}</span>
                     </div>
                     <div className='sign-up-form-input mb-4'>
                         <label className='block mb-2'>Nhập lại Password</label>
-                        <input name='rePassword' onChange={handleChange} className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook' type="password" placeholder='Nhập lại password' />
-                        <span className='text-[red] font-CircularLight text-xs'></span>
+                        <input name='rePassword' onChange={handleChange} className={`focus:outline-2 focus:shadow-inner border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook`} type="password" placeholder='Nhập lại password' />
+                        <span className='text-[red] font-CircularLight text-xs'>{inputVal.rePassword.status ? "" : inputVal?.rePassword?.error}</span>
                     </div>
                     <div className='sign-up-form-input mb-4'>
                         <label className='block mb-2'>Bạn tên gì?</label>
-                        <input name='name' onChange={handleChange} className='focus:outline-2 focus:shadow-inner focus:outline-[#000] border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook' type="text" placeholder='Nhập tên hồ sơ' />
+                        <input name='name' onChange={handleChange} className={`focus:outline-2 focus:shadow-inner border border-[#878787] hover:border-[#000] w-full p-3.5 rounded text-base font-CircularBook`} type="text" placeholder='Nhập tên hồ sơ' />
+                        <span className='text-[red] font-CircularLight text-xs'>{inputVal.name.status ? "" : inputVal?.name?.error}</span>
                     </div>
                     <div className='sign-up-form-input mb-4'>
                         <label className='block mb-2'>Bạn sinh ngày nào?</label>
@@ -159,11 +220,11 @@ export default function SignUp() {
                         <p className='mr-2 mb-2'>Giới tính của bạn là?</p>
                         <div className='flex'>
                             <div className='mr-5 flex justify-center'>
-                                <input onChange={handleChange} value={true} className='mr-2' type="radio" name='gender' />
+                                <input checked={inputVal.gender.value == "true"} onChange={handleChange} value={true} className='mr-2' type="radio" name='gender' />
                                 <label className='font-CircularBook'>Nam</label>
                             </div>
                             <div className='mr-5 flex justify-center'>
-                                <input onChange={handleChange} value={false} className='mr-2' type="radio" name='gender' />
+                                <input checked={inputVal.gender.value == "false"} onChange={handleChange} value={false} className='mr-2' type="radio" name='gender' />
                                 <label className='font-CircularBook'>Nữ</label>
                             </div>
                         </div>
@@ -172,8 +233,9 @@ export default function SignUp() {
                     <div className='text-center'>
                         <button onClick={handleSubmit} className='bg-[#1ed768] py-3 px-12 rounded-[500px] text-[18px] mb-5'>Đăng kí</button>
                     </div>
-                    <p className='text-base text-center mb-3 font-CircularBook'>Bạn có tài khoản? <a className='text-primaryColor underline mb-6' href="">Đăng nhập</a> </p>
+                    <p className='text-base text-center mb-3 font-CircularBook'>Bạn có tài khoản? <Link to={"/login"} className='text-primaryColor underline mb-6'>Đăng nhập</Link> </p>
                 </form>
+                <AlertModal page={(signInResult.result === "" ? "sign-up" : "sign-up-failed")} toggleModal={toggleModal} />
                 {/* Sign Up Form */}
             </div>
             {/* Sign Up */}

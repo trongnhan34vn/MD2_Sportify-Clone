@@ -18,3 +18,17 @@ export const actPostUser = (newUser) => {
         payload: newUser
     }
 }
+
+export const actRecieveData = (data) => {
+    return {
+        type: actionType.RECIEV_DATA,
+        payload: data
+    }
+}
+
+export const actLogin = (detectUser) => {
+    return {
+        type: actionType.LOGIN,
+        payload: detectUser
+    }
+}
