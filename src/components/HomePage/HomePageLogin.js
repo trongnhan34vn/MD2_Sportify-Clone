@@ -5,27 +5,113 @@ import DirectionMenu from '../Direction Menu/DirectionMenu';
 import Footer from '../Footer/Footer';
 import { iconPauseTrackBtnFooter, iconPlayTrackBtnFooter, iconPauseTrackItem, iconPlayTrackItem, iconUnMute, iconMute, iconPauseBtnPlaylist, iconPlayBtnPlaylist } from '../../icon';
 import Navbar from '../Navbar/Navbar';
-import { actPlayAudio, actToggleNav } from '../../redux/actions';
-import { controlSelector } from '../../redux/selector';
+import { actPlayAudio, actToggleNav, recievePlaylists, resetCurrentTime, setIsPlay } from '../../redux/actions';
+import { controlAudio, playlists, toggleSelector } from '../../redux/selector';
 import { Link } from 'react-router-dom';
 
 export default function HomePageLogin() {
+    //  Return playlists
+    const listPlaylists = useSelector(playlists)
+    const list1 = listPlaylists.filter(playlist => playlist.id <= 5)
+    const list2 = listPlaylists.filter(playlist => playlist.id > 5 && playlist.id <= 10)
+    const list3 = listPlaylists.filter(playlist => playlist.id > 10 && playlist.id <= 12)
     const dispatch = useDispatch()
-    const toggleStatus = useSelector(controlSelector)
-    let toggle = toggleStatus.toggleNav
+    const toggleStatus = useSelector(toggleSelector)
+    const playingStatus = useSelector(controlAudio)
+    let toggle = toggleStatus
 
+    let playlistId = useSelector(controlAudio)
     // Play Audio
-    let isPlayAudio = toggleStatus.isPlay
-    const [isPlay, setIsPlay] = useState(isPlayAudio)
-    const handlePlay = () => {
-        setIsPlay(!isPlay)
-        dispatch(actPlayAudio())
+    let isPlayAudio = playingStatus.isPlay
+    // const [isPlay, setIsPlay] = useState(isPlayAudio)
+    const handleReset = useRef(0)
+    const [changeStateButton, setChangeStateButton] = useState()
+    const handlePlay = (id, playlist) => {
+        if (id !== changeStateButton) {
+            setChangeStateButton(id)
+            dispatch(setIsPlay(true))
+        } else {
+            setChangeStateButton()
+            dispatch(setIsPlay(!isPlayAudio))
+        }
+        if (playlistId.playlistId !== id) {
+            if (handleReset === 0) {
+                handleReset.current += 1
+            } else {
+                dispatch(resetCurrentTime(true))
+                setTimeout(() => { dispatch(resetCurrentTime(false)) }, 100)
+            }
+            dispatch(actPlayAudio(id, playlist))
+        }
     }
+    useEffect(() => {
+        isPlayAudio ? setIsPlay(true) : setIsPlay(false)
+    }, [isPlayAudio])
 
-    const elementIconPlayingItem = (isPlay) ? iconPlayTrackItem : iconPauseTrackItem
+
+    useEffect(() => {
+        if (list1.length == 5) {
+            console.log(list1);
+            // dispatch((actPlayAudio(list1[0].id, list1[0].listTracks)))
+        }
+    }, [list1])
+
     const handleMenuToggle = () => {
         dispatch(actToggleNav())
     }
+
+    const elementFirstPlaylist = list1.map((playlist, index) => {
+        return <div key={playlist.id} className='group relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
+            <button onClick={() => handlePlay(playlist.id, playlist.listTracks)} id={playlist.id} className='z-20 top-[42%] -translate-x-5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
+                {changeStateButton === playlist.id ? iconPlayTrackItem : iconPauseTrackItem}
+            </button>
+            <Link to={"/playlist"} className='block album-wrap p-4'>
+                <div className='album-img mb-4 relative'>
+                    <img className='rounded object-cover w-[167px] h-[167px] drop-shadow-2xl' src={playlist.imgSrc} alt="" />
+                </div>
+                <div className='album-content text-[#fff]'>
+                    <h3 className='font-CircularMedium text-base mb-1'>{playlist.name}</h3>
+                    <p className='font-CircularLight text-sm text-[#6a6a6a]'>{playlist.artist}</p>
+                </div>
+            </Link>
+        </div>
+    })
+
+    const elementSecondPlaylist = list2.map((playlist, index) => {
+        return <div key={playlist.id} className='group z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
+            <button onClick={() => handlePlay(playlist.id, playlist.listTracks)} id={playlist.id} className='z-50 top-[42%] -translate-x-5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
+                {changeStateButton === playlist.id ? iconPlayTrackItem : iconPauseTrackItem}
+            </button>
+            <Link to={"/playlist"} className='block album-wrap p-4'>
+                <div className='album-img mb-4  relative'>
+                    <img className='rounded object-cover w-[167px] h-[167px] drop-shadow-2xl' src={playlist.imgSrc} alt="" />
+                </div>
+                <div className='album-content text-[#fff]'>
+                    <h3 className='font-CircularMedium text-base mb-1'>{playlist.name}</h3>
+                    <p className='font-CircularLight text-sm text-[#6a6a6a]'>{playlist.artist}</p>
+                </div>
+            </Link>
+        </div>
+    })
+
+    const elementThirdPlaylist = list3.map((playlist, index) => {
+        return <div key={playlist.id} className='group z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
+            <button onClick={() => handlePlay(playlist.id, playlist.listTracks)} id={playlist.id} className='z-50 top-[42%] -translate-x-5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
+                {changeStateButton === playlist.id ? iconPlayTrackItem : iconPauseTrackItem}
+            </button>
+            <Link to={"/playlist"} className='block album-wrap p-4'>
+                <div className='album-img mb-4 relative'>
+                    <img className='rounded object-cover w-[167px] h-[167px] drop-shadow-2xl' src={playlist.imgSrc} alt="" />
+                </div>
+                <div className='album-content text-[#fff]'>
+                    <h3 className='font-CircularMedium text-base mb-1'>{playlist.name}</h3>
+                    <p className='font-CircularLight text-sm text-[#6a6a6a]'>{playlist.artist}</p>
+                </div>
+            </Link>
+        </div>
+    })
+
+    //  Return playlists
     return (
         <div onClick={toggle ? handleMenuToggle : undefined}>
             <div>
@@ -86,113 +172,8 @@ export default function HomePageLogin() {
                                 {/* Playlist Title */}
                                 <div className='list-playlists-item list-albums grid gap-6 grid-cols-5 min-w-[414px] xl:grid-cols-4  l:grid-cols-3 sm:!grid-cols-2 xl:[&>:last-child]:hidden l:[&>:nth-child(3)]:hidden sm:[&>:nth-child(2)]:hidden'>
                                     {/* Playlist Item */}
-                                    <div className='group z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
-                                        <Link to={"/playlist"} className='block album-wrap p-4 group'>
-                                            <div className='album-img mb-4 relative'>
-                                                <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
-                                                <button onClick={handlePlay} className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
-                                                    {elementIconPlayingItem}
-                                                </button>
-                                            </div>
-                                            <div className='album-content text-[#fff]'>
-                                                <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
-                                                <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
-                                            </div>
-                                        </Link>
-                                    </div>
+                                    {elementFirstPlaylist}
                                     {/* Playlist Item */}
-                                    <div className='group z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
-                                        <a href='#' className='block album-wrap p-4 group'>
-                                            <div className='album-img mb-4 relative'>
-                                                <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
-                                                <button className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
-                                                    <svg
-                                                        role="img"
-                                                        height="24"
-                                                        width="24"
-                                                        aria-hidden="true"
-                                                        viewBox="0 0 24 24"
-                                                        data-encore-id="icon"
-                                                        className="Svg-sc-ytk21e-0 uPxdw">
-                                                        <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div className='album-content text-[#fff]'>
-                                                <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
-                                                <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className='group z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
-                                        <a href='#' className='block album-wrap p-4 group'>
-                                            <div className='album-img mb-4 relative'>
-                                                <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
-                                                <button className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
-                                                    <svg
-                                                        role="img"
-                                                        height="24"
-                                                        width="24"
-                                                        aria-hidden="true"
-                                                        viewBox="0 0 24 24"
-                                                        data-encore-id="icon"
-                                                        className="Svg-sc-ytk21e-0 uPxdw">
-                                                        <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div className='album-content text-[#fff]'>
-                                                <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
-                                                <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className='group z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
-                                        <a href='#' className='block album-wrap p-4 group'>
-                                            <div className='album-img mb-4 relative'>
-                                                <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
-                                                <button className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
-                                                    <svg
-                                                        role="img"
-                                                        height="24"
-                                                        width="24"
-                                                        aria-hidden="true"
-                                                        viewBox="0 0 24 24"
-                                                        data-encore-id="icon"
-                                                        className="Svg-sc-ytk21e-0 uPxdw">
-                                                        <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div className='album-content text-[#fff]'>
-                                                <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
-                                                <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className='group z-20 relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
-                                        <a href='#' className='block album-wrap p-4 group'>
-                                            <div className='album-img mb-4 relative'>
-                                                <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
-                                                <button className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
-                                                    <svg
-                                                        role="img"
-                                                        height="24"
-                                                        width="24"
-                                                        aria-hidden="true"
-                                                        viewBox="0 0 24 24"
-                                                        data-encore-id="icon"
-                                                        className="Svg-sc-ytk21e-0 uPxdw">
-                                                        <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div className='album-content text-[#fff]'>
-                                                <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
-                                                <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
-                                            </div>
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
                             {/* Playlists - Your Playlist*/}
@@ -207,121 +188,7 @@ export default function HomePageLogin() {
                                     </a>
                                 </div>
                                 <div className='list-playlists-item list-albums grid gap-6 grid-cols-5 min-w-[414px] xl:grid-cols-4 l:grid-cols-3 sm:!grid-cols-2 xl:[&>:last-child]:hidden l:[&>:nth-child(3)]:hidden sm:[&>:nth-child(2)]:hidden'>
-                                    <div className='album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
-                                        <a href='#' className='block album-wrap p-4 group'>
-                                            <div className='album-img mb-4 relative'>
-                                                <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
-                                                <button className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
-                                                    <svg
-                                                        role="img"
-                                                        height="24"
-                                                        width="24"
-                                                        aria-hidden="true"
-                                                        viewBox="0 0 24 24"
-                                                        data-encore-id="icon"
-                                                        className="Svg-sc-ytk21e-0 uPxdw">
-                                                        <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div className='album-content text-[#fff]'>
-                                                <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
-                                                <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className='album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
-                                        <a href='#' className='block album-wrap p-4 group'>
-                                            <div className='album-img mb-4 relative'>
-                                                <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
-                                                <button className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
-                                                    <svg
-                                                        role="img"
-                                                        height="24"
-                                                        width="24"
-                                                        aria-hidden="true"
-                                                        viewBox="0 0 24 24"
-                                                        data-encore-id="icon"
-                                                        className="Svg-sc-ytk21e-0 uPxdw">
-                                                        <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div className='album-content text-[#fff]'>
-                                                <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
-                                                <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className='album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
-                                        <a href='#' className='block album-wrap p-4 group'>
-                                            <div className='album-img mb-4 relative'>
-                                                <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
-                                                <button className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
-                                                    <svg
-                                                        role="img"
-                                                        height="24"
-                                                        width="24"
-                                                        aria-hidden="true"
-                                                        viewBox="0 0 24 24"
-                                                        data-encore-id="icon"
-                                                        className="Svg-sc-ytk21e-0 uPxdw">
-                                                        <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div className='album-content text-[#fff]'>
-                                                <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
-                                                <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className='album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
-                                        <a href='#' className='block album-wrap p-4 group'>
-                                            <div className='album-img mb-4 relative'>
-                                                <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
-                                                <button className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
-                                                    <svg
-                                                        role="img"
-                                                        height="24"
-                                                        width="24"
-                                                        aria-hidden="true"
-                                                        viewBox="0 0 24 24"
-                                                        data-encore-id="icon"
-                                                        className="Svg-sc-ytk21e-0 uPxdw">
-                                                        <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div className='album-content text-[#fff]'>
-                                                <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
-                                                <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className='album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
-                                        <a href='#' className='block album-wrap p-4 group'>
-                                            <div className='album-img mb-4 relative'>
-                                                <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
-                                                <button className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
-                                                    <svg
-                                                        role="img"
-                                                        height="24"
-                                                        width="24"
-                                                        aria-hidden="true"
-                                                        viewBox="0 0 24 24"
-                                                        data-encore-id="icon"
-                                                        className="Svg-sc-ytk21e-0 uPxdw">
-                                                        <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div className='album-content text-[#fff]'>
-                                                <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
-                                                <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
-                                            </div>
-                                        </a>
-                                    </div>
+                                    {elementSecondPlaylist}
                                 </div>
                             </div>
                             {/* Playlists - Spotify Playlists*/}
@@ -336,52 +203,7 @@ export default function HomePageLogin() {
                                     </a>
                                 </div>
                                 <div className='list-playlists-item list-albums grid gap-6 grid-cols-5 min-w-[414px] xl:grid-cols-4 l:grid-cols-3 sm:!grid-cols-2 xl:[&>:last-child]:hidden l:[&>:nth-child(3)]:hidden sm:[&>:nth-child(2)]:hidden'>
-                                    <div className='relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
-                                        <a href='#' className='block album-wrap p-4 group'>
-                                            <div className='album-img mb-4 relative'>
-                                                <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
-                                                <button className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
-                                                    <svg
-                                                        role="img"
-                                                        height="24"
-                                                        width="24"
-                                                        aria-hidden="true"
-                                                        viewBox="0 0 24 24"
-                                                        data-encore-id="icon"
-                                                        className="Svg-sc-ytk21e-0 uPxdw">
-                                                        <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div className='album-content text-[#fff]'>
-                                                <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
-                                                <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className='relative album-item bg-[#181818] rounded hover:bg-[#282828] transition-all duration-300'>
-                                        <a href='#' className='block album-wrap p-4 group'>
-                                            <div className='album-img mb-4 relative'>
-                                                <img className='rounded drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]' src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" alt="" />
-                                                <button className='group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
-                                                    <svg
-                                                        role="img"
-                                                        height="24"
-                                                        width="24"
-                                                        aria-hidden="true"
-                                                        viewBox="0 0 24 24"
-                                                        data-encore-id="icon"
-                                                        className="Svg-sc-ytk21e-0 uPxdw">
-                                                        <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div className='album-content text-[#fff]'>
-                                                <h3 className='font-CircularMedium text-base mb-1'>Peaceful Piano</h3>
-                                                <p className='font-CircularLight text-sm text-[#6a6a6a]'>Relax and indulge with beautiful piano pieces</p>
-                                            </div>
-                                        </a>
-                                    </div>
+                                    {elementThirdPlaylist}
                                 </div>
                             </div>
                             {/* Playlists - Sleep*/}
@@ -397,7 +219,7 @@ export default function HomePageLogin() {
                     </div>
                     {/* Content */}
                     {/* Footer */}
-                    <Footer />
+
                     {/* Footer */}
                 </div>
                 {/* Home Page - Log in*/}

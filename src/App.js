@@ -7,6 +7,7 @@ import PlayList from './components/Playlist/PlayList'
 import Admin from './components/Admin/Admin';
 import Login from './components/Login/Login';
 import SignUp from './components/Sign Up/SignUp'
+import Footer from './components/Footer/Footer';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/sign-up' element={<SignUp />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

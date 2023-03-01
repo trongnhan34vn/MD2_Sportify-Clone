@@ -392,7 +392,7 @@ export default function HomePage() {
                         </div>
                     </a>
                 </footer> */}
-                <Footer />
+
                 {/* Footer */}
             </div>
             {/* Home Page - Log out*/}

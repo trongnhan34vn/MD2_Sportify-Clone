@@ -3,3 +3,7 @@ export const NAV_TOGGLE = 'NAV_TOGGLE';
 export const POST_USER = 'POST_USER';
 export const RECIEV_DATA = 'RECIEV_DATA';
 export const LOGIN = 'LOGIN';
+export const GET_PLAYLISTS = 'GET_PLAYLISTS';
+export const RECIEVE_PLAYLISTS = 'RECIEVE_PLAYLISTS';
+export const SET_ISPLAY = 'SET_ISPLAY';
+export const RESET_CURRENTTIME = 'RESET_CURRENTTIME';

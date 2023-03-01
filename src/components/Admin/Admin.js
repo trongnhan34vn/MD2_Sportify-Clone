@@ -6,7 +6,7 @@ import Footer from '../Footer/Footer';
 import { iconPauseTrackBtnFooter, iconPlayTrackBtnFooter, iconPauseTrackItem, iconPlayTrackItem, iconUnMute, iconMute, iconPauseBtnPlaylist, iconPlayBtnPlaylist } from '../../icon';
 import Navbar from '../Navbar/Navbar';
 import { actPlayAudio, actToggleNav } from '../../redux/actions';
-import { controlSelector } from '../../redux/selector';
+import { controlAudio, toggleSelector } from '../../redux/selector';
 import FormUpload from './items/FormUpload';
 import ListTracks from './items/ListTracks'
 import AlertModal from '../../Modal/AlertModal';
@@ -14,11 +14,12 @@ import AlertModal from '../../Modal/AlertModal';
 export default function Admin() {
     const [toggleModal, setToggleModal] = useState(false)
     const dispatch = useDispatch()
-    const toggleStatus = useSelector(controlSelector)
-    let toggle = toggleStatus.toggleNav
+    const toggleStatus = useSelector(toggleSelector)
+    const playingStatus = useSelector(controlAudio)
+    let toggle = toggleStatus
 
     // Play Audio
-    let isPlayAudio = toggleStatus.isPlay
+    let isPlayAudio = playingStatus.isPlay
     useEffect(() => {
         isPlayAudio ? setIsPlay(true) : setIsPlay(false)
     },[isPlayAudio])
@@ -49,7 +50,6 @@ export default function Admin() {
             {/* Content */}
             {/* Footer */}
             <AlertModal page="admin" toggleModal={toggleModal} />
-            <Footer />
             {/* Footer */}
         </div>
     )

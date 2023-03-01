@@ -6,11 +6,11 @@ import Footer from '../Footer/Footer';
 import { iconPauseTrackBtnFooter, iconPlayTrackBtnFooter, iconPauseTrackItem, iconPlayTrackItem, iconUnMute, iconMute, iconPauseBtnPlaylist, iconPlayBtnPlaylist } from '../../icon';
 import Navbar from '../Navbar/Navbar';
 import { actPlayAudio, actToggleNav } from '../../redux/actions';
-import { controlSelector } from '../../redux/selector';
+import { controlAudio, toggleSelector } from '../../redux/selector';
 
 export default function PlayList() {
     const dispatch = useDispatch()
-    const toggleStatus = useSelector(controlSelector)
+    const toggleStatus = useSelector(controlAudio)
     let isPlayAudio = toggleStatus.isPlay
     // Play Audio
     const [isPlay, setIsPlay] = useState(isPlayAudio)
@@ -19,7 +19,8 @@ export default function PlayList() {
         dispatch(actPlayAudio())
     }
     // Nav Toggle
-    let toggle = toggleStatus.toggleNav
+    let toggle = toggleStatus
+    
     const handleMenuToggle = () => {
         dispatch(actToggleNav())
     }
@@ -150,7 +151,6 @@ export default function PlayList() {
             </section>
             {/* Content */}
             {/* Footer */}
-            <Footer />
             {/* Footer */}
         </div>
     )

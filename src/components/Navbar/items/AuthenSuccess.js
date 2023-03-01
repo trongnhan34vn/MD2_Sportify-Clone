@@ -4,15 +4,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react';
 import { iconPauseTrackBtnFooter, iconPlayTrackBtnFooter, iconPauseTrackItem, iconPlayTrackItem, iconUnMute, iconMute, iconPauseBtnPlaylist, iconPlayBtnPlaylist } from '../../../icon';
 import { actToggleNav } from '../../../redux/actions';
-import {controlSelector} from '../../../redux/selector'
+import {controlSelector, toggleSelector} from '../../../redux/selector'
 
 
 export default function AuthenSuccess() {
     const dispatch = useDispatch()
     // Hiệu ứng navbar
     const [menuToggle, setMenuToggle] = useState(false)
-    const toggleStatus = useSelector(controlSelector)
-    let toggle = toggleStatus.toggleNav
+    const toggleStatus = useSelector(toggleSelector)
+    let toggle = toggleStatus
     useEffect(() => {
         toggle ? setMenuToggle(true) : setMenuToggle(false)
     }, [toggle])

@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux'
-import controlToggle from './controlToggleReducer'
+import controlAudio from './controlAudio'
 import { recieveData } from './recieveData'
+import playlists from './playlistsReducer'
+import toggle from './toggleReducer'
 
-const rootReducer = combineReducers({ controlToggle, recieveData })
+const rootReducer = combineReducers({ controlAudio, recieveData, playlists, toggle })
 
 export default rootReducer

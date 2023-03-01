@@ -1,32 +1,38 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useRef, useState } from 'react';
 import myMusic from '../../../audio/audio1.mp3'
 import myMusic2 from '../../../audio/điều cha chưa nói final.mp3'
 import myMusic3 from '../../../audio/Hơn em chỗ nào Final Final 2.mp3'
 import { iconPauseTrackBtnFooter, iconPlayTrackBtnFooter, iconPauseTrackItem, iconPlayTrackItem, iconUnMute, iconMute, iconPauseBtnPlaylist, iconPlayBtnPlaylist } from '../../../icon';
-import { controlSelector } from '../../../redux/selector';
-import { actPlayAudio } from '../../../redux/actions';
+import { controlAudio, controlSelector } from '../../../redux/selector';
+import { playlists } from '../../../redux/selector';
+import { actGetPlaylists, actPlayAudio } from '../../../redux/actions';
 
 
-const songArr = [
-    {
-        name: 'Khoa Pug',
-        link: myMusic
-    },
-    {
-        name: 'Anh Nhân đẹp zai',
-        link: myMusic2
-    },
-    {
-        name: 'Anh Tấn đz',
-        link: myMusic3
-    }
-]
+const AuthenSuccess = () => {
+    const [songArr, setSongArr] = useState(
+        [
+            {
+                name: 'Khoa Pug',
+                link: myMusic
+            },
+            {
+                name: 'Anh Nhân đẹp zai',
+                link: myMusic2
+            },
+            {
+                name: 'Anh Tấn đz',
+                link: myMusic3
+            }
+        ]
+    )
 
-export default function AuthenSuccess() {
+    useEffect(() => {
+        dispatch(actGetPlaylists())
+    }, [])
+
     const [songIndex, setSongIndex] = useState(0)
-   
     const [playLength, setPlayLength] = useState(0)
     const audioRef = useRef()
     const progress = useRef(0)
@@ -55,11 +61,19 @@ export default function AuthenSuccess() {
     // Lấy time progress
 
     // Handle Play Audio
-    const toggleStatus = useSelector(controlSelector)
-    let isPlayAudio = (toggleStatus.isPlay)
-    useEffect (() => {
+    const playAudio = useSelector(controlAudio)
+    const listTrack = playAudio.currentTrack
+    const audio = playAudio.audio
+    useEffect(() => {
+        playAudio.playlistId && setSongArr(listTrack)
+    }, [playAudio.playlistId])
+
+    let isPlayAudio = (playAudio.isPlay)
+
+    useEffect(() => {
         isPlayAudio ? setIsPlay(true) : setIsPlay(false)
-    },[isPlayAudio])
+    }, [isPlayAudio])
+
     const [isPlay, setIsPlay] = useState(false)
     const handlePlay = () => {
         setIsPlay(!isPlay)
@@ -109,8 +123,18 @@ export default function AuthenSuccess() {
     }
 
     const elementIconPlayingFooter = (isPlay) ? iconPlayTrackBtnFooter : iconPauseTrackBtnFooter
+    let reset = playAudio.reset
 
-    const elementIconPlayingItem = (isPlay) ? iconPlayTrackItem : iconPauseTrackItem
+    useEffect(() => {
+        console.log(reset);
+        if (reset) {
+            setPlayLength(0)
+            setCurrentTime(
+                pre => ({ minutes: 0, seconds: 0 })
+            )
+
+        }
+    }, [reset])
     // Handle Play Audio
 
     // Handle Prev Track
@@ -193,8 +217,9 @@ export default function AuthenSuccess() {
         } else {
             setIsMuted(false)
         }
+        localStorage.setItem('volume', volume)
     }
-
+    let getVol = localStorage.getItem('volume')
     const handleMuted = () => {
         setIsMuted(!isMuted)
     }
@@ -213,23 +238,25 @@ export default function AuthenSuccess() {
 
     const getBackgroundSize = () => {
         return {
-            backgroundSize: `${(audioVol * 100) / 100}% 100%`
+            backgroundSize: `${(getVol * 100) / 100}% 100%`
         }
     }
-
+    useEffect(() => {
+        audioRef.current.volume = getVol / 100
+    }, [])
     // Handle Volumn
     return (
         <div>
             {/* Footer */}
-            <footer className='fixed z-10 bottom-0 right-0 left-0'>
+            <footer className='fixed z-50 bottom-0 right-0 left-0'>
                 <div className='grid grid-cols-3 items-center bg-[#181818] h-[90px] pt-[11px] pr-[24px] pb-[7px] pl-[15px] '>
                     <div className='footer-content song-info flex items-center'>
                         <div className='song-img w-14 h-14 overflow-hidden'>
-                            <img src="https://scontent.fhan5-9.fna.fbcdn.net/v/t1.6435-9/54728173_1977886592321967_7318146998438199296_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=5SRgtbXjGLcAX8WTQoy&_nc_ht=scontent.fhan5-9.fna&oh=00_AfC54L_ELn9nxTIB5SDiS4ZcVpWyLvE7Y6auo5eysNhZUA&oe=64197CBF" alt="" />
+                            <img className='object-cover' src={songArr[songIndex].audioImg} alt="" />
                         </div>
                         <div className='song-name mx-[14px] pl-[6px] pr-3'>
-                            <a className='font-CircularLight hover:underline cursor-pointer block leading-6 text-sm text-[#fff]'>{songArr[songIndex].name}</a>
-                            <a className='font-CircularLight hover:underline cursor-pointer text-[11px] text-[#B3B3B3]'>Nhân Tic</a>
+                            <a className='font-CircularLight hover:underline cursor-pointer block leading-6 text-sm text-[#fff]'>{songArr[songIndex].audioName}</a>
+                            <a className='font-CircularLight hover:underline cursor-pointer text-[11px] text-[#B3B3B3]'>{songArr[songIndex].artist}</a>
                         </div>
                         <div className='vote flex justify-center'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" className="bi bi-heart cursor-pointer" viewBox="0 0 16 16">
@@ -238,7 +265,7 @@ export default function AuthenSuccess() {
                         </div>
                     </div>
                     <div className='song-control flex flex-col'>
-                        <audio ref={audioRef} webkit-playsinline="true" playsInline={true} autoPlay={true} onLoadedMetadata={onLoadedMetadata} src={songArr[songIndex].link}></audio>
+                        <audio ref={audioRef} autoPlay={true} onLoadedMetadata={onLoadedMetadata} src={songArr[songIndex].audioUrl}></audio>
                         <div className='song-control-btn justify-center mb-1 flex gap-4'>
                             <button className='w-8 h-8 flex justify-center items-center fill-[#fff] opacity-60 hover:opacity-100'>
                                 <svg
@@ -316,7 +343,7 @@ export default function AuthenSuccess() {
                                 {elementIconMute}
                             </button>
                             <div className='h-3 flex items-center relative group'>
-                                <input style={getBackgroundSize()} onChange={handleChangeVolume} value={audioVol} className='block h-1 rounded' max={100} min={0} type="range" />
+                                <input style={getBackgroundSize()} onChange={handleChangeVolume} value={getVol} className='block h-1 rounded' max={100} min={0} type="range" />
                             </div>
                         </div>
                     </div>
@@ -327,3 +354,5 @@ export default function AuthenSuccess() {
         </div>
     )
 }
+
+export default memo(AuthenSuccess)
