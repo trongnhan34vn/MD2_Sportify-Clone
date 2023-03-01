@@ -1,11 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { actGetPlaylists } from '../../../redux/actions'
 
 export default function AuthenFailed() {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(actGetPlaylists())
+    }, [])
     return (
         <div>
             {/* Footer */}
-            <footer className='fixed z-10 bottom-0 right-0 left-0'>
+            <footer className='fixed z-50 bottom-0 right-0 left-0'>
                 <Link to={"/sign-up"} className='flex items-center justify-between pt-[11px] pr-[24px] pb-[7px] pl-[15px] bg-[linear-gradient(90deg,#af2896,#509bf5)] '>
                     <div className='footer-content text-[#fff]'>
                         <p className='text-xs uppercase font-CircularLight tracking-widest leading-5'>Xem trước Spotify</p>

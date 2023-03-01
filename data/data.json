@@ -38,7 +38,7 @@
       "type": "Nhà làm, Acoustic, R&B",
       "date": "26/2/2023",
       "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Fimg%2Fimg%205.jpeg?alt=media&token=a8c1dbce-fc28-4bff-b515-ba68af7617eb",
-      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2Fti%CC%80nh%20%C4%91a%CC%82%CC%80u%20demo%209.mp3?alt=media&token=b186fb6a-7e1c-4b46-82eb-e4b3a366a709"
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2FTi%CC%80nh%20%C4%91a%CC%82%CC%80u%20Final%202.wav?alt=media&token=da8ebad1-260e-4fd7-ada9-6aa6fed687e0"
     },
     {
       "audioId": 5,
@@ -48,7 +48,7 @@
       "type": "Nhà làm, Pop Ballad",
       "date": "26/2/2023",
       "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Fimg%2Fimg%201.jpeg?alt=media&token=57fd46b4-f913-4df4-92c9-c05c19b56914",
-      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2F%C4%91ie%CC%82%CC%80u%20cha%20chu%CC%9Ba%20no%CC%81i%20demo%203.mp3?alt=media&token=8daa13ad-4631-473f-b815-a3ac5287d5b5"
+      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2F%C4%91ie%CC%82%CC%80u%20cha%20chu%CC%9Ba%20no%CC%81i%20final.wav?alt=media&token=126b1cfe-e406-43f5-9865-505a1d78a153"
     },
     {
       "audioId": 6,
@@ -334,7 +334,7 @@
           "audioId": "track01",
           "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Fimg%2Fimg%203.jpeg?alt=media&token=e1b0fd08-4c74-4fa1-bafa-2dd605a95684",
           "audioName": "Điều cha chưa nói",
-          "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2F%C4%91ie%CC%82%CC%80u%20cha%20chu%CC%9Ba%20no%CC%81i%20demo%203.mp3?alt=media&token=8daa13ad-4631-473f-b815-a3ac5287d5b5",
+          "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2F%C4%91ie%CC%82%CC%80u%20cha%20chu%CC%9Ba%20no%CC%81i%20final.wav?alt=media&token=126b1cfe-e406-43f5-9865-505a1d78a153",
           "artist": "Nhân Tic",
           "date": "26/2/2023"
         },
@@ -366,7 +366,7 @@
           "audioId": "track05",
           "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Fimg%2Fimg%204.jpeg?alt=media&token=a2507d26-77fc-4546-878a-c6e7f2841a86",
           "audioName": "Tình đầu",
-          "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2Fti%CC%80nh%20%C4%91a%CC%82%CC%80u%20demo%209.mp3?alt=media&token=b186fb6a-7e1c-4b46-82eb-e4b3a366a709",
+          "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2FTi%CC%80nh%20%C4%91a%CC%82%CC%80u%20Final%202.wav?alt=media&token=da8ebad1-260e-4fd7-ada9-6aa6fed687e0",
           "artist": "Nhân Tic",
           "date": "26/2/2023"
         }
@@ -544,7 +544,7 @@
           "type": "Nhà làm, Acoustic, R&B",
           "date": "26/2/2023",
           "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Fimg%2Fimg%205.jpeg?alt=media&token=a8c1dbce-fc28-4bff-b515-ba68af7617eb",
-          "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2Fti%CC%80nh%20%C4%91a%CC%82%CC%80u%20demo%209.mp3?alt=media&token=b186fb6a-7e1c-4b46-82eb-e4b3a366a709"
+          "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2FTi%CC%80nh%20%C4%91a%CC%82%CC%80u%20Final%202.wav?alt=media&token=da8ebad1-260e-4fd7-ada9-6aa6fed687e0"
         },
         {
           "audioId": "track07",
@@ -622,7 +622,7 @@
           "type": "Nhà làm, Acoustic, R&B",
           "date": "26/2/2023",
           "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Fimg%2Fimg%205.jpeg?alt=media&token=a8c1dbce-fc28-4bff-b515-ba68af7617eb",
-          "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2Fti%CC%80nh%20%C4%91a%CC%82%CC%80u%20demo%209.mp3?alt=media&token=b186fb6a-7e1c-4b46-82eb-e4b3a366a709"
+          "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2FTi%CC%80nh%20%C4%91a%CC%82%CC%80u%20Final%202.wav?alt=media&token=da8ebad1-260e-4fd7-ada9-6aa6fed687e0"
         },
         {
           "audioId": "track07",
@@ -700,7 +700,7 @@
           "type": "Nhà làm, Pop Ballad",
           "date": "26/2/2023",
           "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Fimg%2Fimg%201.jpeg?alt=media&token=57fd46b4-f913-4df4-92c9-c05c19b56914",
-          "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2F%C4%91ie%CC%82%CC%80u%20cha%20chu%CC%9Ba%20no%CC%81i%20demo%203.mp3?alt=media&token=8daa13ad-4631-473f-b815-a3ac5287d5b5"
+          "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2F%C4%91ie%CC%82%CC%80u%20cha%20chu%CC%9Ba%20no%CC%81i%20final.wav?alt=media&token=126b1cfe-e406-43f5-9865-505a1d78a153"
         },
         {
           "audioId": "track11",
@@ -808,8 +808,18 @@
       "id": 6,
       "name": "Indie Mix",
       "artist": "Vũ., Wn 3107,...",
-      "imgSrc": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FV%C5%A9.%2Fimg%2F254291766_4331321781.jpeg?alt=media&token=7c479527-bbe9-4062-8116-753bbf8c800d",
+      "imgSrc": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Fimg%2F3107.jpeg?alt=media&token=493bab05-818d-4aec-9ccb-18da6f0fb1a0",
       "listTracks": [
+        {
+          "audioId": "track28",
+          "audioName": "3107",
+          "albums": "Danh sách có thể bạn sẽ thích",
+          "artist": "Wn 3107 ft. Nâu Dươngg",
+          "type": "Indie, Pop Ballad, BuồnĐời sống, EDM",
+          "date": "27/02/2023",
+          "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Fimg%2F3107.jpeg?alt=media&token=493bab05-818d-4aec-9ccb-18da6f0fb1a0",
+          "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20Wn%20%203107%20full%20album%20ft%20%20titie%20Na%CC%82u%20Du%CC%9Bo%CC%9Bngg%20.mp3?alt=media&token=744d0155-921d-4990-99d1-1e1f83efbb20"
+        },
         {
           "audioId": "track13",
           "audioName": "Lạ lùng",
@@ -839,16 +849,6 @@
           "date": "26/2/2023",
           "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FV%C5%A9.%2Fimg%2F254291766_4331321781.jpeg?alt=media&token=7c479527-bbe9-4062-8116-753bbf8c800d",
           "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FV%C5%A9.%2Faudio%2Fy2mate.com%20-%20%C4%90O%CC%9B%CC%A3I%20%20VU%CC%83%20ORIGINAL_320kbps.mp3?alt=media&token=9fe5c160-54cf-4921-8a7f-3bbb9b975f10"
-        },
-        {
-          "audioId": "track28",
-          "audioName": "3107",
-          "albums": "Danh sách có thể bạn sẽ thích",
-          "artist": "Wn 3107 ft. Nâu Dươngg",
-          "type": "Indie, Pop Ballad, BuồnĐời sống, EDM",
-          "date": "27/02/2023",
-          "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Fimg%2F3107.jpeg?alt=media&token=493bab05-818d-4aec-9ccb-18da6f0fb1a0",
-          "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20Wn%20%203107%20full%20album%20ft%20%20titie%20Na%CC%82u%20Du%CC%9Bo%CC%9Bngg%20.mp3?alt=media&token=744d0155-921d-4990-99d1-1e1f83efbb20"
         }
       ]
     },

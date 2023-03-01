@@ -1,13 +1,17 @@
-                                                                                                                                      
+
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react';
 import { iconPauseTrackBtnFooter, iconPlayTrackBtnFooter, iconPauseTrackItem, iconPlayTrackItem, iconUnMute, iconMute, iconPauseBtnPlaylist, iconPlayBtnPlaylist } from '../../../icon';
 import { actToggleNav } from '../../../redux/actions';
-import {controlSelector, toggleSelector} from '../../../redux/selector'
+import { controlSelector, toggleSelector } from '../../../redux/selector'
+import { useNavigate } from 'react-router-dom';
 
 
 export default function AuthenSuccess() {
+    const navigate = useNavigate()
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    const currentUser = user.user
     const dispatch = useDispatch()
     // Hiệu ứng navbar
     const [menuToggle, setMenuToggle] = useState(false)
@@ -41,6 +45,14 @@ export default function AuthenSuccess() {
     return (
         <div onClick={menuToggle ? handleMenuToggle : undefined}>
             {/* Nav */}
+            {/* <div className='left-[22%] -translate-y-4 top-8 fixed nav-direction-page flex items-center gap-4 z-[100]'>
+                <button onClick={navigate(-1)} className='w-8 h-8 px-2 py-1 opacity-75 hover:opacity-100 transition-all bg-[#101010] rounded-[50%] duration-200'>
+                    <i className="ti-angle-left text-[#fff] font-bold" />
+                </button>
+                <button onClick={navigate(1)} className='w-8 h-8 px-2 py-1 opacity-75 hover:opacity-100 transition-all bg-[#101010] rounded-[50%] duration-200'>
+                    <i className="ti-angle-right text-[#fff] font-bold" />
+                </button>
+            </div> */}
             <nav className={`fixed z-[60] right-0 left-[241px] navbar-menu h-16 px-8 flex justify-between duration-[0.3s] ${stickyClass}`}>
                 <div className='nav-direction-page flex items-center gap-4 z-[60]'>
                     <button className='w-8 h-8 px-2 py-1 opacity-75 hover:opacity-100 transition-all bg-[#101010] rounded-[50%] duration-200'>
@@ -61,7 +73,7 @@ export default function AuthenSuccess() {
                                     <img className='w-7 h-7 rounded-[50%]' src="https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/5/26/913299/Ngan-Ha25.jpg" alt="" />
                                 </span>
                                 <span className='users'>
-                                    Nhân Nguyễn
+                                    {currentUser.name}
                                 </span>
                                 <span className='pr-3'>
                                     {elementIconToggle}

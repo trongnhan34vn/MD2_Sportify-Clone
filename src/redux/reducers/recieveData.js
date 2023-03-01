@@ -1,7 +1,10 @@
 import * as actionType from "../const/actionType";
 
 const initState = {
-    result: ""
+    result: {
+        action: "",
+        currentUser: {}
+    }
 }
 
 export const recieveData = (state = initState, action) => {

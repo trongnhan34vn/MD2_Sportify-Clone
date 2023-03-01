@@ -5,7 +5,7 @@ import myMusic from '../../../audio/audio1.mp3'
 import myMusic2 from '../../../audio/điều cha chưa nói final.mp3'
 import myMusic3 from '../../../audio/Hơn em chỗ nào Final Final 2.mp3'
 import { iconPauseTrackBtnFooter, iconPlayTrackBtnFooter, iconPauseTrackItem, iconPlayTrackItem, iconUnMute, iconMute, iconPauseBtnPlaylist, iconPlayBtnPlaylist } from '../../../icon';
-import { controlAudio, controlSelector } from '../../../redux/selector';
+import { controlAudio } from '../../../redux/selector';
 import { playlists } from '../../../redux/selector';
 import { actGetPlaylists, actPlayAudio } from '../../../redux/actions';
 
@@ -27,10 +27,6 @@ const AuthenSuccess = () => {
             }
         ]
     )
-
-    useEffect(() => {
-        dispatch(actGetPlaylists())
-    }, [])
 
     const [songIndex, setSongIndex] = useState(0)
     const [playLength, setPlayLength] = useState(0)
@@ -61,6 +57,10 @@ const AuthenSuccess = () => {
     // Lấy time progress
 
     // Handle Play Audio
+    useEffect(() => {
+        dispatch(actGetPlaylists())
+    }, [])
+
     const playAudio = useSelector(controlAudio)
     const listTrack = playAudio.currentTrack
     const audio = playAudio.audio
@@ -126,13 +126,11 @@ const AuthenSuccess = () => {
     let reset = playAudio.reset
 
     useEffect(() => {
-        console.log(reset);
         if (reset) {
             setPlayLength(0)
             setCurrentTime(
                 pre => ({ minutes: 0, seconds: 0 })
             )
-
         }
     }, [reset])
     // Handle Play Audio

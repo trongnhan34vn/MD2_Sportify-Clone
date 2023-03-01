@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function AuthenFailed() {
     return (
@@ -28,10 +29,10 @@ export default function AuthenFailed() {
                     <div className='m-4 bg-[#fff] h-6 w-[1px]'></div>
                     <ul className='text-[#fff] font-CircularBook'>
                         <li className='inline-block'>
-                            <a href='' className='tracking-widest inline-block opacity-60 py-4 pl-2 pr-8 leading-8 hover:scale-105 hover:opacity-100 transition-all duration-200'>Đăng kí</a>
+                            <Link to={"/sign-up"} className='tracking-widest inline-block opacity-60 py-4 pl-2 pr-8 leading-8 hover:scale-105 hover:opacity-100 transition-all duration-200'>Đăng kí</Link>
                         </li>
                         <li className='inline-block'>
-                            <a href='' className='font-CircularMedium tracking-normal bg-[#fff] rounded-[500px] text-[#000] inline-block py-2 px-8 leading-8 hover:scale-105 transition-all duration-200'>Đăng nhập</a>
+                            <Link to={'/login'} className='font-CircularMedium tracking-normal bg-[#fff] rounded-[500px] text-[#000] inline-block py-2 px-8 leading-8 hover:scale-105 transition-all duration-200'>Đăng nhập</Link>
                         </li>
                     </ul>
                 </div>

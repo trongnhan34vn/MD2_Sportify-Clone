@@ -10,5 +10,6 @@ export const POST_USER = async (newUser) => {
 }
 
 export const GET_LOGIN = async (user) => {
-    await instance.post('/login', user)
+    let response = await instance.post('/login', user)
+    return response.data
 }

@@ -6,11 +6,11 @@ import Footer from '../Footer/Footer';
 import { iconPauseTrackBtnFooter, iconPlayTrackBtnFooter, iconPauseTrackItem, iconPlayTrackItem, iconUnMute, iconMute, iconPauseBtnPlaylist, iconPlayBtnPlaylist } from '../../icon';
 import Navbar from '../Navbar/Navbar';
 import { actPlayAudio, actToggleNav } from '../../redux/actions';
-import { controlAudio, toggleSelector } from '../../redux/selector';
+import { controlAudio, playlists, toggleSelector } from '../../redux/selector';
 
 export default function PlayList() {
     const dispatch = useDispatch()
-    const toggleStatus = useSelector(controlAudio)
+    const toggleStatus = useSelector(toggleSelector)
     let isPlayAudio = toggleStatus.isPlay
     // Play Audio
     const [isPlay, setIsPlay] = useState(isPlayAudio)
@@ -25,6 +25,12 @@ export default function PlayList() {
         dispatch(actToggleNav())
     }
     const elementIconPlayingItem = (isPlay) ? iconPlayBtnPlaylist : iconPauseBtnPlaylist
+
+    const playlist = JSON.parse(localStorage.getItem("playlist"))
+    const playlistItem = playlist[0]
+    const playlistArr = playlistItem.listTracks
+    const audioRef = useRef()
+
     return (
         <div onClick={toggle ? handleMenuToggle : undefined}>
             {/* Direction Menu */}
@@ -34,13 +40,15 @@ export default function PlayList() {
             <Navbar />
             {/* Content */}
             <section className='section-playlist pb-[90px] pl-[241px]'>
+                <audio ref={audioRef} src={playlistArr}></audio>
                 <div className='section-playlist-banner flex items-end gap-6 linearColor max-h-[500px] h-[30vh] min-h-[340px] p-8'>
                     <div className='banner-img w-48 h-48'>
-                        <img className='w-full h-full shadow-[0 4px 60px rgb(0 0 0 / 50%)]' src="https://seed-mix-image.spotifycdn.com/v6/img/artist/1Gm45JaOS9vp7DsB51yDWq/en/default" alt="" />
+                        <img className='w-full h-full drop-shadow-2xl' src="https://seed-mix-image.spotifycdn.com/v6/img/artist/1Gm45JaOS9vp7DsB51yDWq/en/default" alt="" />
                     </div>
                     <div className='banner-song-info text-[#fff]'>
                         <p className='text-xs font-CircularBook'>Playlist</p>
-                        <h3 className='font-CircularBold text-[72px]'>Tùng Acoustic Mix</h3>
+                        <h3 className='font-CircularBold text-[72px]'>{playlistItem.name}</h3>
+                        <p className='text-xs font-CircularLight'>{playlistItem.artist}</p>
                     </div>
                 </div>
                 <div className='section-playlist-list-song bg-[#121212]'>

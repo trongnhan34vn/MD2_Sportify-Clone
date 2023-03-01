@@ -8,13 +8,14 @@ import Admin from './components/Admin/Admin';
 import Login from './components/Login/Login';
 import SignUp from './components/Sign Up/SignUp'
 import Footer from './components/Footer/Footer';
+import Home from './components/HomePage/Home';
 
 function App() {
 
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<HomePageLogin />} />
+        <Route path="/" element={<Home />} />
         <Route path="/playlist" element={<PlayList />} />
         <Route path='/admin' element={<Admin />} />
         <Route path='/login' element={<Login />} />

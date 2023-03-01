@@ -22,8 +22,9 @@ export const postUsers = function* (action) {
 
 export const login = function* (action) {
     try {
-        yield call(usersServices.GET_LOGIN, action.payload)
-        yield put(actions.actRecieveData("Success"))
+        let user = yield call(usersServices.GET_LOGIN, action.payload)
+        yield put(actions.actRecieveData({currentUser : user, action: "Success"}))
+
     } catch (error) {
         yield put(actions.actRecieveData("Failed"))
     }
