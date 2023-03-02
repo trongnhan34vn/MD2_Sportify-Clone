@@ -1,16 +1,17 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function AuthenFailed() {
+    const navigate = useNavigate()
     return (
         <div>
             {/* Nav */}
             <div className='fixed z-50 right-0 left-[241px] navbar-menu bg-[#101010] px-8 flex justify-between'>
                 <div className='nav-direction-page flex gap-4'>
-                    <button className='px-2 py-1 opacity-75 hover:opacity-100 transition-all duration-200'>
+                    <button onClick={() => navigate(-1)} className='px-2 py-1 opacity-75 hover:opacity-100 transition-all duration-200'>
                         <i className="ti-angle-left text-[#fff] font-bold" />
                     </button>
-                    <button className='px-2 py-1 opacity-75 hover:opacity-100 transition-all duration-200'>
+                    <button onClick={() => navigate(1)} className='px-2 py-1 opacity-75 hover:opacity-100 transition-all duration-200'>
                         <i className="ti-angle-right text-[#fff] font-bold" />
                     </button>
                 </div>

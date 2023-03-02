@@ -8,6 +8,7 @@ import Navbar from '../Navbar/Navbar';
 import { actPlayAudio, actToggleNav, recievePlaylists, resetCurrentTime, setIsPlay } from '../../redux/actions';
 import { controlAudio, currentUser, playlists, toggleSelector } from '../../redux/selector';
 import { Link, useNavigate } from 'react-router-dom';
+import { act } from '@testing-library/react';
 
 export default function HomePageLogin() {
     const navigate = useNavigate()
@@ -25,6 +26,16 @@ export default function HomePageLogin() {
     // Play Audio
     let isPlayAudio = playingStatus.isPlay
     // const [isPlay, setIsPlay] = useState(isPlayAudio)
+    let playlistLocal = JSON.parse(localStorage.getItem('playlist'))
+    useEffect(() => {
+        if (playlistLocal !== null) {
+            let listTrack = playlistLocal.list.filter(item => item.id)
+            let listTrackItem = listTrack[0].listTracks
+            console.log(listTrackItem);
+            dispatch(actPlayAudio(playlistLocal.id, listTrackItem))
+        }
+    }, [])
+
     const handleReset = useRef(0)
     const [changeStateButton, setChangeStateButton] = useState()
     const handlePlay = (id, playlist) => {
@@ -43,29 +54,49 @@ export default function HomePageLogin() {
                 setTimeout(() => { dispatch(resetCurrentTime(false)) }, 100)
             }
             dispatch(actPlayAudio(id, playlist))
+            if (playlistLocal !== null) {
+                let listTrack
+                if (id <= 5) { listTrack = list1 }
+                if (id > 5 && id <= 10) { listTrack = list2 }
+                if (id > 10 && id <= 12) { listTrack = list3 }
+                if (id !== playlistLocal.idTrackList) {
+                    localStorage.removeItem('playlist')
+                    localStorage.setItem('playlist', JSON.stringify({idTrackList: id, list: listTrack}))
+                }
+            }
         }
     }
+
     useEffect(() => {
         isPlayAudio ? setIsPlay(true) : setIsPlay(false)
     }, [isPlayAudio])
-
-
-    useEffect(() => {
-        // if (list1.length == 5) {
-        //     dispatch((actPlayAudio(list1[0].id, list1[0].listTracks)))
-        // }
-
-    }, [list1])
 
     const handleMenuToggle = () => {
         dispatch(actToggleNav())
     }
 
     const handleToPlayList = (id) => {
-       if (id <= 5) {
+        if (id <= 5) {
             navigate("/playlist")
-            localStorage.setItem("playlist",JSON.stringify(list1))
-       }
+            let idTrackList = id
+            let toPlaylist = { idTrackList, list: list1 }
+            localStorage.removeItem("playlist")
+            localStorage.setItem("playlist", JSON.stringify(toPlaylist))
+        }
+        if (id <= 10 && id > 5) {
+            navigate("/playlist")
+            let idTrackList = id
+            let toPlaylist = { idTrackList, list: list2 }
+            localStorage.removeItem("playlist")
+            localStorage.setItem("playlist", JSON.stringify(toPlaylist))
+        }
+        if (id <= 12 && id > 10) {
+            navigate("/playlist")
+            let idTrackList = id
+            let toPlaylist = { idTrackList, list: list3 }
+            localStorage.removeItem("playlist")
+            localStorage.setItem("playlist", JSON.stringify(toPlaylist))
+        }
     }
 
     const elementFirstPlaylist = list1.map((playlist, index) => {
@@ -73,7 +104,7 @@ export default function HomePageLogin() {
             <button onClick={() => handlePlay(playlist.id, playlist.listTracks)} id={playlist.id} className='z-20 top-[42%] -translate-x-5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
                 {changeStateButton === playlist.id ? iconPlayTrackItem : iconPauseTrackItem}
             </button>
-            <button onClick={() => handleToPlayList(playlist.id)} to={"/playlist"} className='w-full inline-block text-left album-wrap p-4'>
+            <button onClick={() => handleToPlayList(playlist.id)} className='w-full inline-block text-left album-wrap p-4'>
                 <div className='album-img flex flex-col mb-4 '>
                     <img className='rounded object-cover w-[167px] h-[167px] drop-shadow-2xl' src={playlist.imgSrc} alt="" />
                 </div>
@@ -90,15 +121,15 @@ export default function HomePageLogin() {
             <button onClick={() => handlePlay(playlist.id, playlist.listTracks)} id={playlist.id} className='z-50 top-[42%] -translate-x-5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
                 {changeStateButton === playlist.id ? iconPlayTrackItem : iconPauseTrackItem}
             </button>
-            <Link to={"/playlist"} className='flex flex-col album-wrap p-4'>
-                <div className='album-img mb-4  relative'>
+            <button onClick={() => handleToPlayList(playlist.id)} className='w-full inline-block text-left album-wrap p-4'>
+                <div className='album-img flex flex-col mb-4'>
                     <img className='rounded object-cover w-[167px] h-[167px] drop-shadow-2xl' src={playlist.imgSrc} alt="" />
                 </div>
                 <div className='album-content text-[#fff]'>
-                    <h3 className='font-CircularMedium text-base mb-1'>{playlist.name}</h3>
+                    <h3 className='font-CircularMedium w-full text-base mb-1'>{playlist.name}</h3>
                     <p className='font-CircularLight text-sm text-[#6a6a6a]'>{playlist.artist}</p>
                 </div>
-            </Link>
+            </button>
         </div>
     })
 
@@ -107,15 +138,15 @@ export default function HomePageLogin() {
             <button onClick={() => handlePlay(playlist.id, playlist.listTracks)} id={playlist.id} className='z-50 top-[42%] -translate-x-5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
                 {changeStateButton === playlist.id ? iconPlayTrackItem : iconPauseTrackItem}
             </button>
-            <Link to={"/playlist"} className='flex flex-col album-wrap p-4'>
-                <div className='album-img mb-4 justify-center w-[167px] h-[167px] relative'>
+            <button onClick={() => handleToPlayList(playlist.id)} className='w-full inline-block text-left album-wrap p-4'>
+                <div className='album-img flex flex-col mb-4'>
                     <img className='rounded object-cover w-[167px] h-[167px] drop-shadow-2xl' src={playlist.imgSrc} alt="" />
                 </div>
                 <div className='album-content text-[#fff]'>
-                    <h3 className='font-CircularMedium text-base mb-1 truncate'>{playlist.name}</h3>
+                    <h3 className='font-CircularMedium w-full text-base mb-1 truncate'>{playlist.name}</h3>
                     <p className='font-CircularLight text-sm text-[#6a6a6a]'>{playlist.artist}</p>
                 </div>
-            </Link>
+            </button>
         </div>
     })
 

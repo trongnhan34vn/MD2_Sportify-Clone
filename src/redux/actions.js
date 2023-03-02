@@ -61,6 +61,50 @@ export const resetCurrentTime = (payload) => {
     }
 }
 
+export const getListTracksAdmin = () => {
+    return {
+        type: actionType.GET_LISTTRACKS
+    }
+}
+
+export const recieveListTracksAdmin = (data) => {
+    return {
+        type: actionType.RECIEVE_LISTTRACKS,
+        payload: data
+    }
+}
+
+export const postNewTrackAudio = (data) => {
+    return {
+        type: actionType.POST_NEW_TRACK,
+        payload: data
+    }
+}
+
+export const actDelTrack = (data) => {
+    return {
+        type: actionType.DEL_TRACK,
+        payload: data
+    }
+}
+
+export const actSelectTrack = (data) => {
+    return {
+        type: actionType.SELECT_TRACK,
+        payload: data
+    }
+}
+
+export const actUpdateTrack = (data) => {
+    return {
+        type: actionType.UPDATE_TRACK,
+        payload: data
+    }
+}
+
+
+
+
 
 
 

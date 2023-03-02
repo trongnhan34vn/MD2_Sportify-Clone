@@ -35,11 +35,16 @@ export default function AuthenSuccess() {
         setMenuToggle(!menuToggle)
         dispatch(actToggleNav())
     }
+
+    const handleSignOut = () => {
+        localStorage.removeItem("currentUser")
+        navigate("/")
+    }
     const elementIconToggle = (menuToggle) ? <i className="fa-solid fa-caret-up"></i> : <i className="fa-solid fa-caret-down"></i>
     const elementMenuToggle = (menuToggle) ? <ul className='right-0 top-10 p-1 direction-account absolute bg-[#282828] font-CircularLight text-sm rounded shadow-[0 16px 24px rgb(0 0 0 / 30%), 0 6px 8px rgb(0 0 0 / 20%)] max-w-[350px] min-w-[160px]'>
-        <li><a className='p-3 h-10 block hover:bg-[hsla(0,0%,100%,.1)]' href="">Profile</a></li>
-        <li><a className='p-3 h-10 block hover:bg-[hsla(0,0%,100%,.1)]' href="">Account</a></li>
-        <li><a className='p-3 h-10 block hover:bg-[hsla(0,0%,100%,.1)]' href="">Log Out</a></li>
+        <li><a className='p-3 h-10 block hover:bg-[hsla(0,0%,100%,.1)]' >Profile</a></li>
+        <li><a className='p-3 h-10 block hover:bg-[hsla(0,0%,100%,.1)]' >Account</a></li>
+        <li><button onClick={handleSignOut} className='w-full text-left p-3 h-10 block hover:bg-[hsla(0,0%,100%,.1)]' >Log Out</button></li>
     </ul> : ""
     // Toggle menu navbar thò thụt
     return (
@@ -55,10 +60,10 @@ export default function AuthenSuccess() {
             </div> */}
             <nav className={`fixed z-[60] right-0 left-[241px] navbar-menu h-16 px-8 flex justify-between duration-[0.3s] ${stickyClass}`}>
                 <div className='nav-direction-page flex items-center gap-4 z-[60]'>
-                    <button className='w-8 h-8 px-2 py-1 opacity-75 hover:opacity-100 transition-all bg-[#101010] rounded-[50%] duration-200'>
+                    <button onClick={() => navigate(-1)} className='w-8 h-8 px-2 py-1 opacity-75 hover:opacity-100 transition-all bg-[#101010] rounded-[50%] duration-200'>
                         <i className="ti-angle-left text-[#fff] font-bold" />
                     </button>
-                    <button className='w-8 h-8 px-2 py-1 opacity-75 hover:opacity-100 transition-all bg-[#101010] rounded-[50%] duration-200'>
+                    <button onClick={() => navigate(1)} className='w-8 h-8 px-2 py-1 opacity-75 hover:opacity-100 transition-all bg-[#101010] rounded-[50%] duration-200'>
                         <i className="ti-angle-right text-[#fff] font-bold" />
                     </button>
                 </div>

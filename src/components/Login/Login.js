@@ -66,8 +66,6 @@ export default function Login() {
                 checkStat = true
             }
         }
-
-
         if (checkStat) {
             let checkUser = {
                 email: inputValue.email.value,
@@ -80,6 +78,9 @@ export default function Login() {
                 setToggleModal(false)
             }, 4000)
         }
+        if (resultLogin.result.action === "Success") {
+            localStorage.setItem("currentUser", JSON.stringify(resultLogin.result.currentUser))
+        }
         if (resultLogin.result === "Failed") {
             setToggleModal(true)
             setInterval(() => {
@@ -88,12 +89,11 @@ export default function Login() {
         }
     }
 
+    let user = JSON.parse(localStorage.getItem("currentUser"))
+
     useEffect(() => {
-        if (resultLogin.result.action === "Success") {
-            navigate("/")
-            localStorage.setItem("currentUser", JSON.stringify(resultLogin.result.currentUser))
-        }
-    }, [resultLogin.result])
+        (user) && navigate("/")
+    }, [user])
 
     return (
         <div>

@@ -91,7 +91,7 @@ export default function HomePage() {
                                     <p className="text-[#B3B3B3] font-CircularMedium text-sm hover:underline">Show all</p>
                                 </a>
                             </div>
-                            <div className='list-playlists-item list-albums grid gap-6 grid-cols-5 min-w-[414px]'>
+                            <div className='list-playlists-item list-albums grid gap-6 grid-cols-5 min-w-[414px] xl:grid-cols-4 l:grid-cols-3 sm:!grid-cols-2 xl:[&>:last-child]:hidden l:[&>:nth-child(3)]:hidden sm:[&>:nth-child(2)]:hidden'>
                                 {elementFirstPlaylist}
                             </div>
                         </div>
@@ -106,7 +106,7 @@ export default function HomePage() {
                                     <p className="text-[#B3B3B3] font-CircularMedium text-sm hover:underline">Show all</p>
                                 </a>
                             </div>
-                            <div className='list-playlists-item list-albums grid gap-6 grid-cols-5 min-w-[414px]'>
+                            <div className='list-playlists-item list-albums grid gap-6 grid-cols-5 min-w-[414px] xl:grid-cols-4 l:grid-cols-3 sm:!grid-cols-2 xl:[&>:last-child]:hidden l:[&>:nth-child(3)]:hidden sm:[&>:nth-child(2)]:hidden'>
                                 {elementSecondPlaylist}
                             </div>
                         </div>
@@ -121,7 +121,7 @@ export default function HomePage() {
                                     <p className="text-[#B3B3B3] font-CircularMedium text-sm hover:underline">Show all</p>
                                 </a>
                             </div>
-                            <div className='list-playlists-item list-albums grid gap-6 grid-cols-5 min-w-[414px]'>
+                            <div className='list-playlists-item list-albums grid gap-6 grid-cols-5 min-w-[414px] xl:grid-cols-4 l:grid-cols-3 sm:!grid-cols-2 xl:[&>:last-child]:hidden l:[&>:nth-child(3)]:hidden sm:[&>:nth-child(2)]:hidden'>
                                 {elementThirdPlaylist}
                             </div>
                         </div>

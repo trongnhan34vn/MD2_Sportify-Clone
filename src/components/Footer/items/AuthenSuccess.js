@@ -218,6 +218,7 @@ const AuthenSuccess = () => {
         localStorage.setItem('volume', volume)
     }
     let getVol = localStorage.getItem('volume')
+    
     const handleMuted = () => {
         setIsMuted(!isMuted)
     }

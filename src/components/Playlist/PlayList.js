@@ -6,31 +6,71 @@ import Footer from '../Footer/Footer';
 import { iconPauseTrackBtnFooter, iconPlayTrackBtnFooter, iconPauseTrackItem, iconPlayTrackItem, iconUnMute, iconMute, iconPauseBtnPlaylist, iconPlayBtnPlaylist } from '../../icon';
 import Navbar from '../Navbar/Navbar';
 import { actPlayAudio, actToggleNav } from '../../redux/actions';
-import { controlAudio, playlists, toggleSelector } from '../../redux/selector';
+import { controlAudio, toggleSelector } from '../../redux/selector';
 
 export default function PlayList() {
+    const playlist = JSON.parse(localStorage.getItem("playlist"))
+    const playlistItem = playlist.list.filter(item => item.id === playlist.idTrackList)
+    const listTrack = playlistItem[0]
     const dispatch = useDispatch()
     const toggleStatus = useSelector(toggleSelector)
-    let isPlayAudio = toggleStatus.isPlay
+    const controlAudioSelect = useSelector(controlAudio)
+    let isPlayAudio = controlAudioSelect.isPlay
     // Play Audio
     const [isPlay, setIsPlay] = useState(isPlayAudio)
     const handlePlay = () => {
         setIsPlay(!isPlay)
-        dispatch(actPlayAudio())
+        dispatch(actPlayAudio(playlist.idTrackList, listTrack.listTracks))
     }
     // Nav Toggle
     let toggle = toggleStatus
-    
+
     const handleMenuToggle = () => {
         dispatch(actToggleNav())
     }
     const elementIconPlayingItem = (isPlay) ? iconPlayBtnPlaylist : iconPauseBtnPlaylist
 
-    const playlist = JSON.parse(localStorage.getItem("playlist"))
-    const playlistItem = playlist[0]
-    const playlistArr = playlistItem.listTracks
-    const audioRef = useRef()
+    const testRef = useRef(null)
 
+    const getDuration = (src) => {
+        // let audioRef = <audio  src={src.audioUrl} controls></audio>
+        let audioRef = document.createElement("AUDIO")
+        audioRef.src = src.audioUrl
+        audioRef.setAttribute("controls", "controls")
+        audioRef.setAttribute("onloadedmetadata", "onloadedmetadata")
+
+        return audioRef.duration;
+    }
+
+    const disPlayDuration = () => {
+        let durationArr = [];
+        listTrack.listTracks.forEach(val => {
+            let duration = getDuration(val)
+            durationArr = [...durationArr, duration]
+        });
+
+        return durationArr;
+    }
+
+
+    let result = disPlayDuration()
+    // console.log(result);
+
+
+    const elementListtrack = listTrack.listTracks.map((item, index) => {
+        return <tr key={index} className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
+            <td className='text-center'>{index + 1}</td>
+            <td className='flex gap-2 items-center py-2'>
+                <div><img className='w-10 object-cover h-10' src={item.audioImg} alt="" /></div>
+                <div><p className='text-base font-CircularBook text-[#fff]'>{item.audioName}</p><p className='text-sm'>{item.artist}</p></div>
+            </td>
+            <td className='overflow-hidden truncate'>{item.albums}</td>
+            <td></td>
+            <td>4:42</td>
+        </tr>
+    })
+
+    let currentUser = JSON.parse(localStorage.getItem('currentUser')) 
     return (
         <div onClick={toggle ? handleMenuToggle : undefined}>
             {/* Direction Menu */}
@@ -39,29 +79,29 @@ export default function PlayList() {
             {/* Nav */}
             <Navbar />
             {/* Content */}
-            <section className='section-playlist pb-[90px] pl-[241px]'>
-                <audio ref={audioRef} src={playlistArr}></audio>
+            <section className='section-playlist pb-[90px] h-full pl-[241px] bg-[#121212] '>
+                <audio ref={testRef} src=""></audio>
                 <div className='section-playlist-banner flex items-end gap-6 linearColor max-h-[500px] h-[30vh] min-h-[340px] p-8'>
                     <div className='banner-img w-48 h-48'>
-                        <img className='w-full h-full drop-shadow-2xl' src="https://seed-mix-image.spotifycdn.com/v6/img/artist/1Gm45JaOS9vp7DsB51yDWq/en/default" alt="" />
+                        <img className='w-full h-full drop-shadow-2xl' src={listTrack.listTracks[0].audioImg} alt="" />
                     </div>
                     <div className='banner-song-info text-[#fff]'>
                         <p className='text-xs font-CircularBook'>Playlist</p>
-                        <h3 className='font-CircularBold text-[72px]'>{playlistItem.name}</h3>
-                        <p className='text-xs font-CircularLight'>{playlistItem.artist}</p>
+                        <h3 className='font-CircularBold text-[72px]'>{listTrack.name}</h3>
+                        <p className='text-xs font-CircularLight'>{listTrack.artist}</p>
                     </div>
                 </div>
-                <div className='section-playlist-list-song bg-[#121212]'>
+                <div className='section-playlist-list-song h-full bg-[#121212]'>
                     <div className='section-play-list-control flex gap-8 px-8 py-6 items-center'>
-                        <button onClick={handlePlay} className='rounded-[50%] bg-primaryColor p-3.5'>
-                            {elementIconPlayingItem}
+                        <button onClick={handlePlay} className='rounded-[50%] hover:scale-110 transition-all duration-200 bg-primaryColor p-3.5'>
+                          {(currentUser)?elementIconPlayingItem: iconPauseBtnPlaylist}
                         </button>
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="hsla(0,0%,100%,.7)" className="bi bi-heart cursor-pointer" viewBox="0 0 16 16">
                             <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
                         </svg>
                     </div>
-                    <div className='section-playlist-list px-8'>
-                        <table className='table-fixed w-full text-[#B3B3B3] font-CircularLight text-sm'>
+                    <div className='section-playlist-list px-8 h-full'>
+                        <table className='table-fixed w-full text-[#B3B3B3] h-full font-CircularLight text-sm'>
                             <thead className='text-left'>
                                 <tr className='border-b border-[hsla(0,0%,100%,.1)]'>
                                     <th width="5%" className='text-center'>#</th>
@@ -72,86 +112,7 @@ export default function PlayList() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
-                                    <td className='text-center'>1</td>
-                                    <td className='flex gap-2 items-center py-2'>
-                                        <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
-                                        <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
-                                    </td>
-                                    <td>Tuyển tập của Tùng Acoustic</td>
-                                    <td></td>
-                                    <td>4:42</td>
-                                </tr>
-                                <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
-                                    <td className='text-center'>1</td>
-                                    <td className='flex gap-2 items-center py-2'>
-                                        <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
-                                        <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
-                                    </td>
-                                    <td>Tuyển tập của Tùng Acoustic</td>
-                                    <td></td>
-                                    <td>4:42</td>
-                                </tr>
-                                <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
-                                    <td className='text-center'>1</td>
-                                    <td className='flex gap-2 items-center py-2'>
-                                        <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
-                                        <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
-                                    </td>
-                                    <td>Tuyển tập của Tùng Acoustic</td>
-                                    <td></td>
-                                    <td>4:42</td>
-                                </tr>
-                                <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
-                                    <td className='text-center'>1</td>
-                                    <td className='flex gap-2 items-center py-2'>
-                                        <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
-                                        <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
-                                    </td>
-                                    <td>Tuyển tập của Tùng Acoustic</td>
-                                    <td></td>
-                                    <td>4:42</td>
-                                </tr>
-                                <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
-                                    <td className='text-center'>1</td>
-                                    <td className='flex gap-2 items-center py-2'>
-                                        <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
-                                        <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
-                                    </td>
-                                    <td>Tuyển tập của Tùng Acoustic</td>
-                                    <td></td>
-                                    <td>4:42</td>
-                                </tr>
-                                <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
-                                    <td className='text-center'>1</td>
-                                    <td className='flex gap-2 items-center py-2'>
-                                        <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
-                                        <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
-                                    </td>
-                                    <td>Tuyển tập của Tùng Acoustic</td>
-                                    <td></td>
-                                    <td>4:42</td>
-                                </tr>
-                                <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
-                                    <td className='text-center'>1</td>
-                                    <td className='flex gap-2 items-center py-2'>
-                                        <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
-                                        <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
-                                    </td>
-                                    <td>Tuyển tập của Tùng Acoustic</td>
-                                    <td></td>
-                                    <td>4:42</td>
-                                </tr>
-                                <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
-                                    <td className='text-center'>1</td>
-                                    <td className='flex gap-2 items-center py-2'>
-                                        <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
-                                        <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
-                                    </td>
-                                    <td>Tuyển tập của Tùng Acoustic</td>
-                                    <td></td>
-                                    <td>4:42</td>
-                                </tr>
+                                {elementListtrack}
                             </tbody>
                         </table>
                     </div>

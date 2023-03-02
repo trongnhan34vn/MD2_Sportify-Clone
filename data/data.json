@@ -1,7 +1,7 @@
 {
   "listTracks": [
     {
-      "audioId": 1,
+      "id": 1,
       "audioName": "Ánh sao và bầu trời",
       "albums": "Tuyển tập những ca khúc cover bởi Nhân Tic",
       "artist": "Nhân Tic",
@@ -11,7 +11,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2FA%CC%81nh%20Tra%CC%86ng%20Hoa%CC%80ng%20Anh%20Final%203.wav?alt=media&token=d40df454-4691-4a05-836f-e8a05f94fe78"
     },
     {
-      "audioId": 2,
+      "id": 2,
       "audioName": "Hơn em chỗ nào",
       "albums": "Tuyển tập những ca khúc cover bởi Nhân Tic",
       "artist": "Nhân Tic",
@@ -21,7 +21,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2FHo%CC%9Bn%20em%20cho%CC%82%CC%83%20na%CC%80o%20Final%20Final%202.mp3?alt=media&token=74863189-c544-4e19-9527-4f518948ebbf"
     },
     {
-      "audioId": 3,
+      "id": 3,
       "audioName": "Bước qua nhau",
       "albums": "Tuyển tập những ca khúc cover bởi Nhân Tic",
       "artist": "Nhân Tic",
@@ -31,7 +31,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Fimg%2Fimg%205.jpeg?alt=media&token=a8c1dbce-fc28-4bff-b515-ba68af7617eb"
     },
     {
-      "audioId": 4,
+      "id": 4,
       "audioName": "Tình đầu",
       "albums": "Tuyển tập những ca khúc cover bởi Nhân Tic",
       "artist": "Nhân Tic",
@@ -41,7 +41,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2FTi%CC%80nh%20%C4%91a%CC%82%CC%80u%20Final%202.wav?alt=media&token=da8ebad1-260e-4fd7-ada9-6aa6fed687e0"
     },
     {
-      "audioId": 5,
+      "id": 5,
       "audioName": "Điều cha chưa nói",
       "albums": "Tuyển tập những ca khúc cover bởi Nhân Tic",
       "artist": "Nhân Tic",
@@ -51,7 +51,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Faudio%2F%C4%91ie%CC%82%CC%80u%20cha%20chu%CC%9Ba%20no%CC%81i%20final.wav?alt=media&token=126b1cfe-e406-43f5-9865-505a1d78a153"
     },
     {
-      "audioId": 6,
+      "id": 6,
       "audioName": "Mưa trên cuộc tình",
       "albums": "Danh sách phát của Tùng Acoustic",
       "artist": "Tùng Acoustic",
@@ -61,7 +61,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FT%C3%B9ng%20Acoustic%2Faudio%2FMu%CC%9Ba%20Tre%CC%82n%20Cuo%CC%A3%CC%82c%20Ti%CC%80nh.mp3?alt=media&token=f1eb9b6e-5b23-4f9a-a620-f920b90511d3"
     },
     {
-      "audioId": 7,
+      "id": 7,
       "audioName": "Tình Đơn Phương",
       "albums": "Danh sách phát của Tùng Acoustic",
       "artist": "Tùng Acoustic",
@@ -71,7 +71,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FT%C3%B9ng%20Acoustic%2Faudio%2FTi%CC%80nh%20%C4%90o%CC%9Bn%20Phu%CC%9Bo%CC%9Bng%20with%20Intro.wav?alt=media&token=58f26433-cf1f-4763-9ebf-bf6223dcdb97"
     },
     {
-      "audioId": 8,
+      "id": 8,
       "audioName": "Trái Đất Tròn",
       "albums": "Danh sách phát của Tùng Acoustic",
       "artist": "Tùng Acoustic",
@@ -81,7 +81,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FT%C3%B9ng%20Acoustic%2Faudio%2Fy2mate.com%20-%20TRA%CC%81I%20%C4%90A%CC%82%CC%81T%20TRO%CC%80N%20Cover%20%20T%20N%20K%20V%20L_320kbps.mp3?alt=media&token=97f8e6aa-f19b-4d5d-9e1f-11f0bc4653b8"
     },
     {
-      "audioId": 9,
+      "id": 9,
       "audioName": "Thiên Đường Vắng Em",
       "albums": "Danh sách phát của Tùng Acoustic",
       "artist": "Tùng Acoustic",
@@ -91,7 +91,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FT%C3%B9ng%20Acoustic%2Faudio%2Fy2mate.com%20-%20Thie%CC%82n%20%C4%90u%CC%9Bo%CC%9B%CC%80ng%20Va%CC%86%CC%81ng%20Em%20%20%C4%90a%CC%86ng%20Kho%CC%82i%20%20%20Xua%CC%82n%20So%CC%9Bn%20ft%20Tu%CC%80ng%20Acoustic%20%20Acoustic%20Cover%20_320kbps.mp3?alt=media&token=079b4c46-db4b-4843-b414-8ffc84868c32"
     },
     {
-      "audioId": 10,
+      "id": 10,
       "audioName": "Xin Anh Đừng",
       "albums": "Danh sách phát của Tùng Acoustic",
       "artist": "Tùng Acoustic",
@@ -101,7 +101,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FT%C3%B9ng%20Acoustic%2Faudio%2Fy2mate.com%20-%20Xin%20Anh%20%C4%90u%CC%9B%CC%80ng%20%20%C4%90o%CC%82ng%20Nhi%20%20Tu%CC%80ng%20Ti%CC%81c%20ft%20Du%CC%9Bo%CC%9Bng%20Thu%CC%80y%20Nga%CC%82n%20%20Acoustic%20Cover%20_320kbps.mp3?alt=media&token=a41c96dc-a0b1-41f3-91c5-fe92229a6c80"
     },
     {
-      "audioId": 11,
+      "id": 11,
       "audioName": "Anh nhớ ra",
       "albums": "Danh sách phát của Vũ.",
       "artist": "Vũ.",
@@ -111,7 +111,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FV%C5%A9.%2Faudio%2Fy2mate.com%20-%20ANH%20NHO%CC%9B%CC%81%20RA%20%20Vu%CC%83%20Feat%20Trang%20%20Official%20Audio_320kbps.mp3?alt=media&token=06d992d7-7c7b-4323-a8fa-ca213ee51317"
     },
     {
-      "audioId": 12,
+      "id": 12,
       "audioName": "Bước qua mùa cô đơn",
       "albums": "Danh sách phát của Vũ.",
       "artist": "Vũ.",
@@ -121,7 +121,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FV%C5%A9.%2Faudio%2Fy2mate.com%20-%20BU%CC%9BO%CC%9B%CC%81C%20QUA%20MU%CC%80A%20CO%CC%82%20%C4%90O%CC%9BN%20%20Vu%CC%83%20Official%20MV_320kbps.mp3?alt=media&token=d89c813e-56b1-4dd7-a98b-d1a4df257953"
     },
     {
-      "audioId": 13,
+      "id": 13,
       "audioName": "Lạ lùng",
       "albums": "Danh sách phát của Vũ.",
       "artist": "Vũ.",
@@ -131,7 +131,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FV%C5%A9.%2Faudio%2Fy2mate.com%20-%20LA%CC%A3%20LU%CC%80NG%20%20Vu%CC%83%20Original_320kbps.mp3?alt=media&token=9d41f290-6cda-4099-b370-1fe985f70560"
     },
     {
-      "audioId": 14,
+      "id": 14,
       "audioName": "Đông kiếm em",
       "albums": "Danh sách phát của Vũ.",
       "artist": "Vũ.",
@@ -141,7 +141,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FV%C5%A9.%2Faudio%2Fy2mate.com%20-%20%C4%90O%CC%82NG%20KIE%CC%82%CC%81M%20EM%20%20Vu%CC%83%20Original_320kbps.mp3?alt=media&token=ba46f4f3-e756-4cca-aa1f-c2593f929377"
     },
     {
-      "audioId": 15,
+      "id": 15,
       "audioName": "Đợi",
       "albums": "Danh sách phát của Vũ.",
       "artist": "Vũ.",
@@ -151,7 +151,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FV%C5%A9.%2Faudio%2Fy2mate.com%20-%20%C4%90O%CC%9B%CC%A3I%20%20VU%CC%83%20ORIGINAL_320kbps.mp3?alt=media&token=9fe5c160-54cf-4921-8a7f-3bbb9b975f10"
     },
     {
-      "audioId": 16,
+      "id": 16,
       "audioName": "Lời xin lỗi vụng về",
       "albums": "Danh sách phát của Quân AP",
       "artist": "Quân AP",
@@ -161,7 +161,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FQu%C3%A2n%20AP%2Faudio%2Fy2mate.com%20-%20LO%CC%9B%CC%80I%20XIN%20LO%CC%82%CC%83I%20VU%CC%A3NG%20VE%CC%82%CC%80%20%20QUA%CC%82N%20AP%20%20OFFICIAL%20MV.mp3?alt=media&token=ec019c34-6586-4664-97f0-c4fd64ee9689"
     },
     {
-      "audioId": 17,
+      "id": 17,
       "audioName": "Bông hoa đẹp nhất",
       "albums": "Danh sách phát của Quân AP",
       "artist": "Quân AP",
@@ -171,7 +171,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FQu%C3%A2n%20AP%2Faudio%2Fy2mate.com%20-%20QUA%CC%82N%20AP%20%20BO%CC%82NG%20HOA%20%C4%90E%CC%A3P%20NHA%CC%82%CC%81T%20%20OFFICIAL%20MUSIC%20VIDEO.mp3?alt=media&token=e02b7bf9-3b1f-4958-a103-20f583bb7e46"
     },
     {
-      "audioId": 18,
+      "id": 18,
       "audioName": "Còn gì đau hơn chữ đã từng",
       "albums": "Danh sách phát của Quân AP",
       "artist": "Quân AP",
@@ -181,7 +181,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FQu%C3%A2n%20AP%2Faudio%2Fy2mate.com%20-%20QUA%CC%82N%20AP%20%20Co%CC%80n%20Gi%CC%80%20%C4%90au%20Ho%CC%9Bn%20Chu%CC%9B%CC%83%20%C4%90a%CC%83%20Tu%CC%9B%CC%80ng%20%20Lyrics%20Audio.mp3?alt=media&token=d3fce928-68dc-4e05-bea4-a7d22aab6594"
     },
     {
-      "audioId": 19,
+      "id": 19,
       "audioName": "Ai là người thương em",
       "albums": "Danh sách phát của Quân AP",
       "artist": "Quân AP",
@@ -191,7 +191,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FQu%C3%A2n%20AP%2Faudio%2Fy2mate.com%20-%20Qua%CC%82n%20AP%20%20Ai%20La%CC%80%20Ngu%CC%9Bo%CC%9B%CC%80i%20Thu%CC%9Bo%CC%9Bng%20Em%20%20Official%20Music%20Video.mp3?alt=media&token=d8e6fa50-bc80-4c52-936d-e8d5adc0a7fb"
     },
     {
-      "audioId": 20,
+      "id": 20,
       "audioName": "Ở Trọ",
       "albums": "Danh sách phát của Hà Lê",
       "artist": "Hà Lê",
@@ -201,7 +201,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FH%C3%A0%20L%C3%AA%2Faudio%2Fy2mate.com%20-%20O%CC%9B%CC%89%20Tro%CC%A3%20Remake%20%20Ha%CC%80%20Le%CC%82%20%20Official%20Audio.mp3?alt=media&token=d94960fb-ca08-40ac-ad52-e3a66637c65d"
     },
     {
-      "audioId": 21,
+      "id": 21,
       "audioName": "Diễm Xưa",
       "albums": "Danh sách phát của Hà Lê",
       "artist": "Hà Lê",
@@ -211,7 +211,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FH%C3%A0%20L%C3%AA%2Faudio%2Fy2mate.com%20-%20DIE%CC%82%CC%83M%20XU%CC%9BA%20%20HA%CC%80%20LE%CC%82%20%20OFFICIAL%20MUSIC%20VIDEO.mp3?alt=media&token=73f967d2-bf4e-4ff8-9ef7-54a6906c8be3"
     },
     {
-      "audioId": 22,
+      "id": 22,
       "audioName": "Biển nhớ",
       "albums": "Danh sách phát của Hà Lê",
       "artist": "Hà Lê",
@@ -221,7 +221,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FH%C3%A0%20L%C3%AA%2Faudio%2Fy2mate.com%20-%20HA%CC%80%20LE%CC%82%20%20BIE%CC%82%CC%89N%20NHO%CC%9B%CC%81%20%20OFFICIAL%20MV.mp3?alt=media&token=fdc09cd5-3f30-4dd2-99cb-8b498a96ea40"
     },
     {
-      "audioId": 23,
+      "id": 23,
       "audioName": "Mưa Hồng",
       "albums": "Danh sách phát của Hà Lê",
       "artist": "Hà Lê",
@@ -231,7 +231,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FH%C3%A0%20L%C3%AA%2Faudio%2Fy2mate.com%20-%20HA%CC%80%20LE%CC%82%20%20MU%CC%9BA%20HO%CC%82%CC%80NG%20Official%20MV%20ft%20BU%CC%80I%20LAN%20HU%CC%9BO%CC%9BNG.mp3?alt=media&token=a0f00d28-df36-434a-bfd9-1ef5e7f47998"
     },
     {
-      "audioId": 24,
+      "id": 24,
       "audioName": "Một ngàn nỗi đau",
       "albums": "Danh sách có thể bạn sẽ thích",
       "artist": "Trung Quân Idol",
@@ -241,7 +241,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20Mo%CC%A3%CC%82t%20Nga%CC%80n%20No%CC%82%CC%83i%20%C4%90au%20%20TRUNG%20QUA%CC%82N%20live%20at%20souloftheforest%20%20St%20Hu%CC%9B%CC%81a%20Kim%20Tuye%CC%82%CC%80n.mp3?alt=media&token=391e9181-c311-4f56-b86e-ff17d330713c"
     },
     {
-      "audioId": 25,
+      "id": 25,
       "audioName": "Mashup Đáp Án Cuối Cùng - Anh Chưa Thương Em Đến Vậy Đâu - Thu Cuối",
       "albums": "Danh sách có thể bạn sẽ thích",
       "artist": "Quân AP ft. Myra Trần",
@@ -251,7 +251,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20Qua%CC%82n%20AP%20Myra%20Tra%CC%82%CC%80n%20live%20Mashup%20%C4%90a%CC%81p%20A%CC%81n%20Cuo%CC%82%CC%81i%20Cu%CC%80ng%20Anh%20Chu%CC%9Ba%20Thu%CC%9Bo%CC%9Bng%20Em%20%C4%90e%CC%82%CC%81n%20Va%CC%A3%CC%82y%20%C4%90a%CC%82uThu%20Cuo%CC%82%CC%81i%20So%CC%81ng%2023.mp3?alt=media&token=b211f13f-e1a2-40fd-a3a9-bb925eaf262c"
     },
     {
-      "audioId": 26,
+      "id": 26,
       "audioName": "Cafe Thuốc Lá Những Ngày Vui",
       "albums": "Danh sách có thể bạn sẽ thích",
       "artist": "Thế Bảo",
@@ -261,7 +261,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20The%CC%82%CC%81%20Ba%CC%89o%20%20Cafe%20Thuo%CC%82%CC%81c%20La%CC%81%20%20Nhu%CC%9B%CC%83ng%20Nga%CC%80y%20Vui%20Official%20Lyric%20Video.mp3?alt=media&token=1fef3d97-f2dd-45e3-a2d3-f4bc2f10152b"
     },
     {
-      "audioId": 27,
+      "id": 27,
       "audioName": "Vẫn Nhớ",
       "albums": "Danh sách có thể bạn sẽ thích",
       "artist": "Soobin Hoàng Sơn",
@@ -271,7 +271,7 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20Va%CC%82%CC%83n%20Nho%CC%9B%CC%81%20%20Soobin%20Hoa%CC%80ng%20So%CC%9Bn%20%20Cover.mp3?alt=media&token=61d43c28-e21d-419f-b986-16feae60a2b7"
     },
     {
-      "audioId": 28,
+      "id": 28,
       "audioName": "3107",
       "albums": "Danh sách có thể bạn sẽ thích",
       "artist": "Wn 3107 ft. Nâu Dươngg",
@@ -279,13 +279,22 @@
       "date": "27/02/2023",
       "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Fimg%2F3107.jpeg?alt=media&token=493bab05-818d-4aec-9ccb-18da6f0fb1a0",
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20Wn%20%203107%20full%20album%20ft%20%20titie%20Na%CC%82u%20Du%CC%9Bo%CC%9Bngg%20.mp3?alt=media&token=744d0155-921d-4990-99d1-1e1f83efbb20"
+    },
+    {
+      "audioName": "Khoa pug",
+      "albums": "bdsajhfbjasb",
+      "date": "jhsdabfjhasbf",
+      "artist": "dsahjfbjhasbf",
+      "id": 29,
+      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/images%2FLWScreenShot%202023-02-28%20at%2020.40.52.png?alt=media&token=fd6313ab-66de-464d-89cd-f22fc63126ad",
+      "audioUrl": []
     }
   ],
   "users": [
     {
+      "email": "admin@gmail.com",
+      "password": "$2a$10$XKuUkxIF8YzRKaBUufSgJeSIyt5OgEAotry3etVLuEstzfaXnTs/q",
       "id": 0,
-      "email": "admin@xtic.com",
-      "password": "1234567",
       "name": "admin",
       "birthday": "09/03/1998",
       "gender": "male",
@@ -330,7 +339,7 @@
       "artist": "Nhạc nhà làm!",
       "imgSrc": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Fimg%2Fimg%203.jpeg?alt=media&token=e1b0fd08-4c74-4fa1-bafa-2dd605a95684",
       "listTracks": [
-        { 
+        {
           "audioId": "track01",
           "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FNh%C3%A2n%20Tic%2Fimg%2Fimg%203.jpeg?alt=media&token=e1b0fd08-4c74-4fa1-bafa-2dd605a95684",
           "audioName": "Điều cha chưa nói",
@@ -1039,7 +1048,7 @@
     {
       "id": 10,
       "name": "Danh sách phát của Hà Lê",
-      "artist":"Hà Lê",
+      "artist": "Hà Lê",
       "imgSrc": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FH%C3%A0%20L%C3%AA%2Fimg%2FHa-Le-jpeg-4643-1617699562.jpeg?alt=media&token=c7e8d25f-378e-4127-a8ab-d7c8cf46218e",
       "listTracks": [
         {

@@ -1,6 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { actDelTrack, actSelectTrack } from '../../../redux/actions'
 
 export default function ListTracks(props) {
+    const dispatch = useDispatch()
+    const { listTracksAdmin } = props
+
+    const handleDelete = (id) => {
+        dispatch(actDelTrack(id))
+    }
+
+    const handleEdit = (selectTrack) => {
+        props.setOpenEditModal(true)
+        dispatch(actSelectTrack(selectTrack))
+    }
+
+    const elementItemTrack = listTracksAdmin.map((item, index) => {
+        return <tr key={item.id} className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
+            <td className='text-center'>{index + 1}</td>
+            <td className='flex w-full gap-3 items-center py-2'>
+                <div className='w-10 h-10'><img className='block w-full h-full object-cover' src={item.audioImg} alt="" /></div>
+                <div className='w-full overflow-hidden'><p className='text-base w-full font-CircularBook text-[#fff] truncate'>{item.audioName}</p><p className='text-sm'>{item.artist}</p></div>
+            </td>
+            <td><div className='overflow-hidden truncate'>{item.albums}</div></td>
+            <td>{item.date}</td>
+            <td>
+                <div className='flex'>
+                    <button onClick={() => handleEdit(item)} className='bg-primaryColor rounded-[500px] hover:scale-105 text-[#000] mr-2 px-4 '>Edit</button>
+                    <button onClick={() => handleDelete(item.id)} className='bg-none hover:underline'>Delete</button>
+                </div>
+            </td>
+        </tr>
+    })
     return (
         <div className='section-playlist-list-song bg-[#121212]'>
             <div className='section-play-list-control flex justify-between gap-8 px-8 py-6 items-center'>
@@ -18,97 +49,18 @@ export default function ListTracks(props) {
                 </div>
             </div>
             <div className='section-playlist-list px-8'>
-                <table className='table-fixed w-full text-[#B3B3B3] font-CircularLight text-sm'>
+                <table className='table-fixed w-full text-[#B3B3B3] font-CircularLight border-spacing-2 text-sm'>
                     <thead className='text-left'>
                         <tr className='border-b border-[hsla(0,0%,100%,.1)]'>
                             <th width="5%" className='text-center'>#</th>
                             <th width="35%" className='py-2'>Title</th>
-                            <th wdth="20%" className='py-2'>Album</th>
-                            <th className='py-2'>Date Added</th>
-                            <th width="5%" className='py-2'><i className="fa-regular fa-clock"></i></th>
+                            <th wdth="5%" className='py-2'>Album</th>
+                            <th width="10%" className='py-2'>Date Added</th>
+                            <th width="15%" className='py-2'><i className="fa-regular fa-clock"></i></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
-                            <td className='text-center'>1</td>
-                            <td className='flex gap-2 items-center py-2'>
-                                <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
-                                <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
-                            </td>
-                            <td>Tuyển tập của Tùng Acoustic</td>
-                            <td></td>
-                            <td>4:42</td>
-                        </tr>
-                        <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
-                            <td className='text-center'>1</td>
-                            <td className='flex gap-2 items-center py-2'>
-                                <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
-                                <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
-                            </td>
-                            <td>Tuyển tập của Tùng Acoustic</td>
-                            <td></td>
-                            <td>4:42</td>
-                        </tr>
-                        <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
-                            <td className='text-center'>1</td>
-                            <td className='flex gap-2 items-center py-2'>
-                                <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
-                                <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
-                            </td>
-                            <td>Tuyển tập của Tùng Acoustic</td>
-                            <td></td>
-                            <td>4:42</td>
-                        </tr>
-                        <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
-                            <td className='text-center'>1</td>
-                            <td className='flex gap-2 items-center py-2'>
-                                <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
-                                <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
-                            </td>
-                            <td>Tuyển tập của Tùng Acoustic</td>
-                            <td></td>
-                            <td>4:42</td>
-                        </tr>
-                        <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
-                            <td className='text-center'>1</td>
-                            <td className='flex gap-2 items-center py-2'>
-                                <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
-                                <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
-                            </td>
-                            <td>Tuyển tập của Tùng Acoustic</td>
-                            <td></td>
-                            <td>4:42</td>
-                        </tr>
-                        <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
-                            <td className='text-center'>1</td>
-                            <td className='flex gap-2 items-center py-2'>
-                                <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
-                                <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
-                            </td>
-                            <td>Tuyển tập của Tùng Acoustic</td>
-                            <td></td>
-                            <td>4:42</td>
-                        </tr>
-                        <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
-                            <td className='text-center'>1</td>
-                            <td className='flex gap-2 items-center py-2'>
-                                <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
-                                <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
-                            </td>
-                            <td>Tuyển tập của Tùng Acoustic</td>
-                            <td></td>
-                            <td>4:42</td>
-                        </tr>
-                        <tr className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
-                            <td className='text-center'>1</td>
-                            <td className='flex gap-2 items-center py-2'>
-                                <div><img className='w-10 h-10' src="https://i.scdn.co/image/ab67616d000048513a9bb590e0c50a8774333783" alt="" /></div>
-                                <div><p className='text-base font-CircularBook text-[#fff]'>Tình Đơn Phương</p><p className='text-sm'>Tùng Acoustic</p></div>
-                            </td>
-                            <td>Tuyển tập của Tùng Acoustic</td>
-                            <td></td>
-                            <td>4:42</td>
-                        </tr>
+                        {elementItemTrack}
                     </tbody>
                 </table>
             </div>
