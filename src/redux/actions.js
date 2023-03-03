@@ -75,6 +75,7 @@ export const recieveListTracksAdmin = (data) => {
 }
 
 export const postNewTrackAudio = (data) => {
+    console.log(data);
     return {
         type: actionType.POST_NEW_TRACK,
         payload: data
@@ -82,6 +83,7 @@ export const postNewTrackAudio = (data) => {
 }
 
 export const actDelTrack = (data) => {
+    console.log(data);
     return {
         type: actionType.DEL_TRACK,
         payload: data

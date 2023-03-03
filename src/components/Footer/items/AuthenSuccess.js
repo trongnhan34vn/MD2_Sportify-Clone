@@ -237,11 +237,12 @@ const AuthenSuccess = () => {
 
     const getBackgroundSize = () => {
         return {
-            backgroundSize: `${(getVol * 100) / 100}% 100%`
+            backgroundSize: `${(audioVol * 100) / 100}% 100%`
         }
     }
     useEffect(() => {
         audioRef.current.volume = getVol / 100
+        setAudioVol(getVol ? 100 : getVol)
     }, [])
     // Handle Volumn
     return (
@@ -342,7 +343,7 @@ const AuthenSuccess = () => {
                                 {elementIconMute}
                             </button>
                             <div className='h-3 flex items-center relative group'>
-                                <input style={getBackgroundSize()} onChange={handleChangeVolume} value={audioVol} className='block h-1 rounded' max={100} min={0} type="range" />
+                                <input style={getBackgroundSize()} onChange={handleChangeVolume} value={getVol === null ? 100 : getVol} className='block h-1 rounded' max={100} min={0} type="range" />
                             </div>
                         </div>
                     </div>

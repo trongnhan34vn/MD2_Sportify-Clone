@@ -57,8 +57,9 @@ export default function Login() {
         }
     }
 
+    const [checkAPI, setCheckAPI] = useState(false)
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
         let checkStat = false
         for (const key in inputValue) {
@@ -71,32 +72,36 @@ export default function Login() {
                 email: inputValue.email.value,
                 password: inputValue.password.value
             }
-          dispatch(actLogin(checkUser))
+            dispatch(actLogin(checkUser))
+            setTimeout(() => {
+                setCheckAPI(true)
+            }, 1500)
         } else {
             setToggleModal(true)
             setTimeout(() => {
                 setToggleModal(false)
             }, 4000)
         }
-        
+
     }
 
     useEffect(() => {
-        if (resultLogin.result.action === "Success") {
-            navigate("/")
-            localStorage.setItem("currentUser", JSON.stringify(resultLogin.result.currentUser))
+        if(checkAPI) {
+            if (resultLogin.result.action === "Success") {
+                navigate("/")
+                localStorage.setItem("currentUser", JSON.stringify(resultLogin.result.currentUser))
+            }
+            if (resultLogin.result.action === "Failed") {
+                setToggleModal(true)
+                setTimeout(() => {
+                    setToggleModal(false)
+                }, 4000)
+            }
         }
-        if (resultLogin.result.action === "Failed") {
-            setToggleModal(true)
-            setTimeout(() => {
-                setToggleModal(false)
-            }, 4000)
-        }
-    }, [resultLogin])
+    }, [checkAPI])
 
     let user = JSON.parse(localStorage.getItem("currentUser"))
 
-    const [checkAPI, setCheckAPI] = useState(false)
 
     // useEffect(() => {
 

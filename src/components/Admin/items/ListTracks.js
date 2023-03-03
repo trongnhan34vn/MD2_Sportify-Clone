@@ -11,6 +11,7 @@ export default function ListTracks(props) {
     const { listTracksAdmin } = props
 
     const handleDelete = (id) => {
+        console.log(id);
         dispatch(actDelTrack(id))
     }
 
@@ -24,9 +25,8 @@ export default function ListTracks(props) {
     }
 
     const searchResult = useSelector(selectTrackSelector)
-    console.log(searchResult);
     const a = (searchResult.search.length>0) ? searchResult.search : listTracksAdmin
-
+    console.log(listTracksAdmin);
     const elementItemTrack = a.map((item, index) => {
         return <tr key={item.id} className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
             <td className='text-center'>{index + 1}</td>

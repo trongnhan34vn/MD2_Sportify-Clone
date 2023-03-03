@@ -7,6 +7,7 @@ import { iconPauseTrackBtnFooter, iconPlayTrackBtnFooter, iconPauseTrackItem, ic
 import Navbar from '../Navbar/Navbar';
 import { actPlayAudio, actToggleNav, resetCurrentTime, setIsPlay } from '../../redux/actions';
 import { controlAudio, toggleSelector } from '../../redux/selector';
+import LoginModal from '../../Modal/LoginModal';
 
 export default function PlayList() {
     const playlist = JSON.parse(localStorage.getItem("playlist"))
@@ -20,6 +21,7 @@ export default function PlayList() {
     // Play Audio
     // const [isPlaying, setIsPlaying] = useState(isPlayAudio)
     const [changeStateButton, setChangeStateButton] = useState()
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'))
 
     const handleReset = useRef(0)
     const handlePlay = () => {
@@ -38,6 +40,9 @@ export default function PlayList() {
                 setTimeout(() => { dispatch(resetCurrentTime(false)) }, 100)
             }
             dispatch(actPlayAudio(playlist.idTrackList, listTrack.listTracks))
+        }
+        if(currentUser === null) {
+            setOnModal(true)
         }
     }
     // Nav Toggle
@@ -84,11 +89,12 @@ export default function PlayList() {
             </td>
             <td className='overflow-hidden truncate'>{item.albums}</td>
             <td></td>
-            <td>4:42</td>
+            <td></td>
         </tr>
     })
+    const [onModal, setOnModal] = useState(false)
 
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'))
+    
     return (
         <div onClick={toggle ? handleMenuToggle : undefined}>
             {/* Direction Menu */}
@@ -138,6 +144,7 @@ export default function PlayList() {
             </section>
             {/* Content */}
             {/* Footer */}
+            <LoginModal onModal={onModal} />
             {/* Footer */}
         </div>
     )

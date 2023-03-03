@@ -231,16 +231,6 @@
       "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FH%C3%A0%20L%C3%AA%2Faudio%2Fy2mate.com%20-%20HA%CC%80%20LE%CC%82%20%20MU%CC%9BA%20HO%CC%82%CC%80NG%20Official%20MV%20ft%20BU%CC%80I%20LAN%20HU%CC%9BO%CC%9BNG.mp3?alt=media&token=a0f00d28-df36-434a-bfd9-1ef5e7f47998"
     },
     {
-      "id": 24,
-      "audioName": "Một ngàn nỗi đau",
-      "albums": "Danh sách có thể bạn sẽ thích",
-      "artist": "Trung Quân Idol",
-      "type": "Pop Ballad, Cover",
-      "date": "27/02/2023",
-      "audioImg": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Fimg%2Ftrung-quan-idol-img.jpeg?alt=media&token=21a1c6aa-ee46-4320-b7cd-20b2692fb7bd",
-      "audioUrl": "https://firebasestorage.googleapis.com/v0/b/spotify-clone-2754a.appspot.com/o/Albums%2FKh%C3%A1c%2Faudio%2Fy2mate.com%20-%20Mo%CC%A3%CC%82t%20Nga%CC%80n%20No%CC%82%CC%83i%20%C4%90au%20%20TRUNG%20QUA%CC%82N%20live%20at%20souloftheforest%20%20St%20Hu%CC%9B%CC%81a%20Kim%20Tuye%CC%82%CC%80n.mp3?alt=media&token=391e9181-c311-4f56-b86e-ff17d330713c"
-    },
-    {
       "id": 25,
       "audioName": "Mashup Đáp Án Cuối Cùng - Anh Chưa Thương Em Đến Vậy Đâu - Thu Cuối",
       "albums": "Danh sách có thể bạn sẽ thích",
@@ -321,6 +311,26 @@
       "permission": "user",
       "status": "active",
       "id": 3
+    },
+    {
+      "email": "trongnhan15vn@gmail.com",
+      "password": "$2a$10$skzNaSJwwoPP5UZiFGPKfOnufrdVVrdDyZxvqVNLmYi0t7ZGMxfsW",
+      "name": "Nhân",
+      "gender": "false",
+      "birthday": "09/03/2000",
+      "permission": "user",
+      "status": "active",
+      "id": 4
+    },
+    {
+      "email": "trongnhan56@gmail.com",
+      "password": "$2a$10$I/5Kl2uUkTS9ol4R/UdRruSXFwPybNX.2JmYzCjVKbLdb7L/cf/Ai",
+      "name": "",
+      "gender": "true",
+      "birthday": "//",
+      "permission": "user",
+      "status": "active",
+      "id": 5
     }
   ],
   "playlists": [

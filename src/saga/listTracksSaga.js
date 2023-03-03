@@ -12,11 +12,12 @@ export function* getListTracks() {
 }
 
 export function* postNewTrack(action) {
+    console.log(action);
     try {
         yield call(listTracks.POST_NEW_TRACK, action.payload)
         yield getListTracks()
     } catch (error) {
-
+        console.log(error);
     }
 }
 
@@ -41,7 +42,6 @@ export function* updateTrack(action) {
 export function* searchTrack(action) {
     try {
         let searchResult = yield call(listTracks.SEARCH_TRACK, action.payload)
-        console.log(searchResult);
         yield put(actions.recieveSearchTrack(searchResult))
     } catch (error) {
         console.log(error);

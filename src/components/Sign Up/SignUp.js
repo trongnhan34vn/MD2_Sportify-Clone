@@ -83,14 +83,11 @@ export default function SignUp() {
 
     const signInResult = useSelector(recieveData)
 
+    const [checkAPI, setCheckAPI] = useState(false)
+
     const handleSubmit = (event) => {
         event.preventDefault()
         let checkStat = false
-        setToggleModal(true)
-        setInterval(() => {
-            setToggleModal(false)
-        }, 4000)
-
         for (const key in inputVal) {
             if (inputVal[key].status) {
                 checkStat = true
@@ -98,7 +95,7 @@ export default function SignUp() {
         }
         if (checkStat === false) {
             setToggleModal(true)
-            setInterval(() => {
+            setTimeout(() => {
                 setToggleModal(false)
             }, 4000)
         } else {
@@ -112,22 +109,27 @@ export default function SignUp() {
                 status: "active"
             }
             dispatch(actPostUser(newStudent))
+            setTimeout(() => {
+                setCheckAPI(true)
+            }, 1500)
         }
     }
 
     useEffect(() => {
-        if (signInResult.result === "Success") {
-            // chuyển trang login
-            navigate("/login")
+        if (checkAPI) {
+            if (signInResult.result === "Success") {
+                // chuyển trang login
+                navigate("/login")
+            }
+            if (signInResult.result === "Failed") {
+                //  hiện alert
+                setToggleModal(true)
+                setInterval(() => {
+                    setToggleModal(false)
+                }, 4000)
+            }
         }
-        if (signInResult.result === "Failed") {
-            //  hiện alert
-            setToggleModal(true)
-            setInterval(() => {
-                setToggleModal(false)
-            }, 4000)
-        }
-    }, [signInResult.result])
+    }, [checkAPI])
 
     return (
         <div>

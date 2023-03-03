@@ -6,7 +6,7 @@ export const GET_LISTTRACKS = async () => {
 }
 
 export const POST_NEW_TRACK = async (newTrack) => {
-
+    console.log(newTrack);
     await instance.post("listTracks", newTrack)
 }
 

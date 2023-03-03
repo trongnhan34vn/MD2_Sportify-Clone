@@ -5,6 +5,7 @@ import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
 import { useDispatch, useSelector } from 'react-redux';
 import { postNewTrackAudio } from '../../../redux/actions';
 import { listTracksAdmin } from '../../../redux/selector';
+import AlertModal from '../../../Modal/AlertModal';
 
 export default function FormUpload(props) {
     const dispatch = useDispatch()
@@ -46,7 +47,7 @@ export default function FormUpload(props) {
         });
     };
     console.log(audioUrls);
-    
+
 
     // Upload Firebase
 
@@ -80,12 +81,25 @@ export default function FormUpload(props) {
         let value = e.target.value;
         setInputValue({ ...inputValue, [key]: value })
     }
-
+    const [page, setPage] = useState("")
     const handleSubmit = (e) => {
         e.preventDefault()
+        let newTrack = { ...inputValue, audioImg: imageUrls, audioUrl: audioUrls }
         if (validate()) {
-            let newTrack = { ...inputValue, id: listTracksAudio.length + 1, audioImg: imageUrls, audioUrl: audioUrls }
+            setPage("")
             dispatch(postNewTrackAudio(newTrack))
+            props.setToggleModal(true)
+            setTimeout(() => {
+                props.setToggleModal(false)
+                setInputValue({
+                    audioName: "",
+                    albums: "",
+                    date: "",
+                    artist: ""
+                })
+            }, 3000)
+        } else {
+            setPage("fail-upload")
         }
     }
 
@@ -94,7 +108,7 @@ export default function FormUpload(props) {
             <div className='w-3/4 flex gap-16 m-auto'>
                 <div className='banner-img w-48 flex flex-col text-center'>
                     <div className='w-48 h-48 border'>
-                        <img className='w-48 h-full object-cover shadow-[0 4px 60px rgb(0 0 0 / 50%)]' src={imageUrls.length === 0 ? ""  : imageUrls} alt="" />
+                        <img className='w-48 h-full object-cover shadow-[0 4px 60px rgb(0 0 0 / 50%)]' src={imageUrls.length === 0 ? "" : imageUrls} alt="" />
                     </div>
                     <div className='mt-2 overflow-hidden'>
                         <label className=' text-[#fff] font-CircularLight text-sm hover:underline cursor-pointer' htmlFor='upload-photo'>Choose File</label>
@@ -106,21 +120,21 @@ export default function FormUpload(props) {
                         <div className='w-full flex justify-between gap-10 mb-4'>
                             <div className='flex-1'>
                                 <label className='pl-1 font-CircularBook block mb-2'>Tên bài hát :</label>
-                                <input name='audioName' onChange={handleChange} className='font-CircularLight border-[#fff] w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' placeholder='Nhập tên bài hát...' type="text" />
+                                <input value={inputValue.audioName} name='audioName' onChange={handleChange} className='font-CircularLight border-[#fff] w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' placeholder='Nhập tên bài hát...' type="text" />
                             </div>
                             <div className='flex-1'>
                                 <label className='pl-1 font-CircularBook block mb-2'>Nghệ sĩ :</label>
-                                <input name='artist' onChange={handleChange} className='font-CircularLight border-[#fff] w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' placeholder='Nhập tên nghệ sĩ...' type="text" />
+                                <input value={inputValue.artist} name='artist' onChange={handleChange} className='font-CircularLight border-[#fff] w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' placeholder='Nhập tên nghệ sĩ...' type="text" />
                             </div>
                         </div>
                         <div className='w-full flex justify-between gap-10 mb-4'>
                             <div className='flex-1'>
                                 <label className='pl-1 font-CircularBook block mb-2'>Album :</label>
-                                <input name='albums' onChange={handleChange} className='font-CircularLight border-[#fff] w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' placeholder='Nhập tên album...' type="text" />
+                                <input value={inputValue.albums} name='albums' onChange={handleChange} className='font-CircularLight border-[#fff] w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' placeholder='Nhập tên album...' type="text" />
                             </div>
                             <div className='flex-1'>
                                 <label className='pl-1 font-CircularBook block mb-2'>Ngày đăng :</label>
-                                <input name='date' onChange={handleChange} className='font-CircularLight border-[#fff] w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' placeholder='Nhập ngày đăng...' type="text" />
+                                <input value={inputValue.date} name='date' onChange={handleChange} className='font-CircularLight border-[#fff] w-full bg-transparent border rounded-[500px] px-5 outline-none py-2' placeholder='Nhập ngày đăng...' type="text" />
                             </div>
                         </div>
                         <div className='flex justify-between gap-10'>
@@ -138,6 +152,7 @@ export default function FormUpload(props) {
                     </div>
                 </div>
             </div>
+            <AlertModal page={page}/>
         </div>
     )
 }

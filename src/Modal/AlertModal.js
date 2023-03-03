@@ -6,7 +6,7 @@ export default function AlertModal(props) {
         let result = "";
         switch (props.page) {
             case "admin":
-                return result = "Success!</b> This upload sucess!"
+                return result = "Success! This upload sucess!"
             case "sign-up":
                 return result = "Sign Up Fail! Please try again!"
             case "login":
@@ -15,6 +15,8 @@ export default function AlertModal(props) {
                 return result = "Sign Up Fail! Your email has already exist! Please try again!"
             case "login-failed":
                 return result = "Login Fail! Please check your email and password!"
+            case "fail-upload":
+                return result = "Upload Fail! Please try again!"
             default:
                 return;
         }
