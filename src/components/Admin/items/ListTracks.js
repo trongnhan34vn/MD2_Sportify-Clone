@@ -1,8 +1,12 @@
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { actDelTrack, actSelectTrack } from '../../../redux/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+import { actDelTrack, actSearchTrack, actSelectTrack } from '../../../redux/actions'
+import controlListTrackAdmin from '../../../redux/reducers/controlListTrackAdmin'
+import { selectTrackSelector } from '../../../redux/selector'
 
 export default function ListTracks(props) {
+    const location = useLocation()
     const dispatch = useDispatch()
     const { listTracksAdmin } = props
 
@@ -10,12 +14,20 @@ export default function ListTracks(props) {
         dispatch(actDelTrack(id))
     }
 
+    const handleSearch = (e) => {
+        dispatch(actSearchTrack(e.target.value))
+    }
+
     const handleEdit = (selectTrack) => {
         props.setOpenEditModal(true)
         dispatch(actSelectTrack(selectTrack))
     }
 
-    const elementItemTrack = listTracksAdmin.map((item, index) => {
+    const searchResult = useSelector(selectTrackSelector)
+    console.log(searchResult);
+    const a = (searchResult.search.length>0) ? searchResult.search : listTracksAdmin
+
+    const elementItemTrack = a.map((item, index) => {
         return <tr key={item.id} className='pt-8 hover:bg-[hsla(0,0%,100%,.1)]'>
             <td className='text-center'>{index + 1}</td>
             <td className='flex w-full gap-3 items-center py-2'>
@@ -44,7 +56,7 @@ export default function ListTracks(props) {
                     </svg>
                 </div>
                 <div className='flex items-center'>
-                    <input className='text-[#fff] font-CircularLight bg-transparent border rounded-tl-[500px] rounded-bl-[500px] px-5 outline-none py-2' type="text" />
+                    <input placeholder='Enter Audio Name...' onChange={handleSearch} className='text-[#fff] font-CircularLight bg-transparent border rounded-tl-[500px] rounded-bl-[500px] px-5 outline-none py-2' type="text" />
                     <div className='bg-primaryColor px-5 py-2 border border-primaryColor rounded-tr-[500px] rounded-br-[500px]'><i className="-ml-1 fa-solid fa-magnifying-glass text-[#fff]"></i></div>
                 </div>
             </div>

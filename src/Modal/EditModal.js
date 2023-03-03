@@ -10,6 +10,7 @@ import { actUpdateTrack } from '../redux/actions';
 export default function EditModal(props) {
     const dispatch = useDispatch()
     const selectTrack = useSelector(selectTrackSelector)
+    console.log(selectTrack);
     // Upload Firebase
     const [imageUploadModal, setImageUploadModal] = useState(null);
     const [imageUrlsModal, setImageUrlsModal] = useState([]);
@@ -37,7 +38,7 @@ export default function EditModal(props) {
     }, []);
 
     const uploadAudioFileModal = (e) => {
-        console.log(e.target.files[0]);
+
         setAudioUploadModal(e.target.files[0])
         let audio = e.target.files[0]
         const audioRef = ref(storage, `audios/${audio.name}`);
@@ -84,9 +85,11 @@ export default function EditModal(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        handleCloseModal()
-        let updateTrack = { ...inputValue,  audioImg: imageUrlsModal, audioUrl: audioUrlsModal }
-        dispatch(actUpdateTrack(updateTrack))
+        if (validate()) {
+            handleCloseModal()
+            let updateTrack = { ...inputValue, audioImg: imageUrlsModal, audioUrl: audioUrlsModal }
+            dispatch(actUpdateTrack(updateTrack))
+        }
     }
 
     const handleCloseModal = () => {
@@ -107,11 +110,11 @@ export default function EditModal(props) {
 
     }, [selectTrack.selectTrack])
 
-    const editModal = (props.openEditModal) ? "visible" : "invisible"
+    const editModal = (props.openEditModal) ? "opacity-100 z-[100]" : "-translate-y-16 z-[-1] opacity-0 h-0 w-0"
 
     return (
         <div className={`${editModal}`}>
-            <div className="fixed z-[999] bg-black bg-opacity-80 top-0 left-0 w-screen h-screen overflow-hidden flex justify-center items-center">
+            <div className={`transition duration-1000 fixed bg-black bg-opacity-80 ${editModal} top-0 left-0 w-screen h-screen overflow-hidden flex justify-center items-center`}>
                 <div className="bg-white w-[63%] h-[75%] relative  rounded-lg bg-gradient-to-b from-[#8ba1b4] to-[#2b2e2e] flex justify-center items-center">
                     <div className="flex justify-between w-[83%] h-[70%]">
                         <div className=' flex justify-between w-full gap-10'>

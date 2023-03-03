@@ -3,7 +3,7 @@ import * as actionType from "../const/actionType";
 const initState = {
     result: {
         action: "",
-        currentUser: {}
+        currentUser: null
     }
 }
 

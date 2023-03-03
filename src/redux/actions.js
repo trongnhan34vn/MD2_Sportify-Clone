@@ -102,6 +102,21 @@ export const actUpdateTrack = (data) => {
     }
 }
 
+export const actSearchTrack = (data) => {
+    return {
+        type: actionType.SEARCH_NAME_TRACK,
+        payload: data
+    }
+}
+
+export const recieveSearchTrack = (data) => {
+    console.log(data);
+    return {
+        type: actionType.RECIEVE_SEARCH_RESULTS,
+        payload: data
+    }
+}
+
 
 
 

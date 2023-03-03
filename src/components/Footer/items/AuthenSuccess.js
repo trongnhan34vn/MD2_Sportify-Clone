@@ -342,7 +342,7 @@ const AuthenSuccess = () => {
                                 {elementIconMute}
                             </button>
                             <div className='h-3 flex items-center relative group'>
-                                <input style={getBackgroundSize()} onChange={handleChangeVolume} value={getVol} className='block h-1 rounded' max={100} min={0} type="range" />
+                                <input style={getBackgroundSize()} onChange={handleChangeVolume} value={audioVol} className='block h-1 rounded' max={100} min={0} type="range" />
                             </div>
                         </div>
                     </div>

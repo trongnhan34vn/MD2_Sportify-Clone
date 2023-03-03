@@ -14,6 +14,7 @@ export const rootSaga = function*() {
           takeLatest(actionType.POST_NEW_TRACK, listTracksSaga.postNewTrack),
           takeLatest(actionType.DEL_TRACK, listTracksSaga.delTrack),
           takeLatest(actionType.UPDATE_TRACK, listTracksSaga.updateTrack),
+          takeLatest(actionType.SEARCH_NAME_TRACK, listTracksSaga.searchTrack)
         ]
     )
 }

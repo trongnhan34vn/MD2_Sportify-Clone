@@ -58,7 +58,7 @@ export default function Login() {
     }
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         let checkStat = false
         for (const key in inputValue) {
@@ -71,29 +71,36 @@ export default function Login() {
                 email: inputValue.email.value,
                 password: inputValue.password.value
             }
-            dispatch(actLogin(checkUser))
+          dispatch(actLogin(checkUser))
         } else {
             setToggleModal(true)
-            setInterval(() => {
+            setTimeout(() => {
                 setToggleModal(false)
             }, 4000)
         }
+        
+    }
+
+    useEffect(() => {
         if (resultLogin.result.action === "Success") {
+            navigate("/")
             localStorage.setItem("currentUser", JSON.stringify(resultLogin.result.currentUser))
         }
-        if (resultLogin.result === "Failed") {
+        if (resultLogin.result.action === "Failed") {
             setToggleModal(true)
-            setInterval(() => {
+            setTimeout(() => {
                 setToggleModal(false)
             }, 4000)
         }
-    }
+    }, [resultLogin])
 
     let user = JSON.parse(localStorage.getItem("currentUser"))
 
-    useEffect(() => {
-        (user) && navigate("/")
-    }, [user])
+    const [checkAPI, setCheckAPI] = useState(false)
+
+    // useEffect(() => {
+
+    // }, [resultLogin.result.currentUser])
 
     return (
         <div>

@@ -5,16 +5,43 @@ import Navbar from '../Navbar/Navbar';
 import { useSelector } from 'react-redux';
 import { playlists } from '../../redux/selector';
 import { iconPauseTrackItem } from '../../icon';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import LoginModal from '../../Modal/LoginModal';
 
 export default function HomePage() {
+    const navigate = useNavigate()
     const listPlaylists = useSelector(playlists)
     const list1 = listPlaylists.filter(playlist => playlist.id <= 5)
     const list2 = listPlaylists.filter(playlist => playlist.id > 5 && playlist.id <= 10)
     const list3 = listPlaylists.filter(playlist => playlist.id > 10 && playlist.id <= 12)
+    const [onModal, setOnModal] = useState(false)
 
     const handlePlay = () => {
+        setOnModal(true)
+    }
 
+    const handleToPlaylist = (id) => {
+        if (id <= 5) {
+            navigate("/playlist")
+            let idTrackList = id
+            let toPlaylist = { idTrackList, list: list1 }
+            localStorage.removeItem("playlist")
+            localStorage.setItem("playlist", JSON.stringify(toPlaylist))
+        }
+        if (id <= 10 && id > 5) {
+            navigate("/playlist")
+            let idTrackList = id
+            let toPlaylist = { idTrackList, list: list2 }
+            localStorage.removeItem("playlist")
+            localStorage.setItem("playlist", JSON.stringify(toPlaylist))
+        }
+        if (id <= 12 && id > 10) {
+            navigate("/playlist")
+            let idTrackList = id
+            let toPlaylist = { idTrackList, list: list3 }
+            localStorage.removeItem("playlist")
+            localStorage.setItem("playlist", JSON.stringify(toPlaylist))
+        }
     }
 
     const elementFirstPlaylist = list1.map((playlist, index) => {
@@ -22,15 +49,15 @@ export default function HomePage() {
             <button onClick={() => handlePlay()} id={playlist.id} className='z-20 top-[42%] -translate-x-5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
                 {iconPauseTrackItem}
             </button>
-            <Link to={"/playlist"} className='block album-wrap p-4'>
+            <button onClick={() =>handleToPlaylist(playlist.id)} className='block w-full album-wrap p-4'>
                 <div className='album-img flex flex-col mb-4 relative'>
                     <img className='rounded object-cover w-[167px] h-[167px] drop-shadow-2xl' src={playlist.imgSrc} alt="" />
                 </div>
-                <div className='album-content text-[#fff]'>
+                <div className='album-content w-full text-left overflow-hidden text-[#fff]'>
                     <h3 className='font-CircularMedium text-base mb-1 truncate'>{playlist.name}</h3>
                     <p className='font-CircularLight text-sm text-[#6a6a6a]'>{playlist.artist}</p>
                 </div>
-            </Link>
+            </button>
         </div>
     })
 
@@ -39,15 +66,15 @@ export default function HomePage() {
             <button onClick={() => handlePlay()} id={playlist.id} className='z-50 top-[42%] -translate-x-5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
                 {iconPauseTrackItem}
             </button>
-            <Link to={"/playlist"} className='flex flex-col album-wrap p-4'>
+            <button onClick={() =>handleToPlaylist(playlist.id)} className='block w-full album-wrap p-4'>
                 <div className='album-img mb-4  relative'>
                     <img className='rounded object-cover w-[167px] h-[167px] drop-shadow-2xl' src={playlist.imgSrc} alt="" />
                 </div>
-                <div className='album-content text-[#fff]'>
-                    <h3 className='font-CircularMedium text-base mb-1'>{playlist.name}</h3>
+                <div className='album-content text-left text-[#fff]'>
+                    <h3 className='font-CircularMedium truncate text-base mb-1'>{playlist.name}</h3>
                     <p className='font-CircularLight text-sm text-[#6a6a6a]'>{playlist.artist}</p>
                 </div>
-            </Link>
+            </button>
         </div>
     })
 
@@ -56,15 +83,15 @@ export default function HomePage() {
             <button onClick={() => handlePlay()} id={playlist.id} className='z-50 top-[42%] -translate-x-5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:shadow-xl w-12 h-12 cursor-default rounded-[50%] bg-[#1ed760] flex items-center justify-center absolute bottom-2 right-2 hover:scale-105 transition-all duration-300 opacity-0 translate-y-2'>
                 {iconPauseTrackItem}
             </button>
-            <Link to={"/playlist"} className='flex flex-col album-wrap p-4'>
+            <button onClick={() =>handleToPlaylist(playlist.id)} className='block w-full album-wrap p-4'>
                 <div className='album-img mb-4 justify-center w-[167px] h-[167px] relative'>
                     <img className='rounded object-cover w-[167px] h-[167px] drop-shadow-2xl' src={playlist.imgSrc} alt="" />
                 </div>
-                <div className='album-content text-[#fff]'>
+                <div className='album-content overflow-hidden text-left text-[#fff]'>
                     <h3 className='font-CircularMedium text-base mb-1 truncate'>{playlist.name}</h3>
                     <p className='font-CircularLight text-sm text-[#6a6a6a]'>{playlist.artist}</p>
                 </div>
-            </Link>
+            </button>
         </div>
     })
     return (
@@ -153,6 +180,7 @@ export default function HomePage() {
                 {/* Footer */}
             </div>
             {/* Home Page - Log out*/}
+            <LoginModal setOnModal={setOnModal} onModal={onModal} />
         </div>
     )
 }

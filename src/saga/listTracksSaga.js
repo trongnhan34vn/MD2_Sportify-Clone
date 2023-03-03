@@ -25,7 +25,7 @@ export function* delTrack(action) {
         yield call(listTracks.DEL_TRACK, action.payload)
         yield getListTracks()
     } catch (error) {
-        
+
     }
 }
 
@@ -34,6 +34,16 @@ export function* updateTrack(action) {
         yield call(listTracks.UPDATE_TRACK, action.payload)
         yield getListTracks()
     } catch (error) {
-        
+
+    }
+}
+
+export function* searchTrack(action) {
+    try {
+        let searchResult = yield call(listTracks.SEARCH_TRACK, action.payload)
+        console.log(searchResult);
+        yield put(actions.recieveSearchTrack(searchResult))
+    } catch (error) {
+        console.log(error);
     }
 }

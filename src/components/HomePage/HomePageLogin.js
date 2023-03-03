@@ -29,9 +29,8 @@ export default function HomePageLogin() {
     let playlistLocal = JSON.parse(localStorage.getItem('playlist'))
     useEffect(() => {
         if (playlistLocal !== null) {
-            let listTrack = playlistLocal.list.filter(item => item.id)
-            let listTrackItem = listTrack[0].listTracks
-            console.log(listTrackItem);
+            let listTrack = playlistLocal?.list?.filter(item => item.id)
+            let listTrackItem = listTrack[0]?.listTracks
             dispatch(actPlayAudio(playlistLocal.id, listTrackItem))
         }
     }, [])

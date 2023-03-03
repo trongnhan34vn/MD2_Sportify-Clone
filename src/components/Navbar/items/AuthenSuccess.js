@@ -37,6 +37,7 @@ export default function AuthenSuccess() {
     }
 
     const handleSignOut = () => {
+        setMenuToggle(false)
         localStorage.removeItem("currentUser")
         navigate("/")
     }
