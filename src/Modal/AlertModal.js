@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function AlertModal(props) {
+    console.log(props);
     const toggleStat = props.toggleModal
     const alerContent = () => {
         let result = "";

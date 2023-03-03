@@ -99,7 +99,6 @@ export default function FormUpload(props) {
                 })
             }, 3000)
         } else {
-            setPage("fail-upload")
         }
     }
 
@@ -152,7 +151,7 @@ export default function FormUpload(props) {
                     </div>
                 </div>
             </div>
-            <AlertModal page={page}/>
+            <AlertModal page={page} />
         </div>
     )
 }

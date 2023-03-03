@@ -107,9 +107,9 @@ export default function PlayList() {
                 <audio ref={testRef} src=""></audio>
                 <div className='section-playlist-banner flex items-end gap-6 linearColor max-h-[500px] h-[30vh] min-h-[340px] p-8'>
                     <div className='banner-img w-48 h-48'>
-                        <img className='w-[192px] object-cover h-full drop-shadow-2xl' src={listTrack.listTracks[0].audioImg} alt="" />
+                        <img className='w-full object-cover h-full drop-shadow-2xl' src={listTrack.listTracks[0].audioImg} alt="" />
                     </div>
-                    <div className='w-full overflow-hidden banner-song-info text-[#fff]'>
+                    <div className='overflow-hidden banner-song-info text-[#fff]'>
                         <p className='text-xs font-CircularBook'>Playlist</p>
                         <h3 className='font-CircularBold text-[72px] truncate'>{listTrack.name}</h3>
                         <p className='text-xs font-CircularLight'>{listTrack.artist}</p>
